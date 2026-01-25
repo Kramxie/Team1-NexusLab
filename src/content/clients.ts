@@ -16,9 +16,6 @@ export interface Client {
 }
 
 export const clients: Client[] = [
-  // ============================================
-  // ACTIVE CLIENTS - Verified & Current
-  // ============================================
   {
     id: "scale-ui",
     name: "Scale UI",
@@ -47,13 +44,6 @@ export const clients: Client[] = [
     },
     isActive: true,
   },
-  // ============================================
-  // ADD NEW VERIFIED CLIENTS BELOW
-  // When adding clients, ensure:
-  // 1. Website URL is valid and accessible
-  // 2. Testimonial is approved by client
-  // 3. Logo file exists in /public/logos/
-  // ============================================
 ];
 
 // Helper to get only active clients

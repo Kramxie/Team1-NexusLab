@@ -29,7 +29,6 @@ export default function PricingTier({
           : "border-gray-800 bg-gray-900/50 hover:border-gray-700"
       }`}
     >
-      {/* Popular Badge */}
       {highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
           <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg">
@@ -38,7 +37,6 @@ export default function PricingTier({
         </div>
       )}
 
-      {/* Tier Name */}
       <h3
         className={`text-lg font-semibold mb-2 ${
           highlighted ? "text-cyan-400" : "text-gray-300"
@@ -47,16 +45,13 @@ export default function PricingTier({
         {name}
       </h3>
 
-      {/* Price */}
       <div className="flex items-baseline gap-1 mb-4">
         <span className="text-4xl font-bold text-white">{price}</span>
         <span className="text-gray-500 text-sm">{period}</span>
       </div>
 
-      {/* Description */}
       <p className="text-gray-400 text-sm mb-6">{description}</p>
 
-      {/* Features */}
       <ul className="space-y-3 mb-8">
         {features.map((feature, index) => (
           <li key={index} className="flex items-start gap-3 text-sm">
@@ -80,7 +75,6 @@ export default function PricingTier({
         ))}
       </ul>
 
-      {/* CTA Button */}
       <Link
         href={buttonHref}
         className={`block text-center py-3 px-6 rounded-xl font-medium transition-all duration-300 ${

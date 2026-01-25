@@ -18,14 +18,8 @@ const clients = getActiveClients();
 export default function Home() {
   return (
     <>
-      {/* ============================================
-          HERO SECTION (Animated)
-          ============================================ */}
       <AnimatedHero clients={clients} />
 
-      {/* ============================================
-          SERVICES PREVIEW SECTION
-          ============================================ */}
       <Section
         title="What We Do"
         subtitle="Full-service digital solutions tailored to your business needs"
@@ -45,9 +39,6 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ============================================
-          WORKFLOWS PREVIEW SECTION
-          ============================================ */}
       <Section
         title="How We Work"
         subtitle="A proven process that delivers results, every time"
@@ -66,9 +57,6 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ============================================
-          CLIENTS PREVIEW SECTION
-          ============================================ */}
       <Section
         title="Who We've Helped"
         subtitle="Partnerships built on trust, innovation, and results"
@@ -88,9 +76,6 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ============================================
-          NEWSLETTER SECTION
-          ============================================ */}
       <Section
         title="Stay in the Loop"
         subtitle="Get insights on digital transformation, automation, and growth strategies"
@@ -102,14 +87,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ============================================
-          CHATBOT / LIVE CHAT SECTION (Animated)
-          ============================================ */}
       <AnimatedChatSection />
 
-      {/* ============================================
-          FINAL CTA SECTION (Animated)
-          ============================================ */}
       <Section>
         <AnimatedCTA />
       </Section>

@@ -12,13 +12,9 @@ import {
 } from "@/components/animations";
 import { Service, Workflow, Client } from "@/content";
 
-// ============================================
-// ANIMATED HERO SECTION
-// ============================================
 export function AnimatedHero({ clients }: { clients: Client[] }) {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background Effects */}
       <div className="absolute inset-0 bg-gray-950">
         <motion.div
           className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[120px]"
@@ -49,7 +45,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
       </div>
 
       <div className="relative max-w-5xl mx-auto text-center">
-        {/* Badge */}
         <FadeInUp delay={0}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700 text-sm text-gray-300 mb-8">
             <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
@@ -57,7 +52,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           </div>
         </FadeInUp>
 
-        {/* Main Heading */}
         <FadeInUp delay={0.1}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
             <TextReveal
@@ -76,7 +70,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           </h1>
         </FadeInUp>
 
-        {/* Subheadline */}
         <FadeInUp delay={0.3}>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
             We are a team of developers and advisors from the Philippines, building
@@ -84,7 +77,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           </p>
         </FadeInUp>
 
-        {/* CTA Buttons */}
         <FadeInUp delay={0.4}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <PulseGlow>
@@ -109,7 +101,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           </div>
         </FadeInUp>
 
-        {/* Trust Indicators */}
         <FadeInUp delay={0.5}>
           <div className="mt-16 pt-8 border-t border-gray-800">
             <p className="text-sm text-gray-500 mb-4">Trusted by innovative companies</p>
@@ -127,9 +118,6 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
   );
 }
 
-// ============================================
-// ANIMATED SERVICE CARDS
-// ============================================
 export function AnimatedServiceCards({ services }: { services: Service[] }) {
   return (
     <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -153,9 +141,6 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
   );
 }
 
-// ============================================
-// ANIMATED WORKFLOW CARDS
-// ============================================
 export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) {
   return (
     <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -166,7 +151,6 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
             whileHover={{ y: -5 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Step Number */}
             <motion.div
               className="absolute -top-4 left-6"
               initial={{ scale: 0 }}
@@ -199,9 +183,6 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
   );
 }
 
-// ============================================
-// ANIMATED CLIENT CARDS
-// ============================================
 export function AnimatedClientCards({ clients }: { clients: Client[] }) {
   return (
     <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -248,9 +229,6 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
   );
 }
 
-// ============================================
-// ANIMATED CTA SECTION
-// ============================================
 export function AnimatedCTA() {
   return (
     <FadeIn>
@@ -261,7 +239,6 @@ export function AnimatedCTA() {
         }}
         transition={{ duration: 0.3 }}
       >
-        {/* Background glow */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5" />
 
         <div className="relative">
@@ -295,9 +272,6 @@ export function AnimatedCTA() {
   );
 }
 
-// ============================================
-// ANIMATED CHATBOT SECTION
-// ============================================
 export function AnimatedChatSection() {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900">

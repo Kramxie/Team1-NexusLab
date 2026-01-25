@@ -13,7 +13,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission (e.g., to email service or CRM)
     console.log("Form submitted:", formData);
     alert("Thank you for your message! We'll get back to you soon.");
   };
@@ -26,11 +25,7 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* ============================================
-          HERO / INTRO SECTION
-          ============================================ */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-1/4 left-1/3 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[80px]" />
@@ -50,12 +45,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ============================================
-          CONTACT FORM & INFO SECTION
-          ============================================ */}
       <Section dark>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Form */}
           <div className="p-8 rounded-2xl border border-gray-800 bg-gray-900/50">
             <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -131,7 +122,6 @@ export default function ContactPage() {
             </form>
           </div>
 
-          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
@@ -140,7 +130,6 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Contact Cards */}
             <div className="space-y-4">
               <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
                 <div className="flex items-start gap-4">
@@ -195,17 +184,9 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Map Placeholder */}
             <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
               <h3 className="font-semibold text-white mb-4">Find Us</h3>
               <div className="aspect-video rounded-xl bg-gray-800 flex items-center justify-center">
-                {/* 
-                  TODO: Embed Google Maps iframe here
-                  <iframe 
-                    src="https://www.google.com/maps/embed?..." 
-                    className="w-full h-full rounded-xl"
-                  />
-                */}
                 <a
                   href="https://www.google.com/maps/place/Salcedo,+Legazpi+Village,+Makati,+Kalakhang+Maynila/"
                   target="_blank"

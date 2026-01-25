@@ -39,7 +39,6 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link
             href="/"
             className="text-xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
@@ -47,7 +46,6 @@ export default function Navbar() {
             NEXXUS LAB
           </Link>
 
-          {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -62,7 +60,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* CTA Button - Desktop */}
           <Link
             href="/contact"
             className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25"
@@ -70,7 +67,6 @@ export default function Navbar() {
             Book a Call
           </Link>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
@@ -102,7 +98,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"

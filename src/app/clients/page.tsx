@@ -20,11 +20,7 @@ export default function ClientsPage() {
 
   return (
     <>
-      {/* ============================================
-          HERO / INTRO SECTION
-          ============================================ */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-1/4 right-1/3 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/3 left-1/4 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[80px]" />
@@ -49,15 +45,11 @@ export default function ClientsPage() {
         </div>
       </section>
 
-      {/* ============================================
-          FILTER & CLIENT GRID SECTION
-          ============================================ */}
       <Section
         title="Client Showcase"
         subtitle="Filter by industry to explore our work"
         dark
       >
-        {/* Industry Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {industries.map((industry) => (
             <button
@@ -74,22 +66,18 @@ export default function ClientsPage() {
           ))}
         </div>
 
-        {/* Results Count */}
         <p className="text-center text-sm text-gray-500 mb-8">
           Showing {filteredClients.length} client{filteredClients.length !== 1 ? "s" : ""}
           {activeFilter !== "All" && ` in ${activeFilter}`}
         </p>
 
-        {/* Client Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredClients.map((client) => (
             <div
               key={client.id}
               className="group p-6 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-all duration-300"
             >
-              {/* Logo & Name */}
               <div className="flex items-center gap-4 mb-4">
-                {/* Placeholder Logo */}
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-2xl font-bold text-gray-400 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all">
                   {client.name.charAt(0)}
                 </div>
@@ -101,10 +89,10 @@ export default function ClientsPage() {
                 </div>
               </div>
 
-              {/* Description */}
+             
               <p className="text-sm text-gray-400 mb-4">{client.description}</p>
 
-              {/* Result/Testimonial Preview */}
+              
               {client.testimonial && (
                 <div className="p-3 rounded-lg bg-gray-800/50 border border-gray-700 mb-4">
                   <p className="text-xs text-cyan-400 font-medium mb-1">Result Highlight</p>
@@ -114,7 +102,7 @@ export default function ClientsPage() {
                 </div>
               )}
 
-              {/* External Website Link - Only show if website exists */}
+           
               {client.website ? (
                 <a
                   href={client.website}
@@ -144,7 +132,6 @@ export default function ClientsPage() {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredClients.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-500">No clients found in this industry.</p>
@@ -158,9 +145,6 @@ export default function ClientsPage() {
         )}
       </Section>
 
-      {/* ============================================
-          TESTIMONIALS SECTION
-          ============================================ */}
       <Section
         title="What They Say"
         subtitle="Hear from the teams we've worked with"
@@ -198,9 +182,7 @@ export default function ClientsPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          CTA SECTION
-          ============================================ */}
+      
       <Section dark>
         <CTA
           heading="Want to Be Our Next Success Story?"

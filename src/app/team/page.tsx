@@ -1,15 +1,10 @@
-import Link from "next/link";
 import { Section, CTA } from "@/components";
 import { team } from "@/content";
 
 export default function TeamPage() {
   return (
     <>
-      {/* ============================================
-          HERO / INTRO SECTION
-          ============================================ */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/4 left-1/3 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[80px]" />
@@ -34,9 +29,6 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* ============================================
-          TEAM GRID SECTION
-          ============================================ */}
       <Section
         title="The People Behind Nexxus Lab"
         subtitle="Dedicated professionals committed to your success"
@@ -48,23 +40,19 @@ export default function TeamPage() {
               key={member.id}
               className="group p-6 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-all duration-300 text-center"
             >
-              {/* Avatar Placeholder */}
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-2 border-gray-700 group-hover:border-cyan-500/50 transition-all flex items-center justify-center">
                 <span className="text-3xl font-bold text-gray-400 group-hover:text-cyan-400 transition-colors">
                   {member.name.split(" ").map((n) => n[0]).join("")}
                 </span>
               </div>
 
-              {/* Name & Role */}
               <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-cyan-400 transition-colors">
                 {member.name}
               </h3>
               <p className="text-sm text-cyan-400 mb-4">{member.role}</p>
 
-              {/* Bio */}
               <p className="text-sm text-gray-400 mb-6">{member.bio}</p>
 
-              {/* Social Links */}
               {member.socials && Object.keys(member.socials).length > 0 && (
                 <div className="flex justify-center gap-3">
                   {member.socials.linkedin && (
@@ -113,9 +101,6 @@ export default function TeamPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          VALUES SECTION
-          ============================================ */}
       <Section
         title="Our Values"
         subtitle="What drives us every day"
@@ -150,9 +135,6 @@ export default function TeamPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          CONTACT INFO SECTION
-          ============================================ */}
       <Section dark>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
@@ -180,9 +162,6 @@ export default function TeamPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          CTA SECTION
-          ============================================ */}
       <Section>
         <CTA
           heading="Ready to Work Together?"

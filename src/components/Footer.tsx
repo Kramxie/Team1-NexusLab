@@ -46,7 +46,6 @@ export default function Footer() {
     <footer className="bg-gray-900 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
           <div className="md:col-span-2">
             <Link
               href="/"
@@ -58,7 +57,6 @@ export default function Footer() {
               Leave the tech to us. We are a team of developers and advisors from
               the Philippines, building innovative software solutions.
             </p>
-            {/* Social Icons */}
             <div className="flex gap-4 mt-6">
               {(["twitter", "linkedin", "github", "instagram"] as const).map((social) => (
                 <a
@@ -73,7 +71,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Quick Links
@@ -92,7 +89,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Legal
@@ -112,7 +108,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Nexxus Lab. All rights reserved.

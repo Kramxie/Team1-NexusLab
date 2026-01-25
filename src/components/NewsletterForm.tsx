@@ -3,29 +3,10 @@
 export default function NewsletterForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
   };
 
   return (
     <div className="p-8 rounded-2xl border border-gray-800 bg-gray-900/50">
-      {/* 
-        ============================================
-        NEWSLETTER EMBED PLACEHOLDER
-        ============================================
-        Paste your Mailchimp, Brevo (Sendinblue), ConvertKit, 
-        or other email marketing form embed code below.
-        
-        Example for Mailchimp:
-        <div id="mc_embed_signup">
-          <!-- Mailchimp form code here -->
-        </div>
-        
-        Example for Brevo:
-        <iframe src="your-brevo-form-url" ...></iframe>
-        ============================================
-      */}
-      
-      {/* Placeholder Form UI */}
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row gap-3">
           <input

@@ -95,11 +95,7 @@ const faqs = [
 export default function ServicesPage() {
   return (
     <>
-      {/* ============================================
-          HERO / INTRO SECTION
-          ============================================ */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[80px]" />
@@ -120,9 +116,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ============================================
-          PRICING TIERS SECTION
-          ============================================ */}
       <Section
         title="Choose Your Plan"
         subtitle="Transparent pricing with no hidden fees"
@@ -144,9 +137,6 @@ export default function ServicesPage() {
         </Grid>
       </Section>
 
-      {/* ============================================
-          SERVICES GRID SECTION
-          ============================================ */}
       <Section
         title="What We Offer"
         subtitle="Comprehensive digital services to power your business"
@@ -162,7 +152,6 @@ export default function ServicesPage() {
           ))}
         </Grid>
 
-        {/* Features List */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service) => (
             <div key={service.id} className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
@@ -195,9 +184,6 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          FAQ SECTION
-          ============================================ */}
       <Section
         title="Frequently Asked Questions"
         subtitle="Got questions? We've got answers"
@@ -222,7 +208,6 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        {/* Additional Help */}
         <div className="mt-12 text-center">
           <p className="text-gray-500 mb-4">Still have questions?</p>
           <a

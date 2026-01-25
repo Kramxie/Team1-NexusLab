@@ -3,10 +3,6 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 
-// ============================================
-// ANIMATION VARIANTS (Reusable configs)
-// ============================================
-
 export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
@@ -91,20 +87,12 @@ export const staggerContainer: Variants = {
   },
 };
 
-// ============================================
-// ANIMATION COMPONENTS
-// ============================================
-
 interface AnimationProps {
   children: ReactNode;
   className?: string;
   delay?: number;
 }
 
-/**
- * FadeInUp - Fades in while sliding up
- * Best for: Headings, paragraphs, cards
- */
 export function FadeInUp({ children, className = "", delay = 0 }: AnimationProps) {
   return (
     <motion.div
@@ -126,10 +114,6 @@ export function FadeInUp({ children, className = "", delay = 0 }: AnimationProps
   );
 }
 
-/**
- * FadeIn - Simple fade in
- * Best for: Images, backgrounds
- */
 export function FadeIn({ children, className = "", delay = 0 }: AnimationProps) {
   return (
     <motion.div
@@ -150,10 +134,6 @@ export function FadeIn({ children, className = "", delay = 0 }: AnimationProps) 
   );
 }
 
-/**
- * SlideIn - Slides in from left or right
- * Best for: Alternating content sections
- */
 export function SlideIn({
   children,
   className = "",
@@ -180,10 +160,6 @@ export function SlideIn({
   );
 }
 
-/**
- * ScaleIn - Scales up while fading in
- * Best for: Cards, images, buttons
- */
 export function ScaleIn({ children, className = "", delay = 0 }: AnimationProps) {
   return (
     <motion.div
@@ -205,10 +181,6 @@ export function ScaleIn({ children, className = "", delay = 0 }: AnimationProps)
   );
 }
 
-/**
- * StaggerContainer - Container that staggers children animations
- * Best for: Grid of cards, list items
- */
 export function StaggerContainer({ children, className = "" }: AnimationProps) {
   return (
     <motion.div
@@ -223,10 +195,6 @@ export function StaggerContainer({ children, className = "" }: AnimationProps) {
   );
 }
 
-/**
- * StaggerItem - Child item for StaggerContainer
- * Must be used inside StaggerContainer
- */
 export function StaggerItem({ children, className = "" }: AnimationProps) {
   return (
     <motion.div className={className} variants={fadeInUp}>
@@ -235,10 +203,6 @@ export function StaggerItem({ children, className = "" }: AnimationProps) {
   );
 }
 
-/**
- * GlowCard - Card with hover glow effect
- * Best for: Service cards, pricing tiers
- */
 export function GlowCard({ children, className = "" }: AnimationProps) {
   return (
     <motion.div
@@ -252,7 +216,6 @@ export function GlowCard({ children, className = "" }: AnimationProps) {
         transition: { duration: 0.2 },
       }}
     >
-      {/* Glow effect on hover */}
       <motion.div
         className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl opacity-0 blur-sm -z-10"
         whileHover={{ opacity: 0.3 }}
@@ -263,10 +226,6 @@ export function GlowCard({ children, className = "" }: AnimationProps) {
   );
 }
 
-/**
- * HoverLift - Lifts element on hover
- * Best for: Buttons, links, small cards
- */
 export function HoverLift({ children, className = "" }: AnimationProps) {
   return (
     <motion.div
@@ -282,10 +241,6 @@ export function HoverLift({ children, className = "" }: AnimationProps) {
   );
 }
 
-/**
- * TextReveal - Reveals text word by word
- * Best for: Hero headlines
- */
 export function TextReveal({
   text,
   className = "",
@@ -329,10 +284,6 @@ export function TextReveal({
   );
 }
 
-/**
- * PulseGlow - Continuous subtle pulse glow
- * Best for: CTA buttons, important elements
- */
 export function PulseGlow({ children, className = "" }: AnimationProps) {
   return (
     <motion.div

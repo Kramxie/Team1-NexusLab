@@ -4,11 +4,7 @@ import { automationSamples, workflows } from "@/content";
 export default function WorkflowsPage() {
   return (
     <>
-      {/* ============================================
-          HERO / INTRO SECTION
-          ============================================ */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/4 right-1/3 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[80px]" />
@@ -33,16 +29,12 @@ export default function WorkflowsPage() {
         </div>
       </section>
 
-      {/* ============================================
-          OUR PROCESS SECTION
-          ============================================ */}
       <Section
         title="Our Process"
         subtitle="A proven methodology for building reliable automations"
         dark
       >
         <div className="relative">
-          {/* Connection Line */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
 
           <Grid columns={4} gap="md">
@@ -51,7 +43,6 @@ export default function WorkflowsPage() {
                 key={workflow.id}
                 className="relative p-6 rounded-2xl border border-gray-800 bg-gray-900/80 text-center"
               >
-                {/* Step Number */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-bold">
                     {index + 1}
@@ -67,9 +58,6 @@ export default function WorkflowsPage() {
         </div>
       </Section>
 
-      {/* ============================================
-          AUTOMATION SAMPLES SECTION
-          ============================================ */}
       <Section
         title="Automation Samples"
         subtitle="Real-world solutions we've built for clients like you"
@@ -80,17 +68,14 @@ export default function WorkflowsPage() {
               key={sample.id}
               className="group p-6 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-purple-500/50 transition-all duration-300"
             >
-              {/* Category Badge */}
               <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-4">
                 {sample.category}
               </span>
 
-              {/* Title */}
               <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-cyan-300 transition-colors">
                 {sample.title}
               </h3>
 
-              {/* Problem */}
               <div className="mb-4">
                 <div className="flex items-center gap-2 text-sm font-medium text-red-400 mb-2">
                   <svg
@@ -111,7 +96,6 @@ export default function WorkflowsPage() {
                 <p className="text-sm text-gray-400">{sample.problem}</p>
               </div>
 
-              {/* Solution */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 text-sm font-medium text-green-400 mb-2">
                   <svg
@@ -132,7 +116,6 @@ export default function WorkflowsPage() {
                 <p className="text-sm text-gray-400">{sample.solution}</p>
               </div>
 
-              {/* Tools */}
               <div>
                 <div className="flex items-center gap-2 text-sm font-medium text-gray-500 mb-3">
                   <svg
@@ -172,9 +155,6 @@ export default function WorkflowsPage() {
         </Grid>
       </Section>
 
-      {/* ============================================
-          CTA SECTION
-          ============================================ */}
       <Section dark>
         <CTA
           heading="Ready to Automate Your Business?"
