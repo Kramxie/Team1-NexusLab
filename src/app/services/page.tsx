@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Section, Grid, Card, PricingTier } from "@/components";
 import { services } from "@/content";
+import JsonLd from "@/components/JsonLd";
+import { servicesSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
@@ -11,6 +13,11 @@ export const metadata: Metadata = {
     description: "Custom software, AI chatbots, automation & more. From startups to enterprises - find the right plan for your business.",
   },
 };
+
+const servicesBreadcrumb = breadcrumbSchema([
+  { name: "Home", url: "https://nexxuslab.com" },
+  { name: "Services", url: "https://nexxuslab.com/services" },
+]);
 
 const pricingTiers = [
   {
@@ -106,6 +113,10 @@ const faqs = [
 export default function ServicesPage() {
   return (
     <>
+      {/* JSON-LD Schema for Services */}
+      <JsonLd data={servicesSchema} />
+      <JsonLd data={servicesBreadcrumb} />
+      
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-gray-950">
           <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />

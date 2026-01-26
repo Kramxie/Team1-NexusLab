@@ -6,3 +6,4 @@ export { default as CTA } from "./CTA";
 export { default as PricingTier } from "./PricingTier";
 export { default as Grid } from "./Grid";
 export { default as PortfolioCarousel } from "./PortfolioCarousel";
+export { default as JsonLd } from "./JsonLd";
