@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXXUS LAB - Wireframes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --bg: #0a0a0a;
+      --surface: #1a1a1a;
+      --surface-2: #2a2a2a;
+      --border: #333;
+      --text: #fff;
+      --text-secondary: #888;
+      --accent: #00d4ff;
+      --placeholder: #444;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Toolbar */
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    
+    .toolbar-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    
+    .toolbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .device-toggle {
+      display: flex;
+      background: var(--surface-2);
+      border-radius: 8px;
+      padding: 4px;
+    }
+    
+    .device-toggle button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    
+    .device-toggle button.active {
+      background: var(--accent);
+      color: #000;
+    }
+    
+    .page-select {
+      padding: 8px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    
+    /* Canvas */
+    .canvas {
+      padding-top: 80px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 48px;
+    }
+    
+    .frame {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    
+    .frame.desktop {
+      width: 1200px;
+    }
+    
+    .frame.mobile {
+      width: 375px;
+    }
+    
+    /* Wireframe Styles */
+    .wf-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    
+    .wf-logo {
+      width: 100px;
+      height: 24px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 4px;
+    }
+    
+    .wf-nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .wf-nav-link {
+      width: 60px;
+      height: 12px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-nav-cta {
+      width: 100px;
+      height: 36px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 20px;
+    }
+    
+    .wf-hamburger {
+      display: none;
+      width: 24px;
+      height: 18px;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .wf-hamburger span {
+      height: 2px;
+      background: var(--text-secondary);
+      border-radius: 1px;
+    }
+    
+    /* Hero */
+    .wf-hero {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 64px 24px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .wf-hero::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    .wf-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 20%;
+      right: 20%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(0,102,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    .wf-badge {
+      padding: 8px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .wf-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    
+    .wf-headline {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 24px;
+    }
+    
+    .wf-headline-lg {
+      height: 48px;
+      width: 400px;
+      max-width: 100%;
+      background: linear-gradient(90deg, var(--accent), #0066ff, #8800ff);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .wf-headline-sm {
+      height: 48px;
+      width: 200px;
+      background: var(--text);
+      border-radius: 8px;
+    }
+    
+    .wf-description {
+      height: 16px;
+      width: 500px;
+      max-width: 100%;
+      background: var(--placeholder);
+      border-radius: 4px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .wf-cta-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .wf-btn-primary {
+      padding: 16px 32px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 30px;
+      font-size: 14px;
+      color: #000;
+      font-weight: 600;
+    }
+    
+    .wf-btn-secondary {
+      padding: 16px 32px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .wf-trust {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .wf-trust-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .wf-trust-logos {
+      display: flex;
+      gap: 32px;
+      opacity: 0.5;
+    }
+    
+    .wf-trust-logo {
+      width: 80px;
+      height: 12px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    /* Section */
+    .wf-section {
+      padding: 64px 24px;
+    }
+    
+    .wf-section.dark {
+      background: var(--bg);
+    }
+    
+    .wf-section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .wf-section-title {
+      height: 32px;
+      width: 250px;
+      background: var(--text);
+      border-radius: 6px;
+      margin: 0 auto 16px;
+    }
+    
+    .wf-section-subtitle {
+      height: 14px;
+      width: 350px;
+      max-width: 100%;
+      background: var(--placeholder);
+      border-radius: 4px;
+      margin: 0 auto;
+    }
+    
+    /* Grid */
+    .wf-grid {
+      display: grid;
+      gap: 24px;
+    }
+    
+    .wf-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .wf-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .wf-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Cards */
+    .wf-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--placeholder);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .wf-card-title {
+      height: 20px;
+      width: 150px;
+      background: var(--text);
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    
+    .wf-card-desc {
+      height: 12px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    
+    .wf-card-desc:last-child {
+      width: 80%;
+    }
+    
+    /* Pricing Card */
+    .wf-pricing-card {
+      padding: 32px 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+    }
+    
+    .wf-pricing-card.highlighted {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(0,212,255,0.1);
+    }
+    
+    .wf-pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 16px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 20px;
+      font-size: 10px;
+      color: #000;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .wf-pricing-name {
+      height: 18px;
+      width: 80px;
+      background: var(--text-secondary);
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-pricing-price {
+      height: 32px;
+      width: 120px;
+      background: var(--text);
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-pricing-desc {
+      height: 12px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    
+    .wf-pricing-features {
+      margin-bottom: 24px;
+    }
+    
+    .wf-pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .wf-pricing-check {
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+    
+    .wf-pricing-feature-text {
+      height: 12px;
+      flex: 1;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-pricing-cta {
+      width: 100%;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    .wf-pricing-card.highlighted .wf-pricing-cta {
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border: none;
+    }
+    
+    /* Workflow Step */
+    .wf-step {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      text-align: center;
+    }
+    
+    .wf-step-number {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), #0066ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+    
+    .wf-step-title {
+      height: 18px;
+      width: 100px;
+      background: var(--text);
+      border-radius: 4px;
+      margin: 16px auto 12px;
+    }
+    
+    .wf-step-desc {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    /* Client Card */
+    .wf-client-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-client-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-client-logo {
+      width: 48px;
+      height: 48px;
+      background: var(--placeholder);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    .wf-client-info {
+      flex: 1;
+    }
+    
+    .wf-client-name {
+      height: 16px;
+      width: 100px;
+      background: var(--text);
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    
+    .wf-client-industry {
+      height: 10px;
+      width: 70px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-client-desc {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    .wf-client-testimonial {
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--surface);
+      border-radius: 8px;
+    }
+    
+    .wf-client-quote {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    .wf-client-author {
+      height: 8px;
+      width: 80px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      margin-top: 12px;
+    }
+    
+    /* Team Card */
+    .wf-team-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+    
+    .wf-team-avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(136,0,255,0.2));
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    .wf-team-name {
+      height: 18px;
+      width: 120px;
+      background: var(--text);
+      border-radius: 4px;
+      margin: 0 auto 8px;
+    }
+    
+    .wf-team-role {
+      height: 12px;
+      width: 80px;
+      background: var(--accent);
+      border-radius: 4px;
+      margin: 0 auto 16px;
+    }
+    
+    .wf-team-bio {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    .wf-team-socials {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .wf-team-social {
+      width: 32px;
+      height: 32px;
+      background: var(--surface);
+      border-radius: 8px;
+    }
+    
+    /* FAQ */
+    .wf-faq {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .wf-faq-item {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-faq-question {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .wf-faq-number {
+      color: var(--accent);
+      font-size: 12px;
+      font-family: monospace;
+    }
+    
+    .wf-faq-q-text {
+      height: 16px;
+      flex: 1;
+      background: var(--text);
+      border-radius: 4px;
+    }
+    
+    .wf-faq-answer {
+      padding-left: 40px;
+    }
+    
+    .wf-faq-a-text {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    /* Contact Form */
+    .wf-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    
+    .wf-form {
+      padding: 32px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-form-title {
+      height: 24px;
+      width: 180px;
+      background: var(--text);
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    
+    .wf-input {
+      width: 100%;
+      height: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .wf-input-label {
+      height: 12px;
+      width: 100px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-textarea {
+      width: 100%;
+      height: 120px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 16px;
+    }
+    
+    .wf-submit {
+      width: 100%;
+      height: 52px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 12px;
+    }
+    
+    .wf-contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .wf-contact-info-title {
+      height: 24px;
+      width: 200px;
+      background: var(--text);
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .wf-contact-info-desc {
+      height: 12px;
+      width: 250px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    
+    .wf-contact-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .wf-contact-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0,212,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .wf-contact-card-title {
+      height: 14px;
+      width: 100px;
+      background: var(--text);
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    
+    .wf-contact-card-value {
+      height: 12px;
+      width: 150px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-map {
+      height: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .wf-map-icon {
+      font-size: 32px;
+      opacity: 0.5;
+    }
+    
+    .wf-map-text {
+      height: 12px;
+      width: 120px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    /* CTA Section */
+    .wf-cta-section {
+      padding: 64px 24px;
+    }
+    
+    .wf-cta-box {
+      padding: 64px 48px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,102,255,0.1), rgba(136,0,255,0.1));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .wf-cta-title {
+      height: 32px;
+      width: 350px;
+      max-width: 100%;
+      background: var(--text);
+      border-radius: 6px;
+      margin: 0 auto 16px;
+    }
+    
+    .wf-cta-desc {
+      height: 14px;
+      width: 450px;
+      max-width: 100%;
+      background: var(--placeholder);
+      border-radius: 4px;
+      margin: 0 auto 32px;
+    }
+    
+    /* Newsletter */
+    .wf-newsletter {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 32px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-newsletter-form {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .wf-newsletter-input {
+      flex: 1;
+      height: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    
+    .wf-newsletter-btn {
+      padding: 0 24px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 12px;
+      height: 48px;
+    }
+    
+    .wf-newsletter-note {
+      height: 10px;
+      width: 200px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin: 16px auto 0;
+    }
+    
+    /* Chat */
+    .wf-chat-section {
+      padding: 48px 24px;
+      background: var(--surface);
+      text-align: center;
+    }
+    
+    .wf-chat-title {
+      height: 24px;
+      width: 300px;
+      background: var(--text);
+      border-radius: 4px;
+      margin: 0 auto 12px;
+    }
+    
+    .wf-chat-desc {
+      height: 12px;
+      width: 400px;
+      max-width: 100%;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+    }
+    
+    .wf-chat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-chat-dot {
+      width: 10px;
+      height: 10px;
+      background: #00ff88;
+      border-radius: 50%;
+    }
+    
+    .wf-chat-text {
+      height: 14px;
+      width: 140px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+    
+    /* Footer */
+    .wf-footer {
+      padding: 48px 24px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    
+    .wf-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    
+    .wf-footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .wf-footer-logo {
+      width: 120px;
+      height: 28px;
+      background: linear-gradient(90deg, var(--accent), #0066ff);
+      border-radius: 4px;
+    }
+    
+    .wf-footer-desc {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 4px;
+    }
+    
+    .wf-footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    
+    .wf-footer-social {
+      width: 36px;
+      height: 36px;
+      background: var(--surface-2);
+      border-radius: 8px;
+    }
+    
+    .wf-footer-col-title {
+      height: 12px;
+      width: 80px;
+      background: var(--text);
+      border-radius: 2px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    
+    .wf-footer-link {
+      height: 10px;
+      width: 70px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    
+    .wf-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .wf-footer-copyright {
+      height: 10px;
+      width: 200px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    .wf-footer-location {
+      height: 10px;
+      width: 180px;
+      background: var(--placeholder);
+      border-radius: 2px;
+    }
+    
+    /* Section Link */
+    .wf-section-link {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    
+    .wf-section-link-text {
+      height: 14px;
+      width: 150px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    
+    /* Filter Buttons */
+    .wf-filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .wf-filter {
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    
+    .wf-filter.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    
+    .wf-filter-text {
+      height: 12px;
+      width: 60px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+    }
+    
+    .wf-filter.active .wf-filter-text {
+      background: #000;
+    }
+    
+    .wf-results {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    .wf-results-text {
+      height: 12px;
+      width: 120px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+    
+    /* Values */
+    .wf-value-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+    
+    .wf-value-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-value-title {
+      height: 18px;
+      width: 100px;
+      background: var(--text);
+      border-radius: 4px;
+      margin: 0 auto 12px;
+    }
+    
+    .wf-value-desc {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    /* Automation Sample */
+    .wf-sample-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    
+    .wf-sample-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(136,0,255,0.1);
+      border: 1px solid rgba(136,0,255,0.3);
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .wf-sample-badge-text {
+      height: 10px;
+      width: 60px;
+      background: #8800ff;
+      border-radius: 2px;
+    }
+    
+    .wf-sample-title {
+      height: 20px;
+      width: 200px;
+      background: var(--text);
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .wf-sample-section {
+      margin-bottom: 20px;
+    }
+    
+    .wf-sample-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .wf-sample-label-icon {
+      font-size: 14px;
+    }
+    
+    .wf-sample-label-text {
+      height: 12px;
+      width: 60px;
+      border-radius: 2px;
+    }
+    
+    .wf-sample-label.problem .wf-sample-label-text {
+      background: #ff4444;
+    }
+    
+    .wf-sample-label.solution .wf-sample-label-text {
+      background: #00ff88;
+    }
+    
+    .wf-sample-label.tools .wf-sample-label-text {
+      background: var(--text-secondary);
+    }
+    
+    .wf-sample-content {
+      height: 10px;
+      background: var(--placeholder);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    
+    .wf-sample-tools {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .wf-sample-tool {
+      padding: 6px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    
+    .wf-sample-tool-text {
+      height: 10px;
+      width: 50px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+    }
+    
+    /* Mobile Styles */
+    .frame.mobile .wf-nav-links,
+    .frame.mobile .wf-nav-cta {
+      display: none;
+    }
+    
+    .frame.mobile .wf-hamburger {
+      display: flex;
+    }
+    
+    .frame.mobile .wf-hero {
+      min-height: 400px;
+      padding: 48px 20px;
+    }
+    
+    .frame.mobile .wf-headline-lg {
+      height: 32px;
+      width: 280px;
+    }
+    
+    .frame.mobile .wf-headline-sm {
+      height: 32px;
+      width: 140px;
+    }
+    
+    .frame.mobile .wf-description {
+      width: 100%;
+    }
+    
+    .frame.mobile .wf-cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .frame.mobile .wf-btn-primary,
+    .frame.mobile .wf-btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .frame.mobile .wf-grid.cols-2,
+    .frame.mobile .wf-grid.cols-3,
+    .frame.mobile .wf-grid.cols-4 {
+      grid-template-columns: 1fr;
+    }
+    
+    .frame.mobile .wf-contact-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .frame.mobile .wf-footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    
+    .frame.mobile .wf-footer-bottom {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    
+    .frame.mobile .wf-newsletter-form {
+      flex-direction: column;
+    }
+    
+    .frame.mobile .wf-newsletter-btn {
+      width: 100%;
+    }
+    
+    .frame.mobile .wf-section {
+      padding: 48px 20px;
+    }
+    
+    .frame.mobile .wf-section-title {
+      width: 200px;
+    }
+    
+    .frame.mobile .wf-section-subtitle {
+      width: 100%;
+    }
+    
+    .frame.mobile .wf-cta-box {
+      padding: 48px 24px;
+    }
+    
+    .frame.mobile .wf-cta-title {
+      width: 100%;
+      height: 24px;
+    }
+    
+    .frame.mobile .wf-cta-desc {
+      width: 100%;
+    }
+    
+    .frame.mobile .wf-filters {
+      justify-content: flex-start;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 8px;
+    }
+    
+    /* Annotations */
+    .annotation {
+      position: absolute;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: #000;
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-title">NEXXUS LAB - Low-Fi Wireframes</div>
+    <div class="toolbar-controls">
+      <select class="page-select" id="pageSelect">
+        <option value="home">Home</option>
+        <option value="services">Services</option>
+        <option value="workflows">Workflows</option>
+        <option value="clients">Clients</option>
+        <option value="team">Team</option>
+        <option value="contact">Contact</option>
+      </select>
+      <div class="device-toggle">
+        <button class="active" data-device="desktop">Desktop</button>
+        <button data-device="mobile">Mobile</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas">
+    <div class="frame desktop" id="frame">
+      <!-- Page content will be injected here -->
+    </div>
+  </div>
+
+  <script>
+    const pages = {
+      home: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero">
+          <div class="wf-badge">Philippine-based Tech Team</div>
+          <div class="wf-headline">
+            <div class="wf-headline-lg"></div>
+            <div class="wf-headline-sm"></div>
+          </div>
+          <div class="wf-description"></div>
+          <div class="wf-description" style="width: 400px;"></div>
+          <div class="wf-cta-group">
+            <div class="wf-btn-primary">Start Your Project</div>
+            <div class="wf-btn-secondary">Explore Services</div>
+          </div>
+          <div class="wf-trust">
+            <div class="wf-trust-label">Trusted by innovative companies</div>
+            <div class="wf-trust-logos">
+              <div class="wf-trust-logo"></div>
+              <div class="wf-trust-logo"></div>
+              <div class="wf-trust-logo"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SERVICES -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3">
+            <div class="wf-card">
+              <div class="wf-card-icon">🌐</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">🤖</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">⚡</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">📱</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">🎨</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">📊</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+          </div>
+          <div class="wf-section-link">
+            <div class="wf-section-link-text"></div>
+          </div>
+        </section>
+        
+        <!-- WORKFLOWS -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3">
+            <div class="wf-step">
+              <div class="wf-step-number">1</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+              <div class="wf-step-desc" style="width: 80%;"></div>
+            </div>
+            <div class="wf-step">
+              <div class="wf-step-number">2</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+              <div class="wf-step-desc" style="width: 80%;"></div>
+            </div>
+            <div class="wf-step">
+              <div class="wf-step-number">3</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+              <div class="wf-step-desc" style="width: 80%;"></div>
+            </div>
+          </div>
+          <div class="wf-section-link">
+            <div class="wf-section-link-text"></div>
+          </div>
+        </section>
+        
+        <!-- CLIENTS -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3">
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">S</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+              <div class="wf-client-testimonial">
+                <div class="wf-client-quote"></div>
+                <div class="wf-client-quote" style="width: 70%;"></div>
+                <div class="wf-client-author"></div>
+              </div>
+            </div>
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">T</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+              <div class="wf-client-testimonial">
+                <div class="wf-client-quote"></div>
+                <div class="wf-client-quote" style="width: 70%;"></div>
+                <div class="wf-client-author"></div>
+              </div>
+            </div>
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">N</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+              <div class="wf-client-testimonial">
+                <div class="wf-client-quote"></div>
+                <div class="wf-client-quote" style="width: 70%;"></div>
+                <div class="wf-client-author"></div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-section-link">
+            <div class="wf-section-link-text"></div>
+          </div>
+        </section>
+        
+        <!-- NEWSLETTER -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-newsletter">
+            <div class="wf-newsletter-form">
+              <div class="wf-newsletter-input"></div>
+              <div class="wf-newsletter-btn"></div>
+            </div>
+            <div class="wf-newsletter-note"></div>
+          </div>
+        </section>
+        
+        <!-- CHAT -->
+        <section class="wf-chat-section">
+          <div class="wf-chat-title"></div>
+          <div class="wf-chat-desc"></div>
+          <div class="wf-chat-btn">
+            <div class="wf-chat-dot"></div>
+            <div class="wf-chat-text"></div>
+          </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="wf-cta-section">
+          <div class="wf-cta-box">
+            <div class="wf-cta-title"></div>
+            <div class="wf-cta-desc"></div>
+            <div class="wf-btn-primary" style="display: inline-block;">Schedule a Call</div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-desc" style="width: 80%;"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `,
+      
+      services: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger"><span></span><span></span><span></span></div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero" style="min-height: 300px;">
+          <div class="wf-headline">
+            <div class="wf-headline-lg" style="width: 350px;"></div>
+          </div>
+          <div class="wf-description"></div>
+        </section>
+        
+        <!-- PRICING -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3">
+            <div class="wf-pricing-card">
+              <div class="wf-pricing-name"></div>
+              <div class="wf-pricing-price"></div>
+              <div class="wf-pricing-desc"></div>
+              <div class="wf-pricing-features">
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+              </div>
+              <div class="wf-pricing-cta">Get a Quote</div>
+            </div>
+            <div class="wf-pricing-card highlighted">
+              <div class="wf-pricing-badge">Most Popular</div>
+              <div class="wf-pricing-name"></div>
+              <div class="wf-pricing-price"></div>
+              <div class="wf-pricing-desc"></div>
+              <div class="wf-pricing-features">
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+              </div>
+              <div class="wf-pricing-cta">Book Discovery Call</div>
+            </div>
+            <div class="wf-pricing-card">
+              <div class="wf-pricing-name"></div>
+              <div class="wf-pricing-price"></div>
+              <div class="wf-pricing-desc"></div>
+              <div class="wf-pricing-features">
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+                <div class="wf-pricing-feature"><div class="wf-pricing-check">✓</div><div class="wf-pricing-feature-text"></div></div>
+              </div>
+              <div class="wf-pricing-cta">Contact Us</div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SERVICES GRID -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-2">
+            <div class="wf-card">
+              <div class="wf-card-icon">🌐</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">🤖</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">⚡</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-icon">📱</div>
+              <div class="wf-card-title"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-faq">
+            <div class="wf-faq-item">
+              <div class="wf-faq-question">
+                <div class="wf-faq-number">01</div>
+                <div class="wf-faq-q-text"></div>
+              </div>
+              <div class="wf-faq-answer">
+                <div class="wf-faq-a-text"></div>
+                <div class="wf-faq-a-text" style="width: 80%;"></div>
+              </div>
+            </div>
+            <div class="wf-faq-item">
+              <div class="wf-faq-question">
+                <div class="wf-faq-number">02</div>
+                <div class="wf-faq-q-text"></div>
+              </div>
+              <div class="wf-faq-answer">
+                <div class="wf-faq-a-text"></div>
+                <div class="wf-faq-a-text" style="width: 80%;"></div>
+              </div>
+            </div>
+            <div class="wf-faq-item">
+              <div class="wf-faq-question">
+                <div class="wf-faq-number">03</div>
+                <div class="wf-faq-q-text"></div>
+              </div>
+              <div class="wf-faq-answer">
+                <div class="wf-faq-a-text"></div>
+                <div class="wf-faq-a-text" style="width: 80%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-section-link">
+            <div class="wf-section-link-text"></div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-desc" style="width: 80%;"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `,
+      
+      workflows: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger"><span></span><span></span><span></span></div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero" style="min-height: 350px;">
+          <div class="wf-badge">Automation & Integration Experts</div>
+          <div class="wf-headline">
+            <div class="wf-headline-lg" style="width: 450px;"></div>
+          </div>
+          <div class="wf-description"></div>
+          <div class="wf-description" style="width: 400px;"></div>
+        </section>
+        
+        <!-- PROCESS -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-4">
+            <div class="wf-step">
+              <div class="wf-step-number">1</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+            </div>
+            <div class="wf-step">
+              <div class="wf-step-number">2</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+            </div>
+            <div class="wf-step">
+              <div class="wf-step-number">3</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+            </div>
+            <div class="wf-step">
+              <div class="wf-step-number">4</div>
+              <div class="wf-step-title"></div>
+              <div class="wf-step-desc"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- AUTOMATION SAMPLES -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-2">
+            <div class="wf-sample-card">
+              <div class="wf-sample-badge"><div class="wf-sample-badge-text"></div></div>
+              <div class="wf-sample-title"></div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label problem">
+                  <div class="wf-sample-label-icon">⚠️</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-content"></div>
+                <div class="wf-sample-content" style="width: 80%;"></div>
+              </div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label solution">
+                  <div class="wf-sample-label-icon">✅</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-content"></div>
+                <div class="wf-sample-content" style="width: 80%;"></div>
+              </div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label tools">
+                  <div class="wf-sample-label-icon">⚙️</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-tools">
+                  <div class="wf-sample-tool"><div class="wf-sample-tool-text"></div></div>
+                  <div class="wf-sample-tool"><div class="wf-sample-tool-text"></div></div>
+                  <div class="wf-sample-tool"><div class="wf-sample-tool-text"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-sample-card">
+              <div class="wf-sample-badge"><div class="wf-sample-badge-text"></div></div>
+              <div class="wf-sample-title"></div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label problem">
+                  <div class="wf-sample-label-icon">⚠️</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-content"></div>
+                <div class="wf-sample-content" style="width: 80%;"></div>
+              </div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label solution">
+                  <div class="wf-sample-label-icon">✅</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-content"></div>
+                <div class="wf-sample-content" style="width: 80%;"></div>
+              </div>
+              <div class="wf-sample-section">
+                <div class="wf-sample-label tools">
+                  <div class="wf-sample-label-icon">⚙️</div>
+                  <div class="wf-sample-label-text"></div>
+                </div>
+                <div class="wf-sample-tools">
+                  <div class="wf-sample-tool"><div class="wf-sample-tool-text"></div></div>
+                  <div class="wf-sample-tool"><div class="wf-sample-tool-text"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="wf-section dark">
+          <div class="wf-cta-box">
+            <div class="wf-cta-title"></div>
+            <div class="wf-cta-desc"></div>
+            <div class="wf-btn-primary" style="display: inline-block;">Schedule a Consultation</div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `,
+      
+      clients: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger"><span></span><span></span><span></span></div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero" style="min-height: 350px;">
+          <div class="wf-badge">Trusted by Industry Leaders</div>
+          <div class="wf-headline">
+            <div class="wf-headline-lg" style="width: 300px;"></div>
+          </div>
+          <div class="wf-description"></div>
+          <div class="wf-description" style="width: 400px;"></div>
+        </section>
+        
+        <!-- FILTER & GRID -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-filters">
+            <div class="wf-filter active"><div class="wf-filter-text"></div></div>
+            <div class="wf-filter"><div class="wf-filter-text"></div></div>
+            <div class="wf-filter"><div class="wf-filter-text"></div></div>
+            <div class="wf-filter"><div class="wf-filter-text"></div></div>
+          </div>
+          <div class="wf-results">
+            <div class="wf-results-text"></div>
+          </div>
+          <div class="wf-grid cols-3">
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">S</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+              <div class="wf-client-testimonial">
+                <div class="wf-client-quote"></div>
+                <div class="wf-client-author"></div>
+              </div>
+            </div>
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">T</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+              <div class="wf-client-testimonial">
+                <div class="wf-client-quote"></div>
+                <div class="wf-client-author"></div>
+              </div>
+            </div>
+            <div class="wf-client-card">
+              <div class="wf-client-header">
+                <div class="wf-client-logo">N</div>
+                <div class="wf-client-info">
+                  <div class="wf-client-name"></div>
+                  <div class="wf-client-industry"></div>
+                </div>
+              </div>
+              <div class="wf-client-desc"></div>
+              <div class="wf-client-desc" style="width: 80%;"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- TESTIMONIALS -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-2" style="max-width: 800px; margin: 0 auto;">
+            <div class="wf-card" style="padding: 32px;">
+              <div style="font-size: 32px; color: rgba(0,212,255,0.3); margin-bottom: 16px;">"</div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc" style="width: 70%;"></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-top: 24px;">
+                <div class="wf-team-avatar" style="width: 40px; height: 40px; font-size: 14px; margin: 0;">A</div>
+                <div>
+                  <div class="wf-client-name" style="width: 80px;"></div>
+                  <div class="wf-client-industry" style="width: 60px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-card" style="padding: 32px;">
+              <div style="font-size: 32px; color: rgba(0,212,255,0.3); margin-bottom: 16px;">"</div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc"></div>
+              <div class="wf-card-desc" style="width: 70%;"></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-top: 24px;">
+                <div class="wf-team-avatar" style="width: 40px; height: 40px; font-size: 14px; margin: 0;">B</div>
+                <div>
+                  <div class="wf-client-name" style="width: 80px;"></div>
+                  <div class="wf-client-industry" style="width: 60px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="wf-section dark">
+          <div class="wf-cta-box">
+            <div class="wf-cta-title"></div>
+            <div class="wf-cta-desc"></div>
+            <div class="wf-btn-primary" style="display: inline-block;">Start Your Project</div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `,
+      
+      team: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger"><span></span><span></span><span></span></div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero" style="min-height: 350px;">
+          <div class="wf-badge">Based in Makati City, Philippines</div>
+          <div class="wf-headline">
+            <div class="wf-headline-lg" style="width: 350px;"></div>
+          </div>
+          <div class="wf-description"></div>
+          <div class="wf-description" style="width: 400px;"></div>
+        </section>
+        
+        <!-- TEAM GRID -->
+        <section class="wf-section dark">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3" style="max-width: 900px; margin: 0 auto;">
+            <div class="wf-team-card">
+              <div class="wf-team-avatar">JD</div>
+              <div class="wf-team-name"></div>
+              <div class="wf-team-role"></div>
+              <div class="wf-team-bio"></div>
+              <div class="wf-team-bio" style="width: 80%;"></div>
+              <div class="wf-team-socials">
+                <div class="wf-team-social"></div>
+                <div class="wf-team-social"></div>
+              </div>
+            </div>
+            <div class="wf-team-card">
+              <div class="wf-team-avatar">MS</div>
+              <div class="wf-team-name"></div>
+              <div class="wf-team-role"></div>
+              <div class="wf-team-bio"></div>
+              <div class="wf-team-bio" style="width: 80%;"></div>
+              <div class="wf-team-socials">
+                <div class="wf-team-social"></div>
+                <div class="wf-team-social"></div>
+              </div>
+            </div>
+            <div class="wf-team-card">
+              <div class="wf-team-avatar">AR</div>
+              <div class="wf-team-name"></div>
+              <div class="wf-team-role"></div>
+              <div class="wf-team-bio"></div>
+              <div class="wf-team-bio" style="width: 80%;"></div>
+              <div class="wf-team-socials">
+                <div class="wf-team-social"></div>
+                <div class="wf-team-social"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- VALUES -->
+        <section class="wf-section">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+            <div class="wf-section-subtitle"></div>
+          </div>
+          <div class="wf-grid cols-3" style="max-width: 800px; margin: 0 auto;">
+            <div class="wf-value-card">
+              <div class="wf-value-icon">🚀</div>
+              <div class="wf-value-title"></div>
+              <div class="wf-value-desc"></div>
+              <div class="wf-value-desc" style="width: 80%;"></div>
+            </div>
+            <div class="wf-value-card">
+              <div class="wf-value-icon">🤝</div>
+              <div class="wf-value-title"></div>
+              <div class="wf-value-desc"></div>
+              <div class="wf-value-desc" style="width: 80%;"></div>
+            </div>
+            <div class="wf-value-card">
+              <div class="wf-value-icon">✨</div>
+              <div class="wf-value-title"></div>
+              <div class="wf-value-desc"></div>
+              <div class="wf-value-desc" style="width: 80%;"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- CONTACT INFO -->
+        <section class="wf-section dark" style="text-align: center;">
+          <div class="wf-section-header">
+            <div class="wf-section-title"></div>
+          </div>
+          <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="wf-contact-icon">📍</div>
+              <div class="wf-contact-card-value" style="width: 200px;"></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="wf-contact-icon">📞</div>
+              <div class="wf-contact-card-value" style="width: 130px;"></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="wf-contact-icon">✉️</div>
+              <div class="wf-contact-card-value" style="width: 150px;"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="wf-cta-section">
+          <div class="wf-cta-box">
+            <div class="wf-cta-title"></div>
+            <div class="wf-cta-desc"></div>
+            <div class="wf-btn-primary" style="display: inline-block;">Contact Us</div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `,
+      
+      contact: `
+        <!-- NAV -->
+        <nav class="wf-nav">
+          <div class="wf-logo"></div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+          <div class="wf-nav-cta"></div>
+          <div class="wf-hamburger"><span></span><span></span><span></span></div>
+        </nav>
+        
+        <!-- HERO -->
+        <section class="wf-hero" style="min-height: 300px;">
+          <div class="wf-headline">
+            <div class="wf-headline-lg" style="width: 250px;"></div>
+          </div>
+          <div class="wf-description"></div>
+          <div class="wf-description" style="width: 350px;"></div>
+        </section>
+        
+        <!-- CONTACT FORM -->
+        <section class="wf-section dark">
+          <div class="wf-contact-grid">
+            <div class="wf-form">
+              <div class="wf-form-title"></div>
+              <div class="wf-input"><div class="wf-input-label"></div></div>
+              <div class="wf-input"><div class="wf-input-label"></div></div>
+              <div class="wf-input"><div class="wf-input-label"></div></div>
+              <div class="wf-textarea">
+                <div class="wf-input-label" style="margin-bottom: 8px;"></div>
+              </div>
+              <div class="wf-submit"></div>
+            </div>
+            <div class="wf-contact-info">
+              <div>
+                <div class="wf-contact-info-title"></div>
+                <div class="wf-contact-info-desc"></div>
+              </div>
+              <div class="wf-contact-card">
+                <div class="wf-contact-icon">📍</div>
+                <div>
+                  <div class="wf-contact-card-title"></div>
+                  <div class="wf-contact-card-value"></div>
+                  <div class="wf-contact-card-value" style="width: 100px; margin-top: 4px;"></div>
+                </div>
+              </div>
+              <div class="wf-contact-card">
+                <div class="wf-contact-icon">📞</div>
+                <div>
+                  <div class="wf-contact-card-title"></div>
+                  <div class="wf-contact-card-value"></div>
+                </div>
+              </div>
+              <div class="wf-contact-card">
+                <div class="wf-contact-icon">✉️</div>
+                <div>
+                  <div class="wf-contact-card-title"></div>
+                  <div class="wf-contact-card-value"></div>
+                </div>
+              </div>
+              <div class="wf-map">
+                <div class="wf-map-icon">🗺️</div>
+                <div class="wf-map-text"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="wf-footer">
+          <div class="wf-footer-grid">
+            <div class="wf-footer-brand">
+              <div class="wf-footer-logo"></div>
+              <div class="wf-footer-desc"></div>
+              <div class="wf-footer-socials">
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+                <div class="wf-footer-social"></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+            <div>
+              <div class="wf-footer-col-title"></div>
+              <div class="wf-footer-link"></div>
+              <div class="wf-footer-link"></div>
+            </div>
+          </div>
+          <div class="wf-footer-bottom">
+            <div class="wf-footer-copyright"></div>
+            <div class="wf-footer-location"></div>
+          </div>
+        </footer>
+      `
+    };
+
+    // Initialize
+    const frame = document.getElementById('frame');
+    const pageSelect = document.getElementById('pageSelect');
+    const deviceButtons = document.querySelectorAll('.device-toggle button');
+    
+    let currentDevice = 'desktop';
+    let currentPage = 'home';
+    
+    function render() {
+      frame.innerHTML = pages[currentPage];
+      frame.className = 'frame ' + currentDevice;
+    }
+    
+    pageSelect.addEventListener('change', (e) => {
+      currentPage = e.target.value;
+      render();
+    });
+    
+    deviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        deviceButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDevice = btn.dataset.device;
+        render();
+      });
+    });
+    
+    // Initial render
+    render();
+  </script>
+</body>
+</html>

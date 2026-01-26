@@ -14,8 +14,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nexxus Lab | Leave the Tech to Us",
-  description: "We are a team of developers and advisors from the Philippines, building innovative software solutions, AI chatbots, and automation systems.",
+  title: {
+    default: "Nexxus Lab | Leave the Tech to Us",
+    template: "%s | Nexxus Lab",
+  },
+  description: "We are a Philippine-based tech team building innovative software solutions, AI chatbots, and automation systems. Custom development for startups and enterprises.",
+  keywords: ["software development", "AI chatbots", "automation", "web development", "mobile apps", "Philippines", "tech company", "Makati"],
+  authors: [{ name: "Nexxus Lab" }],
+  creator: "Nexxus Lab",
+  metadataBase: new URL("https://nexxuslab.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_PH",
+    siteName: "Nexxus Lab",
+    title: "Nexxus Lab | Leave the Tech to Us",
+    description: "Philippine-based tech team building innovative software solutions, AI chatbots, and automation systems.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nexxus Lab | Leave the Tech to Us",
+    description: "Philippine-based tech team building innovative software solutions, AI chatbots, and automation systems.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
