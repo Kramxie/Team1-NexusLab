@@ -222,7 +222,7 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
 
 export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
       {workflows.slice(0, 3).map((workflow, index) => (
         <StaggerItem key={workflow.id}>
           <motion.div
@@ -234,14 +234,14 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
               className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             />
             <motion.div
-              className="absolute -top-4 left-6"
+              className="absolute -top-5 left-6 z-10"
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15, type: "spring", stiffness: 200 }}
             >
               <motion.span 
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold shadow-lg shadow-cyan-500/30"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold shadow-lg shadow-cyan-500/30 border-4 border-gray-950"
                 animate={{
                   boxShadow: ["0 0 20px rgba(34, 211, 238, 0.3)", "0 0 40px rgba(34, 211, 238, 0.5)", "0 0 20px rgba(34, 211, 238, 0.3)"],
                 }}

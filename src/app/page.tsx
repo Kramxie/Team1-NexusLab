@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Section } from "@/components";
-import { services, workflows, getActiveClients } from "@/content";
+import { Section, PortfolioCarousel } from "@/components";
+import { services, workflows, getActiveClients, portfolioProjects } from "@/content";
 import NewsletterForm from "@/components/NewsletterForm";
 import {
   AnimatedHero,
@@ -74,6 +74,13 @@ export default function Home() {
             </svg>
           </Link>
         </div>
+      </Section>
+
+      <Section
+        title="Our Portfolio"
+        subtitle="Explore the projects we've brought to life"
+      >
+        <PortfolioCarousel projects={portfolioProjects} autoPlayInterval={5000} />
       </Section>
 
       <Section

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, CTA } from "@/components";
-import { team } from "@/content";
+import { teamSections } from "@/content";
 
 export const metadata: Metadata = {
   title: "Meet Our Team",
@@ -40,21 +41,26 @@ export default function TeamPage() {
         </div>
       </section>
 
+      {/* Leadership Section */}
       <Section
-        title="The People Behind Nexxus Lab"
-        subtitle="Dedicated professionals committed to your success"
+        title="Leadership"
+        subtitle="The visionaries driving Nexxus Lab forward"
         dark
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {team.map((member) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {teamSections[0].members.map((member) => (
             <div
               key={member.id}
               className="group p-6 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-all duration-300 text-center"
             >
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-2 border-gray-700 group-hover:border-cyan-500/50 transition-all flex items-center justify-center">
-                <span className="text-3xl font-bold text-gray-400 group-hover:text-cyan-400 transition-colors">
-                  {member.name.split(" ").map((n) => n[0]).join("")}
-                </span>
+              <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-gray-700 group-hover:border-cyan-500/50 transition-all">
+                <Image
+                  src={member.avatar}
+                  alt={member.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-cyan-400 transition-colors">
@@ -109,6 +115,36 @@ export default function TeamPage() {
               )}
             </div>
           ))}
+        </div>
+      </Section>
+
+      {/* Internship Team Section */}
+      <Section
+        title="Internship Team"
+        subtitle="DLSUD Interns - The future of tech"
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="group rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden">
+            <div className="relative w-full aspect-video">
+              <Image
+                src="/images/team/internship-team.png"
+                alt="Nexxus Lab Internship Team - DLSUD Interns"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+            </div>
+            <div className="p-6 text-center">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                DLSUD Interns
+              </h3>
+              <p className="text-sm text-cyan-400 mb-4">Internship Team</p>
+              <p className="text-sm text-gray-400">
+                A talented group of interns from De La Salle University - Dasmariñas, 
+                dedicated to learning and contributing to innovative tech solutions.
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 

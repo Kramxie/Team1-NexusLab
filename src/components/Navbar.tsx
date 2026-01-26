@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import AnimatedLogo from "./AnimatedLogo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -39,12 +40,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-          >
-            NEXXUS LAB
-          </Link>
+          <AnimatedLogo />
 
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (

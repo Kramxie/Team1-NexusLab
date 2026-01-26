@@ -5,3 +5,4 @@ export { default as Card } from "./Card";
 export { default as CTA } from "./CTA";
 export { default as PricingTier } from "./PricingTier";
 export { default as Grid } from "./Grid";
+export { default as PortfolioCarousel } from "./PortfolioCarousel";
