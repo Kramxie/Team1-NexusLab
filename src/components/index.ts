@@ -7,3 +7,13 @@ export { default as PricingTier } from "./PricingTier";
 export { default as Grid } from "./Grid";
 export { default as PortfolioCarousel } from "./PortfolioCarousel";
 export { default as JsonLd } from "./JsonLd";
+export { default as AnimatedPageHero } from "./AnimatedPageHero";
+export {
+  AnimatedSection,
+  AnimatedGrid,
+  AnimatedGridItem,
+  AnimatedCard,
+  AnimatedSlideLeft,
+  AnimatedSlideRight,
+  AnimatedScaleIn,
+} from "./AnimatedSection";
