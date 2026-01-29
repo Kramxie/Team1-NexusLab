@@ -32,7 +32,7 @@ export function AnimatedGrid({
 }: AnimatedSectionProps & { staggerDelay?: number }) {
   return (
     <motion.div
-      className={className}
+      className={`overflow-visible ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -56,7 +56,7 @@ export function AnimatedGrid({
 export function AnimatedGridItem({ children, className = "" }: Omit<AnimatedSectionProps, "delay">) {
   return (
     <motion.div
-      className={className}
+      className={`overflow-visible ${className}`}
       variants={{
         hidden: { opacity: 0, y: 30, scale: 0.95 },
         visible: {

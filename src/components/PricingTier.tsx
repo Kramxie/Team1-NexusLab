@@ -30,8 +30,8 @@ export default function PricingTier({
       }`}
     >
       {highlighted && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 overflow-visible">
+          <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg z-30">
             Most Popular
           </span>
         </div>

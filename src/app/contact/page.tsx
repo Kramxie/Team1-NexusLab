@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Section, AnimatedPageHero, AnimatedSlideLeft, AnimatedSlideRight } from "@/components";
+import {
+  Section,
+  AnimatedPageHero,
+  AnimatedSlideLeft,
+  AnimatedSlideRight,
+} from "@/components";
+import CalendlyWidget from "@/components/CalendlyWidget";
+
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ||
+  "https://formspree.io/f/xzdgepjj";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -9,18 +19,64 @@ export default function ContactPage() {
     email: "",
     company: "",
     message: "",
+    // simple bot trap (honeypot)
+    website: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll get back to you soon.");
+    setLoading(true);
+    setStatusMessage(null);
+
+    // Honeypot: if filled, silently stop (likely bot)
+    if (formData.website.trim()) {
+      setLoading(false);
+      setStatusMessage("Thank you — your message was sent.");
+      setFormData({ name: "", email: "", company: "", message: "", website: "" });
+      return;
+    }
+
+    try {
+      // Formspree supports JSON submissions
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+          _subject: `New message from Nexxus Lab Contact Form (${formData.name})`,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (res.ok) {
+        setStatusMessage("Thank you — your message was sent.");
+        setFormData({ name: "", email: "", company: "", message: "", website: "" });
+      } else {
+        console.error("Formspree error:", data);
+        setStatusMessage("Sorry — we could not send your message. Please try again later.");
+      }
+    } catch (err) {
+      console.error("Submit failed:", err);
+      setStatusMessage("Network error — please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -37,7 +93,19 @@ export default function ContactPage() {
           <AnimatedSlideLeft>
             <div className="p-8 rounded-2xl border border-gray-800 bg-gray-900/50">
               <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot (hidden) */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                />
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                     Your Name
@@ -51,6 +119,7 @@ export default function ContactPage() {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="Juan dela Cruz"
+                    disabled={loading}
                   />
                 </div>
 
@@ -67,6 +136,7 @@ export default function ContactPage() {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="juan@company.com"
+                    disabled={loading}
                   />
                 </div>
 
@@ -82,6 +152,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="Your Company"
+                    disabled={loading}
                   />
                 </div>
 
@@ -98,15 +169,21 @@ export default function ContactPage() {
                     rows={5}
                     className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
                     placeholder="Tell us about your project..."
+                    disabled={loading}
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25"
+                  disabled={loading}
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
+
+                {statusMessage && (
+                  <p className="mt-3 text-sm text-gray-300 text-center">{statusMessage}</p>
+                )}
               </form>
             </div>
           </AnimatedSlideLeft>
@@ -130,26 +207,8 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white mb-1">Office Address</h3>
-                      <p className="text-gray-400 text-sm">
-                        Salcedo St., Legaspi Village<br />
-                        Makati City 1299<br />
-                        Philippines
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white mb-1">Phone</h3>
-                      <p className="text-gray-400 text-sm">+63 927-143-0884</p>
+                      <h3 className="font-semibold text-white mb-1">Office Location</h3>
+                      <p className="text-gray-400 text-sm">Makati • Taguig • Cavite</p>
                     </div>
                   </div>
                 </div>
@@ -172,13 +231,30 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.4 15a7.97 7.97 0 001.6-3 8 8 0 10-3 6.4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">US-based Clients</h3>
+                      <p className="text-gray-400 text-sm">
+                        We mostly work with international clients, especially US-based businesses and founders.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
                 <h3 className="font-semibold text-white mb-4">Find Us</h3>
                 <div className="aspect-video rounded-xl bg-gray-800 flex items-center justify-center">
                   <a
-                    href="https://www.google.com/maps/place/Salcedo,+Legazpi+Village,+Makati,+Kalakhang+Maynila/"
+                    href="https://www.google.com/maps/place/Makati,+Metro+Manila/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 hover:text-cyan-400 transition-colors flex flex-col items-center gap-2"
@@ -193,6 +269,14 @@ export default function ContactPage() {
             </div>
           </AnimatedSlideRight>
         </div>
+      </Section>
+
+      <Section
+        title="Get in Touch with Us"
+        subtitle="Set a Google meeting appointment with us!"
+        dark
+      >
+        <CalendlyWidget />
       </Section>
     </>
   );

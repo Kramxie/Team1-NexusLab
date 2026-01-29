@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 
 const quickLinks = [
   { href: "/services", label: "Services" },
@@ -13,11 +14,22 @@ const legalLinks = [
   { href: "/terms", label: "Terms of Service" },
 ];
 
+const socialLinks = [
+  { type: "facebook", label: "Facebook", href: "https://www.facebook.com/nexxuslab/" },
+  { type: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/nexxus-lab/" },
+  { type: "instagram", label: "Instagram", href: "https://www.instagram.com/nexxus_lab/" },
+  { type: "github", label: "GitHub", href: "" }, // empty for now
+] as const;
+
 // Simple SVG social icons (no external libs)
-const SocialIcon = ({ type }: { type: "twitter" | "linkedin" | "github" | "instagram" }) => {
+const SocialIcon = ({
+  type,
+}: {
+  type: "facebook" | "linkedin" | "github" | "instagram";
+}) => {
   const paths: Record<string, React.ReactNode> = {
-    twitter: (
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    facebook: (
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     ),
     linkedin: (
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -31,11 +43,7 @@ const SocialIcon = ({ type }: { type: "twitter" | "linkedin" | "github" | "insta
   };
 
   return (
-    <svg
-      className="w-5 h-5 fill-current"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
+    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
       {paths[type]}
     </svg>
   );
@@ -53,21 +61,35 @@ export default function Footer() {
             >
               NEXXUS LAB
             </Link>
+
             <p className="mt-4 text-gray-400 text-sm max-w-sm">
               Leave the tech to us. We are a team of developers and advisors from
               the Philippines, building innovative software solutions.
             </p>
+
             <div className="flex gap-4 mt-6">
-              {(["twitter", "linkedin", "github", "instagram"] as const).map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="p-2 text-gray-500 hover:text-cyan-400 hover:bg-gray-800 rounded-lg transition-colors"
-                  aria-label={social}
-                >
-                  <SocialIcon type={social} />
-                </a>
-              ))}
+              {socialLinks.map(({ type, label, href }) => {
+                const disabled = !href;
+
+                return (
+                  <a
+                    key={type}
+                    href={disabled ? undefined : href}
+                    target={disabled ? undefined : "_blank"}
+                    rel={disabled ? undefined : "noopener noreferrer"}
+                    aria-label={label}
+                    aria-disabled={disabled}
+                    title={disabled ? "Coming soon" : label}
+                    className={`p-2 rounded-lg transition-colors ${
+                      disabled
+                        ? "text-gray-700 cursor-not-allowed pointer-events-none"
+                        : "text-gray-500 hover:text-cyan-400 hover:bg-gray-800"
+                    }`}
+                  >
+                    <SocialIcon type={type} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -113,7 +135,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Nexxus Lab. All rights reserved.
           </p>
           <p className="text-gray-600 text-xs">
-            Makati City, Philippines ✦ Leave the tech to us
+            International-Client Based ✦ Leave the tech to us
           </p>
         </div>
       </div>

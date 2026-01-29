@@ -11,7 +11,8 @@ export default function FloatingChatbot() {
     {
       id: "welcome",
       role: "bot",
-      content: "Hi there! 👋 I'm Nexxusbot, your virtual assistant. How can I help you learn about Nexxus Lab today?",
+      content:
+        "Hi there! 👋 I'm Nexxusbot, your virtual assistant. How can I help you learn about Nexxus Lab today?",
       timestamp: new Date(),
     },
   ]);
@@ -19,6 +20,14 @@ export default function FloatingChatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // ✅ Open chatbot when other buttons dispatch "open-chatbot"
+  useEffect(() => {
+    const openChat = () => setIsOpen(true);
+
+    window.addEventListener("open-chatbot", openChat);
+    return () => window.removeEventListener("open-chatbot", openChat);
+  }, []);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -46,7 +55,6 @@ export default function FloatingChatbot() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate typing delay for more natural feel
     setTimeout(() => {
       const botResponse = generateBotResponse(userMessage.content);
       const botMessage: ChatMessage = {
@@ -72,7 +80,8 @@ export default function FloatingChatbot() {
       {
         id: "welcome",
         role: "bot",
-        content: "Hi there! 👋 I'm Nexxusbot, your virtual assistant. How can I help you learn about Nexxus Lab today?",
+        content:
+          "Hi there! 👋 I'm Nexxusbot, your virtual assistant. How can I help you learn about Nexxus Lab today?",
         timestamp: new Date(),
       },
     ]);
@@ -106,7 +115,12 @@ export default function FloatingChatbot() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </motion.svg>
           ) : (
             <motion.svg
@@ -128,8 +142,7 @@ export default function FloatingChatbot() {
             </motion.svg>
           )}
         </AnimatePresence>
-        
-        {/* Notification dot */}
+
         {!isOpen && (
           <motion.span
             className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-gray-950"
@@ -166,15 +179,27 @@ export default function FloatingChatbot() {
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-semibold text-sm">Nexxusbot</h3>
-                <p className="text-xs text-gray-400">Online • Ask me about Nexxus Lab</p>
+                <p className="text-xs text-gray-400">
+                  Online • Ask me about Nexxus Lab
+                </p>
               </div>
               <button
                 onClick={handleReset}
                 className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
                 title="Reset conversation"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
                 </svg>
               </button>
             </div>
@@ -186,7 +211,9 @@ export default function FloatingChatbot() {
                   key={message.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex ${
+                    message.role === "user" ? "justify-end" : "justify-start"
+                  }`}
                 >
                   <div
                     className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm whitespace-pre-line ${
@@ -200,7 +227,6 @@ export default function FloatingChatbot() {
                 </motion.div>
               ))}
 
-              {/* Typing indicator */}
               {isTyping && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -212,17 +238,29 @@ export default function FloatingChatbot() {
                       <motion.span
                         className="w-2 h-2 bg-gray-500 rounded-full"
                         animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0,
+                        }}
                       />
                       <motion.span
                         className="w-2 h-2 bg-gray-500 rounded-full"
                         animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0.2,
+                        }}
                       />
                       <motion.span
                         className="w-2 h-2 bg-gray-500 rounded-full"
                         animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0.4,
+                        }}
                       />
                     </div>
                   </div>
@@ -237,7 +275,11 @@ export default function FloatingChatbot() {
               <div className="px-4 pb-2">
                 <p className="text-xs text-gray-500 mb-2">Quick questions:</p>
                 <div className="flex flex-wrap gap-2">
-                  {["What services do you offer?", "How can I contact you?", "Tell me about pricing"].map((q) => (
+                  {[
+                    "What services do you offer?",
+                    "How can I contact you?",
+                    "Tell me about pricing",
+                  ].map((q) => (
                     <button
                       key={q}
                       onClick={() => {
@@ -273,8 +315,18 @@ export default function FloatingChatbot() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    />
                   </svg>
                 </motion.button>
               </div>

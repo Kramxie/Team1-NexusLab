@@ -68,14 +68,18 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
 
       <div className="relative max-w-5xl mx-auto text-center">
         <FadeInUp delay={0}>
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 border border-cyan-500/30 text-sm text-gray-300 mb-8 backdrop-blur-sm"
             whileHover={{ borderColor: "rgba(34, 211, 238, 0.6)", scale: 1.02 }}
           >
-            <motion.span 
+            <motion.span
               className="w-2 h-2 bg-cyan-400 rounded-full"
-              animate={{ 
-                boxShadow: ["0 0 0 0 rgba(34, 211, 238, 0.4)", "0 0 0 8px rgba(34, 211, 238, 0)", "0 0 0 0 rgba(34, 211, 238, 0.4)"],
+              animate={{
+                boxShadow: [
+                  "0 0 0 0 rgba(34, 211, 238, 0.4)",
+                  "0 0 0 8px rgba(34, 211, 238, 0)",
+                  "0 0 0 0 rgba(34, 211, 238, 0.4)",
+                ],
               }}
               transition={{ duration: 2, repeat: Infinity }}
             />
@@ -86,8 +90,8 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
         <FadeInUp delay={0.1}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
             <span className="block">
-              <GlitchText 
-                text="Leave the Tech" 
+              <GlitchText
+                text="Leave the Tech"
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               />
             </span>
@@ -104,38 +108,45 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
 
         <FadeInUp delay={0.3}>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-            We are a team of developers and advisors from the Philippines, building
-            custom software, AI chatbots, and automation solutions that transform businesses.
+            We are a team of developers and advisors from the Philippines,
+            building custom software, AI chatbots, and automation solutions that
+            transform businesses.
           </p>
         </FadeInUp>
 
         <FadeInUp delay={0.4}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <PulseGlow>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
                 >
                   Start Your Project
-                  <motion.svg 
-                    className="w-5 h-5" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                     animate={{ x: [0, 4, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </motion.svg>
                 </Link>
               </motion.div>
             </PulseGlow>
-            <motion.div 
-              whileHover={{ scale: 1.02, borderColor: "rgba(34, 211, 238, 0.5)" }} 
+
+            <motion.div
+              whileHover={{
+                scale: 1.02,
+                borderColor: "rgba(34, 211, 238, 0.5)",
+              }}
               whileTap={{ scale: 0.98 }}
             >
               <Link
@@ -150,11 +161,13 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
 
         <FadeInUp delay={0.5}>
           <div className="mt-16 pt-8 border-t border-gray-800/50">
-            <p className="text-sm text-gray-500 mb-4">Trusted by innovative companies</p>
+            <p className="text-sm text-gray-500 mb-4">
+              Trusted by innovative companies
+            </p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-50">
               {clients.slice(0, 4).map((client, index) => (
-                <motion.span 
-                  key={client.id} 
+                <motion.span
+                  key={client.id}
                   className="text-gray-400 font-semibold tracking-wide"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -186,9 +199,7 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
               }}
               transition={{ duration: 0.3 }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              />
+              <motion.div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <motion.div
                 className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
                 initial={{ x: "-100%" }}
@@ -198,9 +209,11 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
               <FloatingElement amplitude={5} duration={3 + index * 0.2}>
                 <span className="text-4xl block mb-4">{service.icon}</span>
               </FloatingElement>
-              <h3 className="mt-2 text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors">{service.title}</h3>
+              <h3 className="mt-2 text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                {service.title}
+              </h3>
               <p className="mt-2 text-gray-400 text-sm">{service.description}</p>
-              <motion.div 
+              <motion.div
                 className="absolute bottom-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full blur-2xl"
                 animate={{
                   scale: [1, 1.2, 1],
@@ -222,53 +235,70 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
 
 export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+    <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
       {workflows.slice(0, 3).map((workflow, index) => (
         <StaggerItem key={workflow.id}>
           <motion.div
-            className="relative p-6 rounded-2xl border border-gray-800 bg-gray-900/50 h-full overflow-hidden group"
+            className="relative p-8 rounded-3xl border border-gray-800 bg-gray-900/50 h-full overflow-visible group"
             whileHover={{ y: -8, borderColor: "rgba(34, 211, 238, 0.3)" }}
             transition={{ duration: 0.3 }}
           >
+            <motion.div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            />
-            <motion.div
-              className="absolute -top-5 left-6 z-10"
+              className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20"
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15, type: "spring", stiffness: 200 }}
+              transition={{
+                delay: index * 0.15,
+                type: "spring",
+                stiffness: 200,
+              }}
             >
-              <motion.span 
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold shadow-lg shadow-cyan-500/30 border-4 border-gray-950"
+              <motion.span
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-base font-bold shadow-lg shadow-cyan-500/30 border-4 border-gray-950"
                 animate={{
-                  boxShadow: ["0 0 20px rgba(34, 211, 238, 0.3)", "0 0 40px rgba(34, 211, 238, 0.5)", "0 0 20px rgba(34, 211, 238, 0.3)"],
+                  boxShadow: [
+                    "0 0 20px rgba(34, 211, 238, 0.3)",
+                    "0 0 40px rgba(34, 211, 238, 0.5)",
+                    "0 0 20px rgba(34, 211, 238, 0.3)",
+                  ],
                 }}
-                transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: index * 0.3,
+                }}
               >
                 {index + 1}
               </motion.span>
             </motion.div>
-            <div className="mt-6 relative">
+
+            <div className="mt-8 relative">
               <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                 {workflow.title}
               </h3>
-              <p className="text-gray-400 text-sm mb-4">{workflow.description}</p>
+              <p className="text-gray-400 text-sm mb-4">
+                {workflow.description}
+              </p>
               <ul className="space-y-2">
                 {workflow.steps.slice(0, 3).map((step, stepIndex) => (
-                  <motion.li 
-                    key={step.step} 
+                  <motion.li
+                    key={step.step}
                     className="flex items-start gap-2 text-sm text-gray-500"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + stepIndex * 0.1 }}
                   >
-                    <motion.span 
+                    <motion.span
                       className="text-cyan-500 mt-0.5"
                       animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1, repeat: Infinity, delay: stepIndex * 0.2 }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: stepIndex * 0.2,
+                      }}
                     >
                       ›
                     </motion.span>
@@ -277,14 +307,25 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
                 ))}
               </ul>
             </div>
+
             {index < 2 && (
-              <motion.div 
+              <motion.div
                 className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-cyan-500/30"
                 animate={{ x: [0, 5, 0], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </motion.div>
             )}
@@ -309,16 +350,21 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
               }}
               transition={{ duration: 0.3 }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              />
+              <motion.div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="flex items-center gap-4 mb-4 relative">
                 <motion.div
                   className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-xl font-bold text-cyan-400 border border-gray-700 group-hover:border-cyan-500/50 transition-colors"
-                  whileHover={{ rotate: [0, -10, 10, -5, 5, 0], scale: 1.05 }}
+                  whileHover={{
+                    rotate: [0, -10, 10, -5, 5, 0],
+                    scale: 1.05,
+                  }}
                   transition={{ duration: 0.5 }}
                   animate={{
-                    boxShadow: ["0 0 0 rgba(34, 211, 238, 0)", "0 0 20px rgba(34, 211, 238, 0.2)", "0 0 0 rgba(34, 211, 238, 0)"],
+                    boxShadow: [
+                      "0 0 0 rgba(34, 211, 238, 0)",
+                      "0 0 20px rgba(34, 211, 238, 0.2)",
+                      "0 0 0 rgba(34, 211, 238, 0)",
+                    ],
                   }}
                 >
                   {client.name.charAt(0)}
@@ -332,7 +378,7 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
               </div>
               <p className="text-sm text-gray-400 relative">{client.description}</p>
               {client.testimonial && (
-                <motion.blockquote 
+                <motion.blockquote
                   className="mt-4 pt-4 border-t border-gray-800 group-hover:border-cyan-500/20 transition-colors relative"
                   initial={{ opacity: 0.7 }}
                   whileHover={{ opacity: 1 }}
@@ -345,9 +391,7 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
                   </cite>
                 </motion.blockquote>
               )}
-              <motion.div
-                className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition-colors"
-              />
+              <motion.div className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition-colors" />
             </motion.div>
           </CyberCard>
         </StaggerItem>
@@ -389,37 +433,39 @@ export function AnimatedCTA() {
 
         <div className="relative z-10">
           <FadeInUp>
-            <GlitchText 
+            <GlitchText
               text="Let's Build Your Automation"
               className="text-2xl md:text-3xl font-bold text-white mb-4 inline-block"
             />
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <p className="text-gray-400 max-w-xl mx-auto mb-8">
-              Ready to transform your business with cutting-edge digital solutions?
-              Let&apos;s start a conversation about your next project.
+              Ready to transform your business with cutting-edge digital
+              solutions? Let&apos;s start a conversation about your next project.
             </p>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <PulseGlow className="inline-block rounded-full">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/30"
                 >
                   Schedule a Call
-                  <motion.svg 
-                    className="w-5 h-5" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </motion.svg>
                 </Link>
               </motion.div>
@@ -434,9 +480,7 @@ export function AnimatedCTA() {
 export function AnimatedChatSection() {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900 relative overflow-hidden">
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05)_0%,transparent_70%)]"
-      />
+      <motion.div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05)_0%,transparent_70%)]" />
       <div className="max-w-4xl mx-auto text-center relative">
         <FadeInUp>
           <h2 className="text-2xl font-bold text-white mb-4">
@@ -445,26 +489,51 @@ export function AnimatedChatSection() {
         </FadeInUp>
         <FadeInUp delay={0.1}>
           <p className="text-gray-400 mb-8">
-            Chat with us in real-time or leave a message. Our team typically responds within a few hours.
+            Chat with us in real-time or leave a message. Our team typically
+            responds within a few hours.
           </p>
         </FadeInUp>
+
+        {/* ✅ UPDATED: clicking this triggers opening the floating chatbot */}
         <FadeInUp delay={0.2}>
           <motion.button
             type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new Event("open-chatbot"));
+              }
+            }}
             className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gray-800/80 border border-gray-700 text-white hover:bg-gray-700 hover:border-cyan-500/30 transition-all backdrop-blur-sm"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(34, 211, 238, 0.25)" }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 40px rgba(34, 211, 238, 0.25)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
-            <motion.div 
+            <motion.div
               className="w-3 h-3 bg-green-500 rounded-full"
               animate={{
-                boxShadow: ["0 0 0 0 rgba(34, 197, 94, 0.4)", "0 0 0 10px rgba(34, 197, 94, 0)", "0 0 0 0 rgba(34, 197, 94, 0.4)"],
+                boxShadow: [
+                  "0 0 0 0 rgba(34, 197, 94, 0.4)",
+                  "0 0 0 10px rgba(34, 197, 94, 0)",
+                  "0 0 0 0 rgba(34, 197, 94, 0.4)",
+                ],
               }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span>Start a Conversation</span>
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            <svg
+              className="w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
             </svg>
           </motion.button>
         </FadeInUp>

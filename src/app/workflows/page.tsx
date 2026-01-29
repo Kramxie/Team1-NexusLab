@@ -1,6 +1,13 @@
 "use client";
 
-import { Section, CTA, AnimatedPageHero, AnimatedSection, AnimatedGrid, AnimatedGridItem } from "@/components";
+import {
+  Section,
+  CTA,
+  AnimatedPageHero,
+  AnimatedSection,
+  AnimatedGrid,
+  AnimatedGridItem,
+} from "@/components";
 import { automationSamples, workflows } from "@/content";
 
 export default function WorkflowsPage() {
@@ -18,6 +25,7 @@ export default function WorkflowsPage() {
         title="Our Process"
         subtitle="A proven methodology for building reliable automations"
         dark
+        className="overflow-visible"
       >
         <div className="relative">
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
@@ -25,13 +33,14 @@ export default function WorkflowsPage() {
           <AnimatedGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {workflows.map((workflow, index) => (
               <AnimatedGridItem key={workflow.id}>
-                <div className="relative p-6 rounded-2xl border border-gray-800 bg-gray-900/80 text-center">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-bold">
+                <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/80 text-center relative overflow-visible">
+                  {/* Badge - normal flow, always fully visible */}
+                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-bold shadow-xl ring-4 ring-gray-900">
                       {index + 1}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-white mt-4 mb-2">
+                  <h3 className="text-lg font-semibold text-white mt-8 mb-2">
                     {workflow.title}
                   </h3>
                   <p className="text-sm text-gray-400">{workflow.description}</p>
