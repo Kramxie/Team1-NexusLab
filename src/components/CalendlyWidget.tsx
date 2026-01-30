@@ -1,32 +1,29 @@
-import React, { useEffect } from "react";
+"use client";
 
-const CalendlyWidget = () => {
+import { useEffect } from "react";
+
+export default function CalendlyWidget() {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
+    // Prevent adding the script multiple times during route changes / HMR
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
+    );
 
-    return () => {
-      document.body.removeChild(script);
-    };
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    
   }, []);
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto p-6 bg-gray-900 rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-bold text-cyan-400 text-center mb-4">
-        Select a Day
-      </h2>
-      <p className="text-gray-400 text-center mb-6">
-        Set a Google meeting appointment with us!
-      </p>
-      <div
-        className="calendly-inline-widget"
-        data-url="https://calendly.com/markatieh21/30min"
-        style={{ minWidth: "320px", height: "630px" }}
-      ></div>
-    </div>
+    <div
+      className="calendly-inline-widget w-full"
+      data-url="https://calendly.com/markatieh21/30min"
+      style={{ minWidth: "320px", height: "630px" }}
+    />
   );
-};
-
-export default CalendlyWidget;
+}
