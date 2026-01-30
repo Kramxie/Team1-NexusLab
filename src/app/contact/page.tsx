@@ -10,8 +10,7 @@ import {
 import CalendlyWidget from "@/components/CalendlyWidget";
 
 const FORMSPREE_ENDPOINT =
-  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ||
-  "https://formspree.io/f/xzdgepjj";
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/xzdgepjj";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -19,7 +18,8 @@ export default function ContactPage() {
     email: "",
     company: "",
     message: "",
-    website: "", // honeypot
+    // simple bot trap (honeypot)
+    website: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function ContactPage() {
     setLoading(true);
     setStatusMessage(null);
 
-    // honeypot
+    // Honeypot: if filled, silently stop (likely bot)
     if (formData.website.trim()) {
       setLoading(false);
       setStatusMessage("Thank you — your message was sent.");
@@ -61,9 +61,7 @@ export default function ContactPage() {
         setFormData({ name: "", email: "", company: "", message: "", website: "" });
       } else {
         console.error("Formspree error:", data);
-        setStatusMessage(
-          "Sorry — we could not send your message. Please try again later."
-        );
+        setStatusMessage("Sorry — we could not send your message. Please try again later.");
       }
     } catch (err) {
       console.error("Submit failed:", err);
@@ -81,232 +79,174 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* ✅ KEEP THIS (Let’s Talk Hero) */}
       <AnimatedPageHero
-        title="Contact"
-        titleHighlight="Nexxus Lab"
-        description=""
+        title="Let's"
+        titleHighlight="Talk"
+        description="Have a project in mind? We'd love to hear about it. Reach out and let's explore how we can work together."
         highlightColor="cyan"
       />
 
       <Section dark>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto items-start">
-          {/* LEFT: Calendly */}
+        {/* ✅ Layout like your screenshot: Form + Calendly side-by-side on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* LEFT: Message Form */}
           <AnimatedSlideLeft>
-            <div className="space-y-3">
-              <div>
-                <h2 className="text-sm font-semibold text-gray-200 tracking-widest uppercase">
-                  Get in Touch with Us
-                </h2>
-                <p className="text-gray-400 text-sm">
-                  Set a Google meeting appointment with us!
-                </p>
-              </div>
+            <div className="p-8 rounded-2xl border border-gray-800 bg-gray-900/50">
+              <h2 className="text-2xl font-bold text-white mb-6">
+                Send us a Message
+              </h2>
 
-              {/* Calendly card */}
-              <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-4">
-                <CalendlyWidget />
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot (hidden) */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                />
+
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                    className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors disabled:opacity-60"
+                    placeholder="Juan dela Cruz"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                    className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors disabled:opacity-60"
+                    placeholder="juan@company.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Company (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    disabled={loading}
+                    className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors disabled:opacity-60"
+                    placeholder="Your Company"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    disabled={loading}
+                    className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none disabled:opacity-60"
+                    placeholder="Tell us about your project..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
+
+                {statusMessage && (
+                  <p className="mt-3 text-sm text-gray-300 text-center">
+                    {statusMessage}
+                  </p>
+                )}
+              </form>
             </div>
           </AnimatedSlideLeft>
 
-          {/* RIGHT: Form */}
+          {/* RIGHT: Calendly (same card style) */}
           <AnimatedSlideRight>
-            <div className="space-y-3">
-              <div>
-                <h2 className="text-sm font-semibold text-gray-200 tracking-widest uppercase">
-                  Email Us!
-                </h2>
-                <p className="text-gray-400 text-sm">
-                  If you don’t need to book a meeting with us, email us here!
-                </p>
-              </div>
+            <div className="p-8 rounded-2xl border border-gray-800 bg-gray-900/50">
+              <h2 className="text-2xl font-bold text-white mb-2">Book a Call</h2>
+              <p className="text-gray-400 mb-6">
+                Pick a time that works for you — we’ll meet via Google Meet.
+              </p>
 
-              <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/50">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Honeypot */}
-                  <input
-                    type="text"
-                    name="website"
-                    value={formData.website}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    tabIndex={-1}
-                    className="hidden"
-                  />
-
-                  <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-2">
-                      NAME
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      disabled={loading}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      placeholder="Juan dela Cruz"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-2">
-                      EMAIL
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      disabled={loading}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      placeholder="juan@company.com"
-                    />
-                  </div>
-
-                  {/* Optional company (keep but subtle) */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-2">
-                      COMPANY (OPTIONAL)
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      disabled={loading}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      placeholder="Your Company"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-2">
-                      MESSAGE
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      disabled={loading}
-                      className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                      placeholder="Tell us about your project..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-3 rounded-xl bg-gray-200 text-gray-900 font-semibold hover:bg-white transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {loading ? "Sending..." : "Submit"}
-                  </button>
-
-                  {statusMessage && (
-                    <p className="pt-2 text-sm text-gray-300 text-center">
-                      {statusMessage}
-                    </p>
-                  )}
-                </form>
-              </div>
+              <CalendlyWidget />
             </div>
           </AnimatedSlideRight>
         </div>
 
-        
+        {/* ✅ Contact Info goes below, cleaner + matches your screenshot idea */}
         <div className="max-w-6xl mx-auto mt-12">
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/30 p-6">
-            <h3 className="text-sm font-semibold text-white mb-4">
-              Contact Information
-            </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Office Location */}
+            <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
+              <h3 className="font-semibold text-white mb-2">Office Location</h3>
+              <p className="text-gray-400 text-sm">Makati • Taguig • Cavite</p>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-400">
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-200 font-medium">Office Locations</p>
-                  <p>Makati • Taguig • Cavite</p>
-                </div>
-              </div>
+            {/* Email */}
+            <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
+              <h3 className="font-semibold text-white mb-2">Email</h3>
+              <a
+                href="mailto:team@nexxuslab.com"
+                className="text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+              >
+                team@nexxuslab.com
+              </a>
+            </div>
 
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-200 font-medium">Email</p>
-                  <a
-                    href="mailto:team@nexxuslab.com"
-                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                  >
-                    team@nexxuslab.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19.4 15a7.97 7.97 0 001.6-3 8 8 0 10-3 6.4"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-200 font-medium">Clients</p>
-                  <p>Serving US-based & international founders</p>
-                </div>
-              </div>
+            {/* US / International */}
+            <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
+              <h3 className="font-semibold text-white mb-2">
+                US & International Clients
+              </h3>
+              <p className="text-gray-400 text-sm">
+                We mostly work with international clients, especially US-based
+                businesses and founders.
+              </p>
             </div>
           </div>
         </div>
