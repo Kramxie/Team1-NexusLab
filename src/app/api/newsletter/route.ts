@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 
-// Put your Turnstile Secret Key here (SERVER ONLY)
-// Best practice is env, but if you want “no env”, place it here for now.
-const TURNSTILE_SECRET_KEY = "PASTE_YOUR_TURNSTILE_SECRET_KEY_HERE";
+// Turnstile secret key (server only). Read from env (`TURNSTILE_SECRET_KEY`).
+// Fallback to provided key so verification works immediately if env is not set.
+const TURNSTILE_SECRET_KEY =
+  process.env.TURNSTILE_SECRET_KEY || "0x4AAAAAACVgr8KNyGOoHsvBleHxSskDbjo";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => null);
+
+    if (!TURNSTILE_SECRET_KEY) {
+      return NextResponse.json(
+        { ok: false, message: "Server misconfigured: missing TURNSTILE_SECRET_KEY" },
+        { status: 500 }
+      );
+    }
 
     const email = String(body?.email || "").trim();
     const token = String(body?.token || "").trim();

@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const FORMSPREE_NEWSLETTER_ENDPOINT = "https://formspree.io/f/mnjvzrgv";
+const FORMSPREE_NEWSLETTER_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/mnjvzrgv";
 
 // Put your Turnstile Site Key here (safe to expose on client)
-const TURNSTILE_SITE_KEY = "0x4AAAAAACVgr_quPo0x_Ta0";
+const TURNSTILE_SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAACVgr_quPo0x_Ta0";
 
 declare global {
   interface Window {

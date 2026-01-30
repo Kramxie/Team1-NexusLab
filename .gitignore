@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# Ignore local env with secrets
+.env.local
+# (keep other env examples committed) but continue to ignore other env files
+.env.*
 
 # vercel
 .vercel
