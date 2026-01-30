@@ -30,7 +30,7 @@ export const leadershipTeam: TeamMember[] = [
     bio: "Visionary leader driving Nexxus Lab's mission to deliver innovative tech solutions. Passionate about empowering businesses through automation and digital transformation.",
     avatar: "/images/team/chris-bautista.png",
     socials: {
-      linkedin: "https://linkedin.com/in/chrisbautista",
+      linkedin: "https://www.linkedin.com/in/chris-bautista-31935854/",
       facebook: "https://facebook.com/nexxuslab",
     },
   },
