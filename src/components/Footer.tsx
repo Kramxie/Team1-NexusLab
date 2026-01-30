@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const quickLinks = [
   { href: "/services", label: "Services" },
@@ -50,6 +52,20 @@ const SocialIcon = ({
 };
 
 export default function Footer() {
+  const [toast, setToast] = useState<string | null>(null);
+
+  // auto-hide toast
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2800);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  const handleLegalClick = (label: string) => {
+    console.info(`[Footer] "${label}" clicked — page under development.`);
+    setToast(`${label} is under development. Coming soon!`);
+  };
+
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -118,12 +134,14 @@ export default function Footer() {
             <ul className="space-y-3">
               {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                  {/* Button instead of Link so it won't 404 */}
+                  <button
+                    type="button"
+                    onClick={() => handleLegalClick(link.label)}
+                    className="text-left text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -137,6 +155,19 @@ export default function Footer() {
           <p className="text-gray-600 text-xs">
             International-Client Based ✦ Leave the tech to us
           </p>
+        </div>
+      </div>
+
+      {/* Toast / popup */}
+      <div
+        aria-live="polite"
+        className={`fixed bottom-5 right-5 z-50 transition-all duration-200 ${
+          toast ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+        }`}
+      >
+        <div className="max-w-xs rounded-xl border border-gray-700 bg-gray-900/95 px-4 py-3 shadow-lg">
+          <p className="text-sm text-gray-200">{toast}</p>
+          <p className="text-xs text-gray-500 mt-1">We&apos;re working on it.</p>
         </div>
       </div>
     </footer>
