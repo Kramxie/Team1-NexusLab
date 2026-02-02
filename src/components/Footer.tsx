@@ -19,7 +19,7 @@ const legalLinks = [
 const socialLinks = [
   { type: "facebook", label: "Facebook", href: "https://www.facebook.com/nexxuslab/" },
   { type: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/nexxus-lab/" },
-  { type: "instagram", label: "Instagram", href: "https://www.instagram.com/nexxus_lab/" },
+  { type: "instagram", label: "Instagram", href: "https://www.instagram.com/nexxuslab.official/" },
   { type: "github", label: "GitHub", href: "" }, // empty for now
 ] as const;
 
