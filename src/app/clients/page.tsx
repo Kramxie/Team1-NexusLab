@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Section, CTA, AnimatedPageHero, AnimatedSection, AnimatedGrid, AnimatedGridItem } from "@/components";
-import { getActiveClients } from "@/content";
+import { getActiveClients, portfolioProjects } from "@/content";
 
 // Get only active/verified clients
 const activeClients = getActiveClients();
@@ -162,6 +163,65 @@ export default function ClientsPage() {
                 </blockquote>
               </AnimatedGridItem>
             ))}
+        </AnimatedGrid>
+      </Section>
+
+      {/* Project Showcase Section */}
+      <Section
+        title="Project Showcase"
+        subtitle="Explore the digital experiences we've crafted for our clients"
+        dark
+      >
+        <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {portfolioProjects.map((project) => (
+            <AnimatedGridItem key={project.id}>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-2xl overflow-hidden border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-all duration-300"
+              >
+                {/* Project Image */}
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 text-xs font-medium bg-cyan-500/20 backdrop-blur-sm text-cyan-400 rounded-full border border-cyan-500/30">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* View Project Button on Hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="px-4 py-2 bg-cyan-500/90 backdrop-blur-sm rounded-full text-white text-sm font-medium flex items-center gap-2">
+                      View Project
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Project Info */}
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors mb-2">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 line-clamp-2">
+                    {project.description}
+                  </p>
+                </div>
+              </a>
+            </AnimatedGridItem>
+          ))}
         </AnimatedGrid>
       </Section>
 
