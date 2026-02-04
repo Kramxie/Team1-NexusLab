@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Section, PortfolioCarousel } from "@/components";
+import { Section, PortfolioCarousel, AutomationShowcase } from "@/components";
 import { services, workflows, getActiveClients, portfolioProjects } from "@/content";
 import NewsletterForm from "@/components/NewsletterForm";
 import {
@@ -81,6 +81,17 @@ export default function Home() {
         subtitle="Explore the projects we've brought to life"
       >
         <PortfolioCarousel projects={portfolioProjects} autoPlayInterval={5000} />
+      </Section>
+
+      <Section
+        title="Sample of Basic Automation"
+        subtitle="See how we streamline workflows and save time"
+        dark
+      >
+        <AutomationShowcase
+          videoId="fIFpWeHV9Fw"
+          description="This demo showcases a basic automation workflow that eliminates repetitive tasks, reduces human error, and works around the clock. Imagine what custom automation can do for your business."
+        />
       </Section>
 
       <Section

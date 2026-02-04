@@ -143,31 +143,42 @@ export default function ServicesPage() {
         subtitle="Comprehensive digital services to power your business"
       >
         <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <AnimatedGridItem key={service.id}>
-              <Card
-                title={service.title}
-                description={service.description}
-                icon={<span className="text-3xl">{service.icon}</span>}
-              />
-            </AnimatedGridItem>
-          ))}
-        </AnimatedGrid>
-
-        <AnimatedSection delay={0.3} className="mt-16">
-          <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <AnimatedGridItem key={service.id}>
-                <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/30">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl">{service.icon}</span>
-                    <h3 className="text-lg font-semibold text-white">{service.title}</h3>
+              <div className="group relative p-6 rounded-2xl h-full overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+                {/* Animated gradient border */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-x" />
+                <div className="absolute inset-[1px] rounded-2xl bg-gray-900/95 backdrop-blur-sm" />
+                
+                {/* Glowing orb effect */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-150" />
+                <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 group-hover:scale-150" />
+                
+                {/* Scan line effect */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000 ease-in-out" />
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-3">
+                    {/* Animated icon container */}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-cyan-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-125" />
+                      <span className="relative text-3xl block transform group-hover:scale-110 transition-transform duration-300">{service.icon}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 transition-all duration-300">{service.title}</h3>
                   </div>
+                  <p className="text-gray-400 mb-4 group-hover:text-gray-300 transition-colors duration-300">{service.description}</p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
+                      <li 
+                        key={idx} 
+                        className="flex items-start gap-2 text-sm text-gray-400 group-hover:text-gray-300 transition-all duration-300"
+                        style={{ transitionDelay: `${idx * 50}ms` }}
+                      >
                         <svg
-                          className="w-5 h-5 text-cyan-500 flex-shrink-0 mt-0.5"
+                          className="w-5 h-5 text-cyan-500 flex-shrink-0 mt-0.5 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -179,15 +190,23 @@ export default function ServicesPage() {
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                        {feature}
+                        <span className="group-hover:translate-x-1 transition-transform duration-300" style={{ transitionDelay: `${idx * 50}ms` }}>
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </AnimatedGridItem>
-            ))}
-          </AnimatedGrid>
-        </AnimatedSection>
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-transparent group-hover:border-cyan-500/50 rounded-tl-2xl transition-all duration-500" />
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-transparent group-hover:border-purple-500/50 rounded-tr-2xl transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-transparent group-hover:border-purple-500/50 rounded-bl-2xl transition-all duration-500" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-transparent group-hover:border-cyan-500/50 rounded-br-2xl transition-all duration-500" />
+              </div>
+            </AnimatedGridItem>
+          ))}
+        </AnimatedGrid>
       </Section>
 
       <Section

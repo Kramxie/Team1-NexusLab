@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedLogo from "./AnimatedLogo";
 
 const navLinks = [
@@ -17,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   // Detect scroll for navbar style change
   useEffect(() => {
@@ -29,96 +30,244 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+      className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-gray-950/90 border-b border-gray-800 shadow-lg shadow-black/20"
-          : "backdrop-blur-md bg-gray-950/50 border-b border-transparent"
+          ? "backdrop-blur-xl bg-gray-900/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
+          : "backdrop-blur-sm bg-gray-900/10"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Top glowing border line */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+      
+      {/* Animated bottom border */}
+      <div className={`absolute bottom-0 left-0 right-0 h-[1px] transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
+        <motion.div 
+          className="h-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
+          animate={{
+            backgroundPosition: ['200% 0', '-200% 0'],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ backgroundSize: '200% 100%' }}
+        />
+      </div>
+
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none opacity-50" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           <AnimatedLogo />
 
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-1">
+            {navLinks.map((link, index) => (
+              <motion.li 
+                key={link.href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
                 <Link
                   href={link.href}
-                  className="text-sm text-gray-400 hover:text-white transition-colors duration-200 relative group"
+                  className="relative px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors duration-300 group"
+                  onMouseEnter={() => setHoveredLink(link.href)}
+                  onMouseLeave={() => setHoveredLink(null)}
                 >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-cyan-400 group-hover:w-full transition-all duration-300" />
+                  {/* Hover background glow */}
+                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Animated highlight box */}
+                  <AnimatePresence>
+                    {hoveredLink === link.href && (
+                      <motion.span
+                        className="absolute inset-0 rounded-lg border border-cyan-500/30 bg-cyan-500/5"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
+                  </AnimatePresence>
+                  
+                  {/* Text with glow on hover */}
+                  <span className="relative z-10 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300">
+                    {link.label}
+                  </span>
+                  
+                  {/* Animated underline */}
+                  <motion.span 
+                    className="absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                    initial={{ width: 0, x: '-50%' }}
+                    animate={{ 
+                      width: hoveredLink === link.href ? '60%' : 0,
+                      x: '-50%'
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                  
+                  {/* Corner dots on hover */}
+                  <span className="absolute top-1 left-1 w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          <Link
-            href="/contact"
-            className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25"
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="hidden md:block"
           >
-            Book a Call
-          </Link>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="px-4 py-4 space-y-2 bg-gray-900/95 border-t border-gray-800">
-          {navLinks.map((link) => (
             <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block py-2 px-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              href="/contact"
+              className="group relative inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-full overflow-hidden transition-all duration-300"
             >
-              {link.label}
+              {/* Animated gradient background */}
+              <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 transition-transform duration-500 group-hover:scale-105" />
+              
+              {/* Shimmer effect */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              
+              {/* Glow effect */}
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_rgba(6,182,212,0.5),0_0_40px_rgba(6,182,212,0.3)]" />
+              
+              {/* Border glow */}
+              <span className="absolute inset-[-2px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+              
+              {/* Text */}
+              <span className="relative z-10 text-white flex items-center gap-2">
+                Book a Call
+                <motion.svg 
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </motion.svg>
+              </span>
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            onClick={() => setIsOpen(false)}
-            className="block mt-4 py-3 text-center font-medium rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
+          </motion.div>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden relative p-2 text-gray-400 hover:text-white transition-colors group"
+            aria-label="Toggle menu"
+            whileTap={{ scale: 0.95 }}
           >
-            Book a Call
-          </Link>
+            {/* Button glow */}
+            <span className="absolute inset-0 rounded-lg bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+              <motion.span
+                className="absolute h-0.5 w-6 bg-current rounded-full"
+                animate={{
+                  rotate: isOpen ? 45 : 0,
+                  y: isOpen ? 0 : -4,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className="absolute h-0.5 w-6 bg-current rounded-full"
+                animate={{
+                  opacity: isOpen ? 0 : 1,
+                  scaleX: isOpen ? 0 : 1,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className="absolute h-0.5 w-6 bg-current rounded-full"
+                animate={{
+                  rotate: isOpen ? -45 : 0,
+                  y: isOpen ? 0 : 4,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </motion.button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden"
+          >
+            <div className="relative px-4 py-4 space-y-1 bg-gray-900/95 backdrop-blur-xl border-t border-cyan-500/20">
+              {/* Mobile menu glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl" />
+              
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="group relative block py-3 px-4 text-gray-300 hover:text-white rounded-xl transition-all duration-300 overflow-hidden"
+                  >
+                    {/* Hover background */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-cyan-400 rounded-full group-hover:h-6 transition-all duration-300" />
+                    
+                    <span className="relative z-10 flex items-center justify-between">
+                      {link.label}
+                      <motion.svg 
+                        className="w-4 h-4 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </motion.svg>
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className="pt-4"
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="relative block py-3 text-center font-medium rounded-xl overflow-hidden group"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10 text-white">Book a Call</span>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

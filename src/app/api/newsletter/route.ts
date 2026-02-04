@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 // Turnstile secret key (server only). Read from env (`TURNSTILE_SECRET_KEY`).
-// Fallback to provided key so verification works immediately if env is not set.
 const TURNSTILE_SECRET_KEY =
   process.env.TURNSTILE_SECRET_KEY || "0x4AAAAAACVgr8KNyGOoHsvBleHxSskDbjo";
 

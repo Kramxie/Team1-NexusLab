@@ -8,6 +8,7 @@ export { default as Grid } from "./Grid";
 export { default as PortfolioCarousel } from "./PortfolioCarousel";
 export { default as JsonLd } from "./JsonLd";
 export { default as AnimatedPageHero } from "./AnimatedPageHero";
+export { default as AutomationShowcase } from "./AutomationShowcase";
 export {
   AnimatedSection,
   AnimatedGrid,
