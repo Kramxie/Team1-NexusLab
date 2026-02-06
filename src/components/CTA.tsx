@@ -14,24 +14,24 @@ export default function CTA({
   buttonHref,
 }: CTAProps) {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-800">
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[rgba(0,102,255,0.2)]">
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#0066ff]/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#00aaff]/15 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative px-6 py-16 sm:px-12 sm:py-20 text-center">
-        <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+      <div className="relative px-4 py-12 sm:px-12 sm:py-20 text-center">
+        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
           {heading}
         </h3>
         {subheading && (
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-[#cccccc] text-base sm:text-lg max-w-2xl mx-auto mb-8">
             {subheading}
           </p>
         )}
         <Link
           href={buttonHref}
-          className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105"
+          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:scale-105 hover:-translate-y-1"
         >
           {buttonText}
           <svg

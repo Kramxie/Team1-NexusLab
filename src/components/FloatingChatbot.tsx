@@ -94,8 +94,8 @@ export default function FloatingChatbot() {
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           isOpen
-            ? "bg-gray-800 hover:bg-gray-700"
-            : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500"
+            ? "bg-black hover:bg-[rgba(0,102,255,0.1)]"
+            : "bg-gradient-to-r from-[#0066ff] to-[#00aaff] hover:shadow-[0_4px_25px_rgba(0,102,255,0.5)]"
         }`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
@@ -145,7 +145,7 @@ export default function FloatingChatbot() {
 
         {!isOpen && (
           <motion.span
-            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-gray-950"
+            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-black"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5 }}
@@ -161,12 +161,12 @@ export default function FloatingChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-150px)] bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-150px)] bg-[rgba(10,10,10,0.98)] border border-[rgba(0,102,255,0.3)] rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border-b border-gray-800 p-4 flex items-center gap-3">
+            <div className="bg-gradient-to-r from-[#0066ff]/10 to-[#00aaff]/10 border-b border-[rgba(0,102,255,0.3)] p-4 flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] flex items-center justify-center">
                   <Image
                     src="/images/logo/nexxuslab-logo.png"
                     alt="Nexxusbot"
@@ -175,7 +175,7 @@ export default function FloatingChatbot() {
                     className="rounded-full"
                   />
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-black rounded-full" />
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-semibold text-sm">Nexxusbot</h3>
@@ -185,7 +185,7 @@ export default function FloatingChatbot() {
               </div>
               <button
                 onClick={handleReset}
-                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 text-gray-400 hover:text-white hover:bg-[rgba(0,102,255,0.1)] rounded-lg transition-colors"
                 title="Reset conversation"
               >
                 <svg
@@ -218,8 +218,8 @@ export default function FloatingChatbot() {
                   <div
                     className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm whitespace-pre-line ${
                       message.role === "user"
-                        ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-br-md"
-                        : "bg-gray-800 text-gray-200 rounded-bl-md"
+                        ? "bg-[rgba(0,102,255,0.4)] text-white rounded-br-md"
+                        : "bg-[rgba(0,102,255,0.2)] text-gray-200 rounded-bl-md"
                     }`}
                   >
                     {message.content}
@@ -233,7 +233,7 @@ export default function FloatingChatbot() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-gray-800 px-4 py-3 rounded-2xl rounded-bl-md">
+                  <div className="bg-[rgba(0,102,255,0.2)] px-4 py-3 rounded-2xl rounded-bl-md">
                     <div className="flex gap-1">
                       <motion.span
                         className="w-2 h-2 bg-gray-500 rounded-full"
@@ -286,7 +286,7 @@ export default function FloatingChatbot() {
                         setInputValue(q);
                         setTimeout(() => handleSendMessage(), 100);
                       }}
-                      className="px-3 py-1.5 text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-full transition-colors"
+                      className="px-3 py-1.5 text-xs bg-[rgba(0,102,255,0.1)] border border-[rgba(0,102,255,0.3)] hover:bg-[rgba(0,102,255,0.2)] text-[#cccccc] rounded-full transition-colors"
                     >
                       {q}
                     </button>
@@ -296,7 +296,7 @@ export default function FloatingChatbot() {
             )}
 
             {/* Input Area */}
-            <div className="border-t border-gray-800 p-4">
+            <div className="border-t border-[rgba(0,102,255,0.3)] p-4">
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -305,13 +305,13 @@ export default function FloatingChatbot() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
-                  className="flex-1 bg-gray-800 text-white text-sm px-4 py-3 rounded-xl border border-gray-700 focus:border-cyan-500 focus:outline-none transition-colors placeholder-gray-500"
+                  className="flex-1 bg-[rgba(255,255,255,0.05)] text-white text-sm px-4 py-3 rounded-full border border-[rgba(0,102,255,0.3)] focus:border-[#0066ff] focus:bg-[rgba(255,255,255,0.08)] focus:outline-none transition-colors placeholder-gray-500"
                   disabled={isTyping}
                 />
                 <motion.button
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
-                  className="px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                  className="px-4 py-3 bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity font-semibold"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

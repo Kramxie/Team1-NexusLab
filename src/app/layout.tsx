@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from "@/components";
 import FloatingChatbot from "@/components/FloatingChatbot";
+import { MouseTrail } from "@/components/BackgroundEffects";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, websiteSchema, localBusinessSchema } from "@/lib/schema";
 
@@ -58,12 +59,13 @@ export default function RootLayout({
         <JsonLd data={localBusinessSchema} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-gray-100 min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col`}
       >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingChatbot />
+        <MouseTrail />
       </body>
     </html>
   );

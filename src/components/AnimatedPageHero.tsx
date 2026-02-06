@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { FloatingParticles } from "@/components/BackgroundEffects";
 
 interface AnimatedPageHeroProps {
   badge?: {
@@ -17,28 +18,28 @@ interface AnimatedPageHeroProps {
 
 const colorMap = {
   cyan: {
-    badge: "bg-cyan-400",
-    gradient: "from-cyan-400 to-blue-500",
-    glow1: "bg-cyan-500/10",
-    glow2: "bg-blue-500/10",
+    badge: "bg-[#0066ff]",
+    gradient: "from-[#0066ff] to-[#00aaff]",
+    glow1: "bg-[#0066ff]/10",
+    glow2: "bg-[#00aaff]/10",
   },
   blue: {
-    badge: "bg-blue-400",
-    gradient: "from-blue-400 to-cyan-400",
-    glow1: "bg-blue-500/10",
-    glow2: "bg-cyan-500/10",
+    badge: "bg-[#0066ff]",
+    gradient: "from-[#0066ff] to-[#00aaff]",
+    glow1: "bg-[#0066ff]/10",
+    glow2: "bg-[#00aaff]/10",
   },
   purple: {
-    badge: "bg-purple-400",
-    gradient: "from-purple-400 to-cyan-400",
-    glow1: "bg-purple-500/10",
-    glow2: "bg-cyan-500/10",
+    badge: "bg-[#0066ff]",
+    gradient: "from-[#0066ff] to-[#00aaff]",
+    glow1: "bg-[#0066ff]/10",
+    glow2: "bg-[#00aaff]/10",
   },
   green: {
-    badge: "bg-green-400",
-    gradient: "from-green-400 to-cyan-400",
-    glow1: "bg-green-500/10",
-    glow2: "bg-cyan-500/10",
+    badge: "bg-[#0066ff]",
+    gradient: "from-[#0066ff] to-[#00aaff]",
+    glow1: "bg-[#0066ff]/10",
+    glow2: "bg-[#00aaff]/10",
   },
 };
 
@@ -55,9 +56,36 @@ export default function AnimatedPageHero({
   return (
     <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gray-950">
+      <div className="absolute inset-0 bg-black">
+        {/* Radial gradient pulse */}
         <motion.div
-          className={`absolute top-1/4 right-1/3 w-[400px] h-[400px] ${colors.glow1} rounded-full blur-[100px]`}
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(circle at 50% 50%, rgba(0,102,255,0.12) 0%, transparent 70%)",
+          }}
+          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.1, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Conic gradient rotation */}
+        <motion.div
+          className="absolute"
+          style={{
+            top: "-50%",
+            left: "-50%",
+            width: "200%",
+            height: "200%",
+            background: "conic-gradient(from 0deg, transparent, rgba(0,102,255,0.08), transparent)",
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Floating particles */}
+        <FloatingParticles count={30} />
+
+        <motion.div
+          className={`absolute top-1/4 right-1/3 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] ${colors.glow1} rounded-full blur-[100px]`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
@@ -73,7 +101,7 @@ export default function AnimatedPageHero({
           }}
         />
         <motion.div
-          className={`absolute bottom-1/3 left-1/4 w-[300px] h-[300px] ${colors.glow2} rounded-full blur-[80px]`}
+          className={`absolute bottom-1/3 left-1/4 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] ${colors.glow2} rounded-full blur-[80px]`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
@@ -97,7 +125,7 @@ export default function AnimatedPageHero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700 text-sm text-gray-300 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(0,102,255,0.3)] text-sm text-gray-300 mb-8"
           >
             <motion.span
               className={`w-2 h-2 ${colorMap[badge.color || highlightColor].badge} rounded-full`}
@@ -137,7 +165,7 @@ export default function AnimatedPageHero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto"
+          className="text-lg sm:text-xl text-[#cccccc] max-w-2xl mx-auto"
         >
           {description}
         </motion.p>

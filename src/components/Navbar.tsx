@@ -35,17 +35,17 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
       className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-gray-900/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
-          : "backdrop-blur-sm bg-gray-900/10"
+          ? "backdrop-blur-xl bg-black/95 shadow-[0_2px_30px_rgba(0,102,255,0.4)] border-b border-[rgba(0,102,255,0.1)]"
+          : "backdrop-blur-md bg-black/90 border-b border-[rgba(0,102,255,0.1)]"
       }`}
     >
       {/* Top glowing border line */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0066ff]/50 to-transparent" />
       
       {/* Animated bottom border */}
       <div className={`absolute bottom-0 left-0 right-0 h-[1px] transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
         <motion.div 
-          className="h-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
+          className="h-full bg-gradient-to-r from-transparent via-[#0066ff] to-transparent"
           animate={{
             backgroundPosition: ['200% 0', '-200% 0'],
           }}
@@ -59,7 +59,7 @@ export default function Navbar() {
       </div>
 
       {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none opacity-50" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,102,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,102,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none opacity-50" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
@@ -81,13 +81,13 @@ export default function Navbar() {
                   onMouseLeave={() => setHoveredLink(null)}
                 >
                   {/* Hover background glow */}
-                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#0066ff]/0 via-[#0066ff]/10 to-[#0066ff]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   {/* Animated highlight box */}
                   <AnimatePresence>
                     {hoveredLink === link.href && (
                       <motion.span
-                        className="absolute inset-0 rounded-lg border border-cyan-500/30 bg-cyan-500/5"
+                        className="absolute inset-0 rounded-lg border border-[#0066ff]/30 bg-[#0066ff]/5"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
@@ -97,13 +97,13 @@ export default function Navbar() {
                   </AnimatePresence>
                   
                   {/* Text with glow on hover */}
-                  <span className="relative z-10 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300">
+                  <span className="relative z-10 group-hover:text-[#0066ff] group-hover:drop-shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300">
                     {link.label}
                   </span>
                   
                   {/* Animated underline */}
                   <motion.span 
-                    className="absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                    className="absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-[#0066ff] to-[#00aaff] rounded-full"
                     initial={{ width: 0, x: '-50%' }}
                     animate={{ 
                       width: hoveredLink === link.href ? '60%' : 0,
@@ -113,8 +113,8 @@ export default function Navbar() {
                   />
                   
                   {/* Corner dots on hover */}
-                  <span className="absolute top-1 left-1 w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute top-1 left-1 w-1 h-1 rounded-full bg-[#0066ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-[#00aaff] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               </motion.li>
             ))}
@@ -132,17 +132,17 @@ export default function Navbar() {
               className="group relative inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-full overflow-hidden transition-all duration-300"
             >
               {/* Animated gradient background */}
-              <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 transition-transform duration-500 group-hover:scale-105" />
+              <span className="absolute inset-0 bg-gradient-to-r from-[#0066ff] to-[#00aaff] transition-transform duration-500 group-hover:scale-105" />
               
               {/* Shimmer effect */}
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               
               {/* Glow effect */}
-              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_rgba(6,182,212,0.5),0_0_40px_rgba(6,182,212,0.3)]" />
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_rgba(0,102,255,0.5),0_0_40px_rgba(0,102,255,0.3)]" />
               
               {/* Border glow */}
-              <span className="absolute inset-[-2px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+              <span className="absolute inset-[-2px] rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff]" />
               
               {/* Text */}
               <span className="relative z-10 text-white flex items-center gap-2">
@@ -169,7 +169,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
           >
             {/* Button glow */}
-            <span className="absolute inset-0 rounded-lg bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <span className="absolute inset-0 rounded-lg bg-[#0066ff]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             <div className="relative w-6 h-6 flex flex-col justify-center items-center">
               <motion.span
@@ -211,9 +211,9 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden overflow-hidden"
           >
-            <div className="relative px-4 py-4 space-y-1 bg-gray-900/95 backdrop-blur-xl border-t border-cyan-500/20">
+            <div className="relative px-4 py-4 space-y-1 bg-black/98 backdrop-blur-xl border-t border-[#0066ff]/20">
               {/* Mobile menu glow */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-[#0066ff]/10 rounded-full blur-3xl" />
               
               {navLinks.map((link, index) => (
                 <motion.div
@@ -229,13 +229,13 @@ export default function Navbar() {
                     className="group relative block py-3 px-4 text-gray-300 hover:text-white rounded-xl transition-all duration-300 overflow-hidden"
                   >
                     {/* Hover background */}
-                    <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-cyan-400 rounded-full group-hover:h-6 transition-all duration-300" />
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#0066ff]/10 to-[#00aaff]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-[#0066ff] rounded-full group-hover:h-6 transition-all duration-300" />
                     
                     <span className="relative z-10 flex items-center justify-between">
                       {link.label}
                       <motion.svg 
-                        className="w-4 h-4 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="w-4 h-4 text-[#0066ff] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -259,7 +259,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="relative block py-3 text-center font-medium rounded-xl overflow-hidden group"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#0066ff] to-[#00aaff]" />
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                   <span className="relative z-10 text-white">Book a Call</span>
                 </Link>

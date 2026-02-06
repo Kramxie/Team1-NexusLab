@@ -29,7 +29,7 @@ export default function Home() {
         <div className="text-center mt-12">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-[#00aaff] hover:text-[#0066ff] font-medium transition-colors"
           >
             View all services
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="text-center mt-12">
           <Link
             href="/workflows"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-[#00aaff] hover:text-[#0066ff] font-medium transition-colors"
           >
             See our full process
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ export default function Home() {
         <div className="text-center mt-12">
           <Link
             href="/clients"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-[#00aaff] hover:text-[#0066ff] font-medium transition-colors"
           >
             View all case studies
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

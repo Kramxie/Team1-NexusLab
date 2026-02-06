@@ -28,15 +28,15 @@ export default function WorkflowsPage() {
         className="overflow-visible"
       >
         <div className="relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,102,255,0.3)] to-transparent" />
 
           <AnimatedGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {workflows.map((workflow, index) => (
               <AnimatedGridItem key={workflow.id}>
-                <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900/80 text-center relative overflow-visible">
+                <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-black/80 text-center relative overflow-visible">
                   {/* Badge - normal flow, always fully visible */}
                   <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-bold shadow-xl ring-4 ring-gray-900">
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white text-sm font-bold shadow-xl ring-4 ring-black">
                       {index + 1}
                     </span>
                   </div>
@@ -58,12 +58,12 @@ export default function WorkflowsPage() {
         <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {automationSamples.map((sample) => (
             <AnimatedGridItem key={sample.id}>
-              <div className="group p-6 rounded-2xl border border-gray-800 bg-gray-900/50 hover:border-purple-500/50 transition-all duration-300">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-4">
+              <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300">
+                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-[#0066ff]/10 text-[#00aaff] border border-[#0066ff]/20 mb-4">
                   {sample.category}
                 </span>
 
-                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-[#00aaff] transition-colors">
                   {sample.title}
                 </h3>
 
@@ -134,7 +134,7 @@ export default function WorkflowsPage() {
                     {sample.tools.map((tool) => (
                       <span
                         key={tool}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-gray-800 text-gray-300 border border-gray-700"
+                        className="px-3 py-1 text-xs font-medium rounded-full bg-[rgba(0,102,255,0.1)] text-gray-300 border border-[rgba(0,102,255,0.2)]"
                       >
                         {tool}
                       </span>

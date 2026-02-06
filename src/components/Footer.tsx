@@ -67,13 +67,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
+    <footer className="bg-black border-t border-[rgba(0,102,255,0.2)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+              className="text-2xl font-bold bg-gradient-to-r from-[#0066ff] to-[#00aaff] bg-clip-text text-transparent"
             >
               NEXXUS LAB
             </Link>
@@ -99,7 +99,7 @@ export default function Footer() {
                     className={`p-2 rounded-lg transition-colors ${
                       disabled
                         ? "text-gray-700 cursor-not-allowed pointer-events-none"
-                        : "text-gray-500 hover:text-cyan-400 hover:bg-gray-800"
+                        : "text-gray-500 hover:text-[#0066ff] hover:bg-[rgba(0,102,255,0.1)]"
                     }`}
                   >
                     <SocialIcon type={type} />
@@ -118,7 +118,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                    className="text-gray-400 hover:text-[#0066ff] text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -138,7 +138,7 @@ export default function Footer() {
                   <button
                     type="button"
                     onClick={() => handleLegalClick(link.label)}
-                    className="text-left text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                    className="text-left text-gray-400 hover:text-[#0066ff] text-sm transition-colors"
                   >
                     {link.label}
                   </button>
@@ -148,12 +148,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-[rgba(0,102,255,0.1)] flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Nexxus Lab. All rights reserved.
           </p>
           <p className="text-gray-600 text-xs">
-            International-Client Based ✦ Leave the tech to us
+            Leave the Tech to Us
           </p>
         </div>
       </div>
@@ -165,7 +165,7 @@ export default function Footer() {
           toast ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="max-w-xs rounded-xl border border-gray-700 bg-gray-900/95 px-4 py-3 shadow-lg">
+        <div className="max-w-xs rounded-xl border border-[rgba(0,102,255,0.3)] bg-black/95 px-4 py-3 shadow-lg">
           <p className="text-sm text-gray-200">{toast}</p>
           <p className="text-xs text-gray-500 mt-1">We&apos;re working on it.</p>
         </div>

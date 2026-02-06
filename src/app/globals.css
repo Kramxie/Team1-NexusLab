@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  /* Team3 Nexxus Lab Design System Colors */
+  --nex-primary: #0066ff;
+  --nex-secondary: #00aaff;
+  --nex-dark: #0044bb;
+  --nex-bg: #000000;
+  --nex-bg-alt: #0a0a0a;
+  --nex-text: #ffffff;
+  --nex-text-muted: #cccccc;
+  --nex-text-subtle: #666666;
+  --nex-border: rgba(0, 102, 255, 0.2);
+  --nex-border-hover: rgba(0, 102, 255, 0.5);
+  --nex-glow: rgba(0, 102, 255, 0.5);
+  --nex-card-bg: rgba(255, 255, 255, 0.03);
+  --nex-card-bg-hover: rgba(255, 255, 255, 0.06);
 }
 
 @theme inline {
@@ -10,22 +25,36 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* Nexxus Lab custom colors for Tailwind */
+  --color-nex-primary: #0066ff;
+  --color-nex-secondary: #00aaff;
+  --color-nex-dark: #0044bb;
+  --color-nex-glow: rgba(0, 102, 255, 0.5);
+  --color-nex-surface: #0a0a0a;
+  --color-nex-card: rgba(255, 255, 255, 0.03);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Inter', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  font-weight: 400;
 }
 
-/* Futuristic Animations */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', var(--font-geist-sans), sans-serif;
+  font-weight: 700;
+}
+
+/* ============================================
+   Team3 Nexxus Lab Design System - Animations
+   ============================================ */
+
 @keyframes gradient-x {
   0%, 100% {
     background-position: 0% 50%;
@@ -75,6 +104,87 @@ body {
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lineGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes heroRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes underlineExpand {
+  to { transform: scaleX(1); }
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 102, 255, 0.5)); }
+  50% { filter: drop-shadow(0 0 15px rgba(0, 102, 255, 0.8)); }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes line-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-line-glow {
+  animation: line-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulseButton {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 25px rgba(0, 102, 255, 0.5); }
+  50% { transform: scale(1.08); box-shadow: 0 6px 35px rgba(0, 102, 255, 0.7); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .animate-gradient-x {
   animation: gradient-x 3s ease infinite;
   background-size: 200% 200%;
@@ -96,4 +206,269 @@ body {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-cardPopIn {
+  animation: cardPopIn 0.8s ease forwards;
+}
+
+.animate-logoGlow {
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+/* ============================================
+   Team3-style Section Dividers & Backgrounds
+   ============================================ */
+
+.section-divider-glow {
+  position: relative;
+}
+
+.section-divider-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0066ff, transparent);
+  animation: lineGlow 3s ease-in-out infinite;
+}
+
+/* Hero background effects - Team3 style */
+.hero-bg-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 70%);
+  animation: heroPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-bg-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 102, 255, 0.1), transparent);
+  animation: heroRotate 20s linear infinite;
+  pointer-events: none;
+}
+
+/* Floating particles background */
+.floating-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-particle {
+  position: absolute;
+  background: #0066ff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 15s infinite linear;
+  box-shadow: 0 0 10px #0066ff;
+  will-change: transform, opacity;
+}
+
+/* ============================================
+   Team3-style Cards
+   ============================================ */
+
+.nex-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 102, 255, 0.2);
+  border-radius: 24px;
+  padding: 45px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.nex-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.nex-card:hover::before {
+  opacity: 1;
+}
+
+.nex-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #0066ff;
+  box-shadow: 0 25px 70px rgba(0, 102, 255, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 640px) {
+  .nex-card {
+    padding: 25px;
+  }
+  .nex-card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* ============================================
+   Team3-style CTA Buttons
+   ============================================ */
+
+.nex-btn-primary {
+  padding: 14px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0066ff, #00aaff);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 640px) {
+  .nex-btn-primary {
+    padding: 18px 45px;
+    font-size: 16px;
+  }
+}
+
+.nex-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.nex-btn-primary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.nex-btn-primary:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 102, 255, 0.6);
+}
+
+.nex-btn-secondary {
+  padding: 18px 45px;
+  font-size: 16px;
+  font-weight: 600;
+  background: transparent;
+  border: 2px solid #0066ff;
+  color: #0066ff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.nex-btn-secondary:hover {
+  background: rgba(0, 102, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+}
+
+/* ============================================
+   Team3-style Gradient Text
+   ============================================ */
+
+.nex-gradient-text {
+  background: linear-gradient(135deg, #0066ff, #00aaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nex-title-gradient {
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Team3-style Section Titles
+   ============================================ */
+
+.nex-section-title {
+  text-align: center;
+  font-size: clamp(36px, 5vw, 64px);
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.nex-section-subtitle {
+  text-align: center;
+  font-size: clamp(14px, 1.8vw, 20px);
+  color: #666;
+  margin-bottom: 60px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 102, 255, 0.5);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 102, 255, 0.3);
+  color: #ffffff;
 }

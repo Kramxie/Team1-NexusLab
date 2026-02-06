@@ -18,3 +18,11 @@ export {
   AnimatedSlideRight,
   AnimatedScaleIn,
 } from "./AnimatedSection";
+export {
+  FloatingParticles,
+  HeroBackgroundEffects,
+  SectionBackground,
+  ScrollIndicator,
+  MouseTrail,
+  CardHoverGlow,
+} from "./BackgroundEffects";
