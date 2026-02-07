@@ -5,16 +5,22 @@ import { useMemo, useEffect, useState, useCallback } from "react";
 
 /* ============================================
    Team3 Nexxus Lab Background Effects
-   - FloatingParticles: Blue dots floating upward
-   - HeroBackgroundEffects: Radial pulse + conic rotation + particles
-   - SectionDivider: Glowing blue line at top of sections
-   - ScrollIndicator: Animated scroll arrow
-   - MouseTrail: Blue cursor trail (desktop only)
    ============================================ */
+
+const MOBILE_BREAKPOINT = 768;
+
+function getIsMobileParticles() {
+  if (typeof window === "undefined") return false; // safe default for SSR
+  return window.innerWidth < MOBILE_BREAKPOINT;
+}
+
+function getIsMobileTrail() {
+  if (typeof window === "undefined") return true; // safe default for SSR
+  return window.innerWidth < MOBILE_BREAKPOINT || "ontouchstart" in window;
+}
 
 /**
  * FloatingParticles — Team3-style particles that float upward.
- * Renders lightweight CSS-animated dots (no heavy JS).
  */
 export function FloatingParticles({
   count = 50,
@@ -23,13 +29,16 @@ export function FloatingParticles({
   count?: number;
   className?: string;
 }) {
-  const [isMobile, setIsMobile] = useState(false);
+  // ✅ Set initial value WITHOUT calling setState in an effect
+  const [isMobile, setIsMobile] = useState<boolean>(() => getIsMobileParticles());
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const onResize = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   // Reduce particle count on mobile for performance
@@ -75,15 +84,11 @@ export function FloatingParticles({
 }
 
 /**
- * HeroBackgroundEffects — Team3 hero section background:
- * - Radial gradient pulse centered
- * - Conic gradient rotation overlay
- * - Floating particles
+ * HeroBackgroundEffects — Team3 hero section background
  */
 export function HeroBackgroundEffects({ className = "" }: { className?: string }) {
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
-      {/* Radial gradient pulse — Team3 .hero::before */}
       <motion.div
         className="absolute inset-0"
         style={{
@@ -101,7 +106,6 @@ export function HeroBackgroundEffects({ className = "" }: { className?: string }
         }}
       />
 
-      {/* Conic gradient rotation — Team3 .hero::after */}
       <motion.div
         className="absolute"
         style={{
@@ -120,15 +124,13 @@ export function HeroBackgroundEffects({ className = "" }: { className?: string }
         }}
       />
 
-      {/* Floating particles */}
       <FloatingParticles count={60} />
     </div>
   );
 }
 
 /**
- * SectionBackground — subtle background with optional particles and divider.
- * Use as a child inside any <section> with position:relative.
+ * SectionBackground
  */
 export function SectionBackground({
   showParticles = true,
@@ -142,11 +144,12 @@ export function SectionBackground({
   className?: string;
 }) {
   return (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
-      {/* Section top divider glow */}
+    <div
+      className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+      aria-hidden="true"
+    >
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent animate-line-glow" />
 
-      {/* Optional subtle gradient background */}
       {variant === "gradient" && (
         <div
           className="absolute inset-0"
@@ -156,7 +159,6 @@ export function SectionBackground({
         />
       )}
 
-      {/* Subtle radial accent */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
         style={{
@@ -165,14 +167,13 @@ export function SectionBackground({
         }}
       />
 
-      {/* Particles */}
       {showParticles && <FloatingParticles count={particleCount} />}
     </div>
   );
 }
 
 /**
- * ScrollIndicator — Team3-style animated scroll-down arrow for hero sections.
+ * ScrollIndicator
  */
 export function ScrollIndicator({ className = "" }: { className?: string }) {
   return (
@@ -182,21 +183,12 @@ export function ScrollIndicator({ className = "" }: { className?: string }) {
       animate={{ opacity: 1 }}
       transition={{ delay: 1.5, duration: 0.8 }}
     >
-      <span className="text-xs text-gray-500 uppercase tracking-widest">
-        Scroll
-      </span>
+      <span className="text-xs text-gray-500 uppercase tracking-widest">Scroll</span>
       <div className="relative w-6 h-10 rounded-full border-2 border-[#0066ff]/40 flex justify-center">
         <motion.div
           className="w-1.5 h-1.5 rounded-full bg-[#0066ff] mt-2"
-          animate={{
-            y: [0, 16, 0],
-            opacity: [1, 0.3, 1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{ boxShadow: "0 0 8px #0066ff" }}
         />
       </div>
@@ -205,22 +197,24 @@ export function ScrollIndicator({ className = "" }: { className?: string }) {
 }
 
 /**
- * MouseTrail — Team3-style cursor trail (desktop only).
- * Creates blue dots that follow mouse movement.
+ * MouseTrail — desktop only
  */
 export function MouseTrail() {
-  const [isMobile, setIsMobile] = useState(true);
+  // ✅ Set initial value lazily (no setState inside effect body)
+  const [isMobile, setIsMobile] = useState<boolean>(() => getIsMobileTrail());
 
   useEffect(() => {
-    // Only enable on desktop
-    setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+    const onResize = () => setIsMobile(getIsMobileTrail());
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (Math.random() > 0.6) return; // Only create trail 40% of the time
+    if (Math.random() > 0.6) return;
 
     const trail = document.createElement("div");
     const size = Math.random() * 6 + 2;
+
     trail.style.cssText = `
       position: fixed;
       width: ${size}px;
@@ -252,12 +246,11 @@ export function MouseTrail() {
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, [isMobile, handleMouseMove]);
 
-  return null; // No visual DOM — effects are created dynamically
+  return null;
 }
 
 /**
- * CardHoverGlow — Radial gradient that appears on hover (Team3 service-card::before).
- * Use inside a card component with position: relative + overflow: hidden.
+ * CardHoverGlow
  */
 export function CardHoverGlow({ className = "" }: { className?: string }) {
   return (
