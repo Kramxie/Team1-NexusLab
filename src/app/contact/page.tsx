@@ -7,7 +7,6 @@ import {
   AnimatedSlideLeft,
   AnimatedSlideRight,
 } from "@/components";
-import CalendlyWidget from "@/components/CalendlyWidget";
 
 const FORMSPREE_ENDPOINT =
   process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/xzdgepjj";
@@ -205,15 +204,57 @@ export default function ContactPage() {
             </div>
           </AnimatedSlideLeft>
 
-          {/* RIGHT: Calendly (same card style) */}
+          {/* RIGHT: Calendly Widget (Team3 Style) */}
           <AnimatedSlideRight>
-            <div className="p-5 sm:p-8 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
-              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Book a Call</h2>
-              <p className="text-gray-400 mb-6">
-                Pick a time that works for you — we’ll meet via Google Meet.
+            <div className="calendly-widget-container">
+              <div className="calendly-widget-header">
+                <svg className="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <h3>Schedule a Meeting</h3>
+              </div>
+              <p className="calendly-description">
+                Book a free consultation to discuss your project requirements and how we can help bring your vision to life.
               </p>
 
-              <CalendlyWidget />
+              <div className="calendly-benefits">
+                <div className="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066ff" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <span>30-minute consultation</span>
+                </div>
+                <div className="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066ff" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <span>Free project assessment</span>
+                </div>
+                <div className="benefit-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066ff" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <span>Expert technical advice</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => window.open('https://calendly.com/justinjavonitalla/nexxus-lab', '_blank')}
+                className="calendly-btn"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Book Your Call Now
+              </button>
+
+              <p className="calendly-note">You&apos;ll be redirected to our Calendly booking page</p>
             </div>
           </AnimatedSlideRight>
         </div>

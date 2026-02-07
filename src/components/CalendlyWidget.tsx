@@ -11,7 +11,7 @@ type CalendlyWindow = Window & {
 export default function CalendlyWidget() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const initializedRef = useRef(false);
-  const dataUrl = "https://calendly.com/markatieh21/30min";
+  const dataUrl = "https://calendly.com/justinjavonitalla/nexxus-lab";
 
   useEffect(() => {
     const scriptSrc = "https://assets.calendly.com/assets/external/widget.js";
