@@ -4,6 +4,16 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { generateBotResponse, ChatMessage } from "@/lib/chatbot";
+import {
+  checkMessage,
+  getModerationState,
+  addStrike,
+  formatRemainingTime,
+  getInappropriateContentResponse,
+  ModerationState,
+} from "@/lib/chatModeration";
+
+const MAX_STRIKES = 3;
 
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +30,51 @@ export default function FloatingChatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // Moderation state - lazy initialize from localStorage
+  const [moderation, setModeration] = useState<ModerationState>(() => {
+    // This will only run on client-side after hydration
+    if (typeof window !== 'undefined') {
+      return getModerationState();
+    }
+    return {
+      strikes: 0,
+      isLockedOut: false,
+      lockoutEndTime: null,
+      remainingLockoutMs: 0,
+      totalViolations: 0,
+    };
+  });
+
+  // Track previous lockout state for unlock message
+  const prevLockedOutRef = useRef(false);
+
+  // Initialize ref and poll moderation state with countdown timer
+  useEffect(() => {
+    // Initialize ref with current localStorage state (not React state) to avoid dependency
+    const initialState = getModerationState();
+    prevLockedOutRef.current = initialState.isLockedOut;
+    
+    const interval = setInterval(() => {
+      const state = getModerationState();
+      setModeration(state);
+      
+      // If lockout just ended, show a message
+      if (!state.isLockedOut && prevLockedOutRef.current) {
+        const unlockMessage: ChatMessage = {
+          id: `bot-unlock-${Date.now()}`,
+          role: "bot",
+          content: "✅ **Restriction lifted!**\n\nYou can now use the chatbot again. Please keep the conversation respectful. 🙏",
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, unlockMessage]);
+      }
+      
+      prevLockedOutRef.current = state.isLockedOut;
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // ✅ Open chatbot when other buttons dispatch "open-chatbot"
   useEffect(() => {
@@ -43,6 +98,13 @@ export default function FloatingChatbot() {
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
+    
+    // Check if user is locked out
+    const currentState = getModerationState();
+    if (currentState.isLockedOut) {
+      setInputValue("");
+      return;
+    }
 
     const userMessage: ChatMessage = {
       id: `user-${Date.now()}`,
@@ -55,6 +117,31 @@ export default function FloatingChatbot() {
     setInputValue("");
     setIsTyping(true);
 
+    // Check for inappropriate content
+    const moderationResult = checkMessage(userMessage.content);
+    
+    if (moderationResult.isInappropriate && moderationResult.severity !== 'none') {
+      // Add a strike and get the warning response
+      const strikeResult = addStrike(moderationResult.severity);
+      
+      // Update moderation state immediately
+      setModeration(getModerationState());
+      
+      setTimeout(() => {
+        const warningMessage: ChatMessage = {
+          id: `bot-warning-${Date.now()}`,
+          role: "bot",
+          content: getInappropriateContentResponse(strikeResult),
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, warningMessage]);
+        setIsTyping(false);
+      }, 500);
+      
+      return;
+    }
+
+    // Normal response flow
     setTimeout(() => {
       const botResponse = generateBotResponse(userMessage.content);
       const botMessage: ChatMessage = {
@@ -175,14 +262,32 @@ export default function FloatingChatbot() {
                     className="rounded-full"
                   />
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-black rounded-full" />
+                <span className={`absolute bottom-0 right-0 w-3 h-3 ${moderation.isLockedOut ? 'bg-red-500' : 'bg-green-500'} border-2 border-black rounded-full`} />
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-semibold text-sm">Nexxusbot</h3>
                 <p className="text-xs text-gray-400">
-                  Online • Ask me about Nexxus Lab
+                  {moderation.isLockedOut 
+                    ? `🔒 Restricted • ${formatRemainingTime(moderation.remainingLockoutMs)} remaining`
+                    : "Online • Ask me about Nexxus Lab"
+                  }
                 </p>
               </div>
+              
+              {/* Warning counter badge */}
+              {moderation.strikes > 0 && !moderation.isLockedOut && (
+                <div 
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    moderation.strikes === 1 
+                      ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
+                      : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                  }`}
+                  title={`${moderation.strikes} warning(s) - ${MAX_STRIKES - moderation.strikes} remaining`}
+                >
+                  ⚠️ {moderation.strikes}/{MAX_STRIKES}
+                </div>
+              )}
+              
               <button
                 onClick={handleReset}
                 className="p-2 text-gray-400 hover:text-white hover:bg-[rgba(0,102,255,0.1)] rounded-lg transition-colors"
@@ -297,42 +402,67 @@ export default function FloatingChatbot() {
 
             {/* Input Area */}
             <div className="border-t border-[rgba(0,102,255,0.3)] p-4">
-              <div className="flex gap-2">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message..."
-                  className="flex-1 bg-[rgba(255,255,255,0.05)] text-white text-sm px-4 py-3 rounded-full border border-[rgba(0,102,255,0.3)] focus:border-[#0066ff] focus:bg-[rgba(255,255,255,0.08)] focus:outline-none transition-colors placeholder-gray-500"
-                  disabled={isTyping}
-                />
-                <motion.button
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping}
-                  className="px-4 py-3 bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity font-semibold"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+              {moderation.isLockedOut ? (
+                /* Lockout overlay with countdown */
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H10m12-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-red-400 font-semibold text-sm">Chatbot Restricted</span>
+                  </div>
+                  <div className="text-2xl font-bold text-red-300 mb-1">
+                    {formatRemainingTime(moderation.remainingLockoutMs)}
+                  </div>
+                  <p className="text-xs text-gray-400">
+                    Please wait before sending messages
+                  </p>
+                </motion.div>
+              ) : (
+                /* Normal input area */
+                <>
+                  <div className="flex gap-2">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Type your message..."
+                      className="flex-1 bg-[rgba(255,255,255,0.05)] text-white text-sm px-4 py-3 rounded-full border border-[rgba(0,102,255,0.3)] focus:border-[#0066ff] focus:bg-[rgba(255,255,255,0.08)] focus:outline-none transition-colors placeholder-gray-500"
+                      disabled={isTyping}
                     />
-                  </svg>
-                </motion.button>
-              </div>
-              <p className="text-xs text-gray-600 mt-2 text-center">
-                Powered by Nexxus Lab 🚀
-              </p>
+                    <motion.button
+                      onClick={handleSendMessage}
+                      disabled={!inputValue.trim() || isTyping}
+                      className="px-4 py-3 bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity font-semibold"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                        />
+                      </svg>
+                    </motion.button>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-2 text-center">
+                    Powered by Nexxus Lab 🚀
+                  </p>
+                </>
+              )}
             </div>
           </motion.div>
         )}
