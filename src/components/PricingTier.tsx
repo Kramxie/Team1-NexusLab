@@ -33,15 +33,15 @@ export default function PricingTier({
       <div 
         className={`absolute inset-0 rounded-2xl transition-opacity duration-500 ${
           highlighted 
-            ? "bg-gradient-to-r from-[#0066ff] via-[#0044bb] to-[#00aaff] opacity-100 animate-gradient-x" 
-            : "bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff] opacity-0 group-hover:opacity-100 animate-gradient-x"
+            ? "bg-linear-to-r from-nex-primary via-nex-dark to-nex-secondary opacity-100 animate-gradient-x" 
+            : "bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary opacity-0 group-hover:opacity-100 animate-gradient-x"
         }`} 
       />
       <div 
         className={`absolute rounded-2xl transition-all duration-300 ${
           highlighted 
-            ? "inset-[2px] bg-black/95" 
-            : "inset-[1px] bg-black/98 group-hover:inset-[2px]"
+            ? "inset-0.5 bg-black/95" 
+            : "inset-px bg-black/98 group-hover:inset-0.5"
         }`} 
       />
 
@@ -49,37 +49,37 @@ export default function PricingTier({
       <div 
         className={`absolute -top-24 -right-24 w-32 sm:w-48 h-32 sm:h-48 rounded-full blur-3xl transition-all duration-700 ${
           highlighted 
-            ? "bg-[#0066ff]/30 opacity-100" 
-            : "bg-[#0066ff]/20 opacity-0 group-hover:opacity-100 group-hover:scale-125"
+            ? "bg-nex-primary/30 opacity-100" 
+            : "bg-nex-primary/20 opacity-0 group-hover:opacity-100 group-hover:scale-125"
         }`} 
       />
       <div 
         className={`absolute -bottom-24 -left-24 w-32 sm:w-48 h-32 sm:h-48 rounded-full blur-3xl transition-all duration-700 delay-100 ${
           highlighted 
-            ? "bg-[#00aaff]/30 opacity-100" 
-            : "bg-[#00aaff]/20 opacity-0 group-hover:opacity-100 group-hover:scale-125"
+            ? "bg-nex-secondary/30 opacity-100" 
+            : "bg-nex-secondary/20 opacity-0 group-hover:opacity-100 group-hover:scale-125"
         }`} 
       />
 
       {/* Scan line effect */}
       <div className="absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0066ff]/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000 ease-in-out" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-nex-primary/10 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-1000 ease-in-out" />
       </div>
 
       {/* Floating particles for highlighted */}
       {highlighted && (
         <>
-          <div className="absolute top-1/4 left-4 w-1 h-1 bg-[#0066ff] rounded-full animate-float opacity-60" />
-          <div className="absolute top-1/2 right-6 w-1.5 h-1.5 bg-[#00aaff] rounded-full animate-float opacity-60" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute bottom-1/4 left-8 w-1 h-1 bg-[#0066ff] rounded-full animate-float opacity-60" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/4 left-4 w-1 h-1 bg-nex-primary rounded-full animate-float opacity-60" />
+          <div className="absolute top-1/2 right-6 w-1.5 h-1.5 bg-nex-secondary rounded-full animate-float opacity-60" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-1/4 left-8 w-1 h-1 bg-nex-primary rounded-full animate-float opacity-60" style={{ animationDelay: '1s' }} />
         </>
       )}
 
       {/* Most Popular Badge with glow */}
       {highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 overflow-visible">
-          <div className="absolute inset-0 bg-[#0066ff] rounded-full blur-md opacity-50 animate-pulse-glow" />
-          <span className="relative px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white shadow-lg z-30">
+          <div className="absolute inset-0 bg-nex-primary rounded-full blur-md opacity-50 animate-pulse-glow" />
+          <span className="relative px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white shadow-lg z-30">
             Most Popular
           </span>
         </div>
@@ -87,16 +87,16 @@ export default function PricingTier({
 
       {/* Corner tech accents */}
       <div className={`absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 rounded-tl-2xl transition-all duration-500 ${
-        highlighted ? "border-[#0066ff]/50" : "border-transparent group-hover:border-[#0066ff]/50"
+        highlighted ? "border-nex-primary/50" : "border-transparent group-hover:border-nex-primary/50"
       }`} />
       <div className={`absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 rounded-tr-2xl transition-all duration-500 ${
-        highlighted ? "border-[#00aaff]/50" : "border-transparent group-hover:border-[#00aaff]/50"
+        highlighted ? "border-nex-secondary/50" : "border-transparent group-hover:border-nex-secondary/50"
       }`} />
       <div className={`absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 rounded-bl-2xl transition-all duration-500 ${
-        highlighted ? "border-[#00aaff]/50" : "border-transparent group-hover:border-[#00aaff]/50"
+        highlighted ? "border-nex-secondary/50" : "border-transparent group-hover:border-nex-secondary/50"
       }`} />
       <div className={`absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 rounded-br-2xl transition-all duration-500 ${
-        highlighted ? "border-[#0066ff]/50" : "border-transparent group-hover:border-[#0066ff]/50"
+        highlighted ? "border-nex-primary/50" : "border-transparent group-hover:border-nex-primary/50"
       }`} />
 
       {/* Content */}
@@ -104,8 +104,8 @@ export default function PricingTier({
         <h3
           className={`text-lg font-semibold mb-2 transition-all duration-300 ${
             highlighted 
-              ? "text-transparent bg-clip-text bg-gradient-to-r from-[#0066ff] to-[#00aaff]" 
-              : "text-gray-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#0066ff] group-hover:to-[#00aaff]"
+              ? "text-transparent bg-clip-text bg-linear-to-r from-nex-primary to-nex-secondary" 
+              : "text-gray-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-nex-primary group-hover:to-nex-secondary"
           }`}
         >
           {name}
@@ -130,10 +130,10 @@ export default function PricingTier({
               style={{ transitionDelay: `${index * 30}ms` }}
             >
               <svg
-                className={`w-5 h-5 flex-shrink-0 mt-0.5 transition-all duration-300 ${
+                className={`w-5 h-5 shrink-0 mt-0.5 transition-all duration-300 ${
                   highlighted 
-                    ? "text-[#0066ff] drop-shadow-[0_0_6px_rgba(0,102,255,0.5)]" 
-                    : "text-gray-500 group-hover:text-[#0066ff] group-hover:drop-shadow-[0_0_6px_rgba(0,102,255,0.5)]"
+                    ? "text-nex-primary drop-shadow-[0_0_6px_var(--color-nex-glow)]" 
+                    : "text-gray-500 group-hover:text-nex-primary group-hover:drop-shadow-[0_0_6px_var(--color-nex-glow)]"
                 }`}
                 fill="none"
                 stroke="currentColor"
@@ -157,12 +157,12 @@ export default function PricingTier({
           href={buttonHref}
           className={`relative block text-center py-3 px-6 rounded-xl font-medium overflow-hidden transition-all duration-300 ${
             highlighted
-              ? "bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white shadow-lg shadow-[#0066ff]/25 hover:shadow-[#0066ff]/50 hover:scale-105"
-              : "bg-[rgba(0,102,255,0.1)] text-gray-300 border border-[rgba(0,102,255,0.3)] hover:border-[#0066ff]/50 hover:text-white hover:shadow-lg hover:shadow-[#0066ff]/20"
+              ? "bg-linear-to-r from-nex-primary to-nex-secondary text-white shadow-lg shadow-nex-primary/25 hover:shadow-nex-primary/50 hover:scale-105"
+              : "bg-nex-primary/10 text-gray-300 border border-nex-primary/30 hover:border-nex-primary/50 hover:text-white hover:shadow-lg hover:shadow-nex-primary/20"
           }`}
         >
           {/* Button shimmer effect */}
-          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+          <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           <span className="relative">{buttonText}</span>
         </Link>
       </div>

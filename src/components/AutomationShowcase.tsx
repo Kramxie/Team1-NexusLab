@@ -2,17 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 interface AutomationShowcaseProps {
-  title?: string;
-  subtitle?: string;
   videoId: string;
   description?: string;
 }
 
 export default function AutomationShowcase({
-  title = "Sample of Basic Automation",
-  subtitle = "See how we streamline workflows and save time",
   videoId,
   description = "Watch how our automation solutions transform manual processes into efficient, automated workflows that work 24/7.",
 }: AutomationShowcaseProps) {
@@ -21,8 +18,8 @@ export default function AutomationShowcase({
   return (
     <div className="relative">
       {/* Background glows */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-[#0066ff]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-[#00aaff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-nex-primary/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-nex-secondary/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">
         {/* Video Container */}
@@ -34,19 +31,19 @@ export default function AutomationShowcase({
           className="relative group"
         >
           {/* Animated border glow */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff] rounded-2xl opacity-50 blur-sm group-hover:opacity-75 transition-opacity duration-500 animate-gradient-x" />
+          <div className="absolute -inset-1 bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary rounded-2xl opacity-50 blur-sm group-hover:opacity-75 transition-opacity duration-500 animate-gradient-x" />
           
           {/* Corner accents */}
-          <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-[#0066ff] rounded-tl-lg hidden sm:block" />
-          <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-[#00aaff] rounded-tr-lg hidden sm:block" />
-          <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-[#00aaff] rounded-bl-lg hidden sm:block" />
-          <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-[#0066ff] rounded-br-lg hidden sm:block" />
+          <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-nex-primary rounded-tl-lg hidden sm:block" />
+          <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-nex-secondary rounded-tr-lg hidden sm:block" />
+          <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-nex-secondary rounded-bl-lg hidden sm:block" />
+          <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-nex-primary rounded-br-lg hidden sm:block" />
 
           {/* Video wrapper */}
-          <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl shadow-[#0066ff]/10">
+          <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl shadow-nex-primary/10">
             {/* Scan line effect */}
             <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden opacity-30">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0066ff]/5 to-transparent animate-scan-line" />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-nex-primary/5 to-transparent animate-scan-line" />
             </div>
 
             {/* YouTube Embed */}
@@ -55,14 +52,13 @@ export default function AutomationShowcase({
                 // Custom Thumbnail with Play Button
                 <div className="relative w-full h-full">
                   {/* YouTube Thumbnail */}
-                  <img
+                  <Image
                     src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
                     alt="Automation Demo Thumbnail"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback to hqdefault if maxresdefault doesn't exist
-                      (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                    }}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
+                    unoptimized
                   />
                   
                   {/* Overlay */}
@@ -78,7 +74,7 @@ export default function AutomationShowcase({
                     <div className="relative">
                       {/* Pulsing ring */}
                       <motion.div
-                        className="absolute inset-0 bg-[#0066ff]/30 rounded-full"
+                        className="absolute inset-0 bg-nex-primary/30 rounded-full"
                         animate={{
                           scale: [1, 1.5, 1],
                           opacity: [0.5, 0, 0.5],
@@ -91,7 +87,7 @@ export default function AutomationShowcase({
                       />
                       
                       {/* Play button */}
-                      <div className="relative w-20 h-20 bg-gradient-to-r from-[#0066ff] to-[#00aaff] rounded-full flex items-center justify-center shadow-lg shadow-[#0066ff]/50 group-hover:shadow-[#0066ff]/75 transition-shadow duration-300">
+                      <div className="relative w-20 h-20 bg-linear-to-r from-nex-primary to-nex-secondary rounded-full flex items-center justify-center shadow-lg shadow-nex-primary/50 group-hover:shadow-nex-primary/75 transition-shadow duration-300">
                         <svg
                           className="w-8 h-8 text-white ml-1"
                           fill="currentColor"
@@ -152,8 +148,8 @@ export default function AutomationShowcase({
               className="group relative inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full overflow-hidden transition-all duration-300"
             >
               {/* Button background */}
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff]" />
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="absolute inset-0 bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary" />
+              <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               
               {/* Button content */}
               <span className="relative z-10 text-white">Want This For Your Business?</span>
@@ -176,7 +172,7 @@ export default function AutomationShowcase({
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="w-1 h-8 bg-gradient-to-b from-[#0066ff]/50 to-transparent rounded-full"
+              className="w-1 h-8 bg-linear-to-b from-nex-primary/50 to-transparent rounded-full"
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -188,7 +184,7 @@ export default function AutomationShowcase({
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="w-1 h-8 bg-gradient-to-b from-[#00aaff]/50 to-transparent rounded-full"
+              className="w-1 h-8 bg-linear-to-b from-nex-secondary/50 to-transparent rounded-full"
               initial={{ opacity: 0, x: 10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}

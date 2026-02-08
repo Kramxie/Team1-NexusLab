@@ -55,10 +55,13 @@ export default function CalendlyWidget() {
       document.body.appendChild(script);
     }
 
+    // Capture ref value for cleanup
+    const container = containerRef.current;
+
     return () => {
       // Cleanup on unmount (optional)
       initializedRef.current = false;
-      if (containerRef.current) containerRef.current.innerHTML = "";
+      if (container) container.innerHTML = "";
     };
   }, []);
 

@@ -14,10 +14,10 @@ export default function CTA({
   buttonHref,
 }: CTAProps) {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black via-[#0a0a0a] to-black border border-[rgba(0,102,255,0.2)]">
+    <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-black via-nex-surface to-black border border-[rgba(0,102,255,0.2)]">
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#0066ff]/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#00aaff]/15 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-nex-primary/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-nex-secondary/15 rounded-full blur-3xl" />
       </div>
 
       <div className="relative px-4 py-12 sm:px-12 sm:py-20 text-center">
@@ -31,7 +31,7 @@ export default function CTA({
         )}
         <Link
           href={buttonHref}
-          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+          className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:scale-105 hover:-translate-y-1"
         >
           {buttonText}
           <svg

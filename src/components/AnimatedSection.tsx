@@ -161,7 +161,7 @@ export function AnimatedCounter({
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration }}
       >
         {value}
       </motion.span>

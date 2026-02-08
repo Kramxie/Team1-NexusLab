@@ -9,7 +9,7 @@ export default function AnimatedLogo() {
     <Link href="/" className="relative flex items-center gap-3 group">
       {/* Glow effect behind logo */}
       <motion.div
-        className="absolute -inset-2 bg-gradient-to-r from-[#0066ff]/20 via-[#00aaff]/20 to-[#0066ff]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute -inset-2 bg-linear-to-r from-nex-primary/20 via-nex-secondary/20 to-nex-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         animate={{
           scale: [1, 1.1, 1],
         }}
@@ -45,7 +45,7 @@ export default function AnimatedLogo() {
 
         {/* Inner glow pulse */}
         <motion.div
-          className="absolute inset-0 bg-[#0066ff]/30 rounded-full blur-md"
+          className="absolute inset-0 bg-nex-primary/30 rounded-full blur-md"
           animate={{
             opacity: [0.3, 0.6, 0.3],
             scale: [0.9, 1.1, 0.9],
@@ -83,7 +83,7 @@ export default function AnimatedLogo() {
       <div className="relative overflow-hidden">
         {/* Main text */}
         <motion.span
-          className="relative z-10 text-xl font-bold tracking-tight bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff] bg-clip-text text-transparent bg-[length:200%_auto]"
+          className="relative z-10 text-xl font-bold tracking-tight bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary bg-clip-text text-transparent bg-size-[200%_auto]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ 
             opacity: 1, 
@@ -105,7 +105,7 @@ export default function AnimatedLogo() {
 
         {/* Glitch layer 1 */}
         <motion.span
-          className="absolute inset-0 text-xl font-bold tracking-tight text-[#0066ff]/50"
+          className="absolute inset-0 text-xl font-bold tracking-tight text-nex-primary/50"
           initial={{ opacity: 0 }}
           animate={{
             opacity: [0, 0, 0.5, 0, 0],
@@ -123,7 +123,7 @@ export default function AnimatedLogo() {
 
         {/* Glitch layer 2 */}
         <motion.span
-          className="absolute inset-0 text-xl font-bold tracking-tight text-[#00aaff]/50"
+          className="absolute inset-0 text-xl font-bold tracking-tight text-nex-secondary/50"
           initial={{ opacity: 0 }}
           animate={{
             opacity: [0, 0, 0.5, 0, 0],
@@ -142,7 +142,7 @@ export default function AnimatedLogo() {
 
         {/* Scan line effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0066ff]/20 to-transparent h-[2px] w-full"
+          className="absolute inset-0 bg-linear-to-b from-transparent via-nex-primary/20 to-transparent h-0.5 w-full"
           initial={{ top: "-100%" }}
           animate={{ top: ["0%", "100%"] }}
           transition={{
@@ -155,7 +155,7 @@ export default function AnimatedLogo() {
 
         {/* Underline animation */}
         <motion.div
-          className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff]"
+          className="absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary"
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
           transition={{
@@ -170,7 +170,7 @@ export default function AnimatedLogo() {
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-[#0066ff] rounded-full"
+          className="absolute w-1 h-1 bg-nex-primary rounded-full"
           style={{
             left: `${10 + i * 15}%`,
             top: `${20 + i * 20}%`,

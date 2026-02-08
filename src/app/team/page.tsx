@@ -33,8 +33,8 @@ export default function TeamPage() {
             .filter((m) => m.name === "Chris Bautista")
             .map((member) => (
               <AnimatedGridItem key={member.id}>
-                <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300 text-center w-full max-w-xl">
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[rgba(0,102,255,0.3)] group-hover:border-[#0066ff]/50 transition-all">
+                <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 text-center w-full max-w-xl">
+                  <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[rgba(0,102,255,0.3)] group-hover:border-nex-primary/50 transition-all">
                     <Image
                       src={member.avatar}
                       alt={member.name}
@@ -44,10 +44,10 @@ export default function TeamPage() {
                     />
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-[#0066ff] transition-colors">
+                  <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-nex-primary transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-sm text-[#00aaff] mb-4">{member.role}</p>
+                  <p className="text-sm text-nex-secondary mb-4">{member.role}</p>
 
                   <p className="text-sm text-gray-400 mb-6">{member.bio}</p>
 
@@ -58,7 +58,7 @@ export default function TeamPage() {
                         href={member.socials.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-gray-500 hover:text-[#0066ff] hover:bg-[rgba(0,102,255,0.1)] rounded-lg transition-colors"
+                        className="p-2 text-gray-500 hover:text-nex-primary hover:bg-[rgba(0,102,255,0.1)] rounded-lg transition-colors"
                         aria-label="LinkedIn"
                       >
                         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ export default function TeamPage() {
         subtitle="DLSUD Interns - The future of tech"
       >
         <AnimatedSection className="max-w-4xl mx-auto">
-            <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300 overflow-hidden">
+            <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 overflow-hidden">
             <div className="relative w-full aspect-video">
               <Image
                 src="/images/team/internship-team.png"
@@ -87,13 +87,13 @@ export default function TeamPage() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
             </div>
             <div className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#0066ff] transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-nex-primary transition-colors">
                 DLSUD Interns
               </h3>
-              <p className="text-sm text-[#00aaff] mb-4">Internship Team</p>
+              <p className="text-sm text-nex-secondary mb-4">Internship Team</p>
               <p className="text-sm text-gray-400">
                 A talented group of interns from De La Salle University -
                 Dasmariñas, dedicated to learning and contributing to innovative
@@ -127,7 +127,7 @@ export default function TeamPage() {
             },
           ].map((value) => (
             <AnimatedGridItem key={value.title}>
-              <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] text-center">
+              <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card text-center">
                 <span className="text-4xl mb-4 block">{value.icon}</span>
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {value.title}
@@ -146,7 +146,7 @@ export default function TeamPage() {
           <div className="space-y-4 text-gray-400">
             <p className="flex items-center justify-center gap-3">
               <svg
-                className="w-5 h-5 text-[#0066ff]"
+                className="w-5 h-5 text-nex-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -172,7 +172,7 @@ export default function TeamPage() {
 
             <p className="flex items-center justify-center gap-3">
               <svg
-                className="w-5 h-5 text-[#0066ff]"
+                className="w-5 h-5 text-nex-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

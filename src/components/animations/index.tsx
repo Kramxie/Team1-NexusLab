@@ -217,7 +217,7 @@ export function GlowCard({ children, className = "" }: AnimationProps) {
       }}
     >
       <motion.div
-        className="absolute -inset-0.5 bg-gradient-to-r from-[#0066ff] to-[#00aaff] rounded-xl opacity-0 blur-sm -z-10"
+        className="absolute -inset-0.5 bg-linear-to-r from-nex-primary to-nex-secondary rounded-xl opacity-0 blur-sm -z-10"
         whileHover={{ opacity: 0.3 }}
         transition={{ duration: 0.3 }}
       />
@@ -321,7 +321,7 @@ export function GlitchText({
       viewport={{ once: true }}
     >
       <motion.span
-        className="absolute inset-0 text-[#0066ff]"
+        className="absolute inset-0 text-nex-primary"
         animate={{
           x: [0, -2, 2, 0],
           opacity: [1, 0.8, 0.8, 1],
@@ -336,7 +336,7 @@ export function GlitchText({
         {text}
       </motion.span>
       <motion.span
-        className="absolute inset-0 text-[#00aaff]"
+        className="absolute inset-0 text-nex-secondary"
         animate={{
           x: [0, 2, -2, 0],
           opacity: [1, 0.8, 0.8, 1],
@@ -399,7 +399,7 @@ export function ScanLine({ children, className = "" }: AnimationProps) {
         }}
       />
       <motion.div
-        className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#0066ff]/50 to-transparent pointer-events-none"
+        className="absolute left-0 right-0 h-[2px] bg-linear-to-r from-transparent via-nex-primary/50 to-transparent pointer-events-none"
         animate={{
           top: ["0%", "100%"],
         }}
@@ -506,7 +506,7 @@ export function MatrixReveal({ children, className = "" }: AnimationProps) {
       viewport={{ once: true }}
     >
       <motion.div
-        className="absolute inset-0 bg-gradient-to-b from-[#0066ff]/20 via-transparent to-transparent pointer-events-none"
+        className="absolute inset-0 bg-linear-to-b from-nex-primary/20 via-transparent to-transparent pointer-events-none"
         initial={{ y: "-100%" }}
         whileInView={{ y: "200%" }}
         viewport={{ once: true }}
@@ -528,11 +528,11 @@ export function CyberCard({ children, className = "" }: AnimationProps) {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
-      <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent opacity-50" />
-      <div className="absolute bottom-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-[#00aaff] to-transparent opacity-50" />
-      <div className="absolute top-4 bottom-4 left-0 w-[1px] bg-gradient-to-b from-transparent via-[#0066ff] to-transparent opacity-50" />
-      <div className="absolute top-4 bottom-4 right-0 w-[1px] bg-gradient-to-b from-transparent via-[#00aaff] to-transparent opacity-50" />
+      <div className="absolute -inset-[1px] bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+      <div className="absolute top-0 left-4 right-4 h-[1px] bg-linear-to-r from-transparent via-nex-primary to-transparent opacity-50" />
+      <div className="absolute bottom-0 left-4 right-4 h-[1px] bg-linear-to-r from-transparent via-nex-secondary to-transparent opacity-50" />
+      <div className="absolute top-4 bottom-4 left-0 w-[1px] bg-linear-to-b from-transparent via-nex-primary to-transparent opacity-50" />
+      <div className="absolute top-4 bottom-4 right-0 w-[1px] bg-linear-to-b from-transparent via-nex-secondary to-transparent opacity-50" />
       <div className="relative bg-black/90 backdrop-blur-sm rounded-2xl">
         {children}
       </div>
@@ -562,7 +562,7 @@ export function ParticleField({ className = "" }: { className?: string }) {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-[#0066ff]/30"
+          className="absolute rounded-full bg-nex-primary/30"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,

@@ -151,7 +151,7 @@ export default function NewsletterForm() {
   };
 
   return (
-    <div className="p-8 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+    <div className="p-8 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="flex flex-col sm:flex-row gap-3">
           <input
@@ -159,14 +159,14 @@ export default function NewsletterForm() {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-[#0066ff] transition-colors"
+            className="flex-1 px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-nex-primary transition-colors"
             disabled={loading}
             required
           />
           <button
             type="submit"
             disabled={loading || !captchaToken}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white font-medium hover:from-[#0055dd] hover:to-[#0099ee] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            className="px-6 py-3 rounded-xl bg-linear-to-r from-nex-primary to-nex-secondary text-white font-medium hover:from-[#0055dd] hover:to-[#0099ee] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Subscribing..." : "Subscribe"}
           </button>

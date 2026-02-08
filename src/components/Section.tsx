@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
+
 interface SectionProps {
   title?: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   dark?: boolean;
 }
@@ -16,7 +18,7 @@ export default function Section({
   return (
     <section
       className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 section-divider-glow ${
-        dark ? "bg-[#0a0a0a]" : "bg-black"
+        dark ? "bg-zinc-950" : "bg-black"
       } ${className}`}
     >
       <div className="max-w-7xl mx-auto">
@@ -32,11 +34,16 @@ export default function Section({
                 {subtitle}
               </p>
             )}
+
             <div className="mt-6 flex justify-center">
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent" />
+              <span
+                aria-hidden="true"
+                className="block h-px w-24 bg-linear-to-r from-transparent via-blue-600 to-transparent"
+              />
             </div>
           </div>
         )}
+
         {children}
       </div>
     </section>

@@ -73,9 +73,9 @@ export default function PortfolioCarousel({
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Main Carousel Container */}
-      <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-black border border-[rgba(0,102,255,0.2)]">
+      <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-[rgba(0,102,255,0.2)]">
         {/* Gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
         
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.a
@@ -104,12 +104,12 @@ export default function PortfolioCarousel({
             />
             
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-[#0066ff]/0 group-hover:bg-[#0066ff]/10 transition-colors duration-300" />
+            <div className="absolute inset-0 bg-nex-primary/0 group-hover:bg-nex-primary/10 transition-colors duration-300" />
             
             {/* Click indicator */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
               <motion.div
-                className="px-6 py-3 bg-[#0066ff]/90 backdrop-blur-sm rounded-full text-white font-medium flex items-center gap-2"
+                className="px-6 py-3 bg-nex-primary/90 backdrop-blur-sm rounded-full text-white font-medium flex items-center gap-2"
                 initial={{ scale: 0.8, y: 20 }}
                 whileHover={{ scale: 1.05 }}
                 animate={{ scale: 1, y: 0 }}
@@ -124,14 +124,14 @@ export default function PortfolioCarousel({
         </AnimatePresence>
 
         {/* Project info overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 z-20 bg-gradient-to-t from-black via-black/80 to-transparent">
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 z-20 bg-linear-to-t from-black via-black/80 to-transparent">
           <motion.div
             key={`info-${currentIndex}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="inline-block px-3 py-1 text-xs font-medium bg-[#0066ff]/20 text-[#00aaff] rounded-full mb-2">
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-nex-primary/20 text-nex-secondary rounded-full mb-2">
               {currentProject.category}
             </span>
             <h3 className="text-lg sm:text-2xl font-bold text-white mb-1">{currentProject.name}</h3>
@@ -145,7 +145,7 @@ export default function PortfolioCarousel({
             e.preventDefault();
             prevSlide();
           }}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/80 backdrop-blur-sm border border-[rgba(0,102,255,0.3)] text-white hover:bg-[#0066ff]/80 hover:border-[#0066ff] transition-all duration-300 group"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/80 backdrop-blur-sm border border-[rgba(0,102,255,0.3)] text-white hover:bg-nex-primary/80 hover:border-nex-primary transition-all duration-300 group"
           aria-label="Previous slide"
         >
           <svg 
@@ -163,7 +163,7 @@ export default function PortfolioCarousel({
             e.preventDefault();
             nextSlide();
           }}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/80 backdrop-blur-sm border border-[rgba(0,102,255,0.3)] text-white hover:bg-[#0066ff]/80 hover:border-[#0066ff] transition-all duration-300 group"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/80 backdrop-blur-sm border border-[rgba(0,102,255,0.3)] text-white hover:bg-nex-primary/80 hover:border-nex-primary transition-all duration-300 group"
           aria-label="Next slide"
         >
           <svg 
@@ -185,14 +185,14 @@ export default function PortfolioCarousel({
             onClick={() => goToSlide(index)}
             className={`relative h-2 rounded-full transition-all duration-300 ${
               index === currentIndex 
-                ? "w-8 bg-[#0066ff]" 
+                ? "w-8 bg-nex-primary" 
                 : "w-2 bg-gray-600 hover:bg-gray-500"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           >
             {index === currentIndex && (
               <motion.div
-                className="absolute inset-0 rounded-full bg-[#0066ff]"
+                className="absolute inset-0 rounded-full bg-nex-primary"
                 layoutId="activeDot"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
@@ -204,7 +204,7 @@ export default function PortfolioCarousel({
       {/* Progress bar */}
       <div className="mt-4 h-1 bg-[rgba(0,102,255,0.1)] rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-[#0066ff] to-[#00aaff]"
+          className="h-full bg-linear-to-r from-nex-primary to-nex-secondary"
           initial={{ width: "0%" }}
           animate={{ width: isPaused ? `${((currentIndex + 1) / projects.length) * 100}%` : "100%" }}
           transition={{ 

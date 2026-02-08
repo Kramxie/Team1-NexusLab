@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo, useEffect, useState, useCallback } from "react";
+import { useMemo, useEffect, useSyncExternalStore, useCallback } from "react";
 
 /* ============================================
    Team3 Nexxus Lab Background Effects
@@ -9,18 +9,34 @@ import { useMemo, useEffect, useState, useCallback } from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
-function getIsMobileParticles() {
-  if (typeof window === "undefined") return false; // safe default for SSR
+// Subscribe to window resize for useSyncExternalStore
+function subscribeToResize(callback: () => void) {
+  window.addEventListener("resize", callback, { passive: true });
+  return () => window.removeEventListener("resize", callback);
+}
+
+// Snapshot functions for useSyncExternalStore
+function getIsMobileSnapshot() {
   return window.innerWidth < MOBILE_BREAKPOINT;
 }
 
-function getIsMobileTrail() {
-  if (typeof window === "undefined") return true; // safe default for SSR
+function getServerSnapshot() {
+  return false; // Default to desktop on server
+}
+
+// For MouseTrail - check if mobile or touch device
+function getIsMobileTrailSnapshot() {
   return window.innerWidth < MOBILE_BREAKPOINT || "ontouchstart" in window;
+}
+
+function getServerSnapshotTrail() {
+  return true; // Default to mobile/disabled on server for trail
 }
 
 /**
  * FloatingParticles — Team3-style particles that float upward.
+ * Rendered only on the client to avoid hydration mismatches from
+ * window-dependent particle counts.
  */
 export function FloatingParticles({
   count = 50,
@@ -29,17 +45,20 @@ export function FloatingParticles({
   count?: number;
   className?: string;
 }) {
-  // ✅ Set initial value WITHOUT calling setState in an effect
-  const [isMobile, setIsMobile] = useState<boolean>(() => getIsMobileParticles());
-
-  useEffect(() => {
-    const onResize = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    };
-
-    window.addEventListener("resize", onResize, { passive: true });
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  // Use useSyncExternalStore for proper SSR-safe window detection
+  const isMobile = useSyncExternalStore(
+    subscribeToResize,
+    getIsMobileSnapshot,
+    getServerSnapshot
+  );
+  
+  // Track if component has mounted (client-side only)
+  const isMounted = useSyncExternalStore(
+    // No-op subscribe - we only care about initial mount
+    useCallback(() => () => {}, []),
+    () => true,  // Client: always true after hydration
+    () => false  // Server: false
+  );
 
   // Reduce particle count on mobile for performance
   const effectiveCount = isMobile ? Math.min(count, Math.ceil(count * 0.4)) : count;
@@ -58,6 +77,17 @@ export function FloatingParticles({
       size: seededRandom(i * 4.9) * 4 + 2,
     }));
   }, [effectiveCount]);
+
+  // Render an empty container on the server and first client render
+  // to keep SSR and client HTML identical (no hydration mismatch).
+  if (!isMounted) {
+    return (
+      <div
+        className={`absolute inset-0 overflow-hidden pointer-events-none z-0 ${className}`}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <div
@@ -148,7 +178,7 @@ export function SectionBackground({
       className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
       aria-hidden="true"
     >
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent animate-line-glow" />
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-nex-primary to-transparent animate-line-glow" />
 
       {variant === "gradient" && (
         <div
@@ -160,7 +190,7 @@ export function SectionBackground({
       )}
 
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full opacity-30"
         style={{
           background:
             "radial-gradient(circle, rgba(0,102,255,0.05) 0%, transparent 70%)",
@@ -184,9 +214,9 @@ export function ScrollIndicator({ className = "" }: { className?: string }) {
       transition={{ delay: 1.5, duration: 0.8 }}
     >
       <span className="text-xs text-gray-500 uppercase tracking-widest">Scroll</span>
-      <div className="relative w-6 h-10 rounded-full border-2 border-[#0066ff]/40 flex justify-center">
+      <div className="relative w-6 h-10 rounded-full border-2 border-nex-primary/40 flex justify-center">
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-[#0066ff] mt-2"
+          className="w-1.5 h-1.5 rounded-full bg-nex-primary mt-2"
           animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{ boxShadow: "0 0 8px #0066ff" }}
@@ -200,14 +230,12 @@ export function ScrollIndicator({ className = "" }: { className?: string }) {
  * MouseTrail — desktop only
  */
 export function MouseTrail() {
-  // ✅ Set initial value lazily (no setState inside effect body)
-  const [isMobile, setIsMobile] = useState<boolean>(() => getIsMobileTrail());
-
-  useEffect(() => {
-    const onResize = () => setIsMobile(getIsMobileTrail());
-    window.addEventListener("resize", onResize, { passive: true });
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  // Use useSyncExternalStore for proper SSR-safe mobile/touch detection
+  const isMobile = useSyncExternalStore(
+    subscribeToResize,
+    getIsMobileTrailSnapshot,
+    getServerSnapshotTrail
+  );
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (Math.random() > 0.6) return;

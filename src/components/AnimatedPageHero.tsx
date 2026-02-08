@@ -18,28 +18,28 @@ interface AnimatedPageHeroProps {
 
 const colorMap = {
   cyan: {
-    badge: "bg-[#0066ff]",
-    gradient: "from-[#0066ff] to-[#00aaff]",
-    glow1: "bg-[#0066ff]/10",
-    glow2: "bg-[#00aaff]/10",
+    badge: "bg-nex-primary",
+    gradient: "from-nex-primary to-nex-secondary",
+    glow1: "bg-nex-primary/10",
+    glow2: "bg-nex-secondary/10",
   },
   blue: {
-    badge: "bg-[#0066ff]",
-    gradient: "from-[#0066ff] to-[#00aaff]",
-    glow1: "bg-[#0066ff]/10",
-    glow2: "bg-[#00aaff]/10",
+    badge: "bg-nex-primary",
+    gradient: "from-nex-primary to-nex-secondary",
+    glow1: "bg-nex-primary/10",
+    glow2: "bg-nex-secondary/10",
   },
   purple: {
-    badge: "bg-[#0066ff]",
-    gradient: "from-[#0066ff] to-[#00aaff]",
-    glow1: "bg-[#0066ff]/10",
-    glow2: "bg-[#00aaff]/10",
+    badge: "bg-nex-primary",
+    gradient: "from-nex-primary to-nex-secondary",
+    glow1: "bg-nex-primary/10",
+    glow2: "bg-nex-secondary/10",
   },
   green: {
-    badge: "bg-[#0066ff]",
-    gradient: "from-[#0066ff] to-[#00aaff]",
-    glow1: "bg-[#0066ff]/10",
-    glow2: "bg-[#00aaff]/10",
+    badge: "bg-nex-primary",
+    gradient: "from-nex-primary to-nex-secondary",
+    glow1: "bg-nex-primary/10",
+    glow2: "bg-nex-secondary/10",
   },
 };
 
@@ -85,7 +85,7 @@ export default function AnimatedPageHero({
         <FloatingParticles count={30} />
 
         <motion.div
-          className={`absolute top-1/4 right-1/3 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] ${colors.glow1} rounded-full blur-[100px]`}
+          className={`absolute top-1/4 right-1/3 w-62.5 sm:w-100 h-62.5 sm:h-100 ${colors.glow1} rounded-full blur-[100px]`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
@@ -101,7 +101,7 @@ export default function AnimatedPageHero({
           }}
         />
         <motion.div
-          className={`absolute bottom-1/3 left-1/4 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] ${colors.glow2} rounded-full blur-[80px]`}
+          className={`absolute bottom-1/3 left-1/4 w-50 sm:w-75 h-50 sm:h-75 ${colors.glow2} rounded-full blur-[80px]`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
@@ -125,7 +125,7 @@ export default function AnimatedPageHero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(0,102,255,0.3)] text-sm text-gray-300 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-nex-card border border-[rgba(0,102,255,0.3)] text-sm text-gray-300 mb-8"
           >
             <motion.span
               className={`w-2 h-2 ${colorMap[badge.color || highlightColor].badge} rounded-full`}
@@ -154,7 +154,7 @@ export default function AnimatedPageHero({
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}
+            className={`bg-linear-to-r ${colors.gradient} bg-clip-text text-transparent`}
           >
             {titleHighlight}
           </motion.span>

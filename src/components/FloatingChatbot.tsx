@@ -182,7 +182,7 @@ export default function FloatingChatbot() {
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           isOpen
             ? "bg-black hover:bg-[rgba(0,102,255,0.1)]"
-            : "bg-gradient-to-r from-[#0066ff] to-[#00aaff] hover:shadow-[0_4px_25px_rgba(0,102,255,0.5)]"
+            : "bg-linear-to-r from-nex-primary to-nex-secondary hover:shadow-[0_4px_25px_rgba(0,102,255,0.5)]"
         }`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
@@ -248,12 +248,12 @@ export default function FloatingChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-150px)] bg-[rgba(10,10,10,0.98)] border border-[rgba(0,102,255,0.3)] rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-6 z-50 w-90 max-w-[calc(100vw-48px)] h-125 max-h-[calc(100vh-150px)] bg-[rgba(10,10,10,0.98)] border border-[rgba(0,102,255,0.3)] rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#0066ff]/10 to-[#00aaff]/10 border-b border-[rgba(0,102,255,0.3)] p-4 flex items-center gap-3">
+            <div className="bg-linear-to-r from-nex-primary/10 to-nex-secondary/10 border-b border-[rgba(0,102,255,0.3)] p-4 flex items-center gap-3">
               <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-r from-nex-primary to-nex-secondary flex items-center justify-center">
                   <Image
                     src="/images/logo/nexxuslab-logo.png"
                     alt="Nexxusbot"
@@ -433,13 +433,13 @@ export default function FloatingChatbot() {
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Type your message..."
-                      className="flex-1 bg-[rgba(255,255,255,0.05)] text-white text-sm px-4 py-3 rounded-full border border-[rgba(0,102,255,0.3)] focus:border-[#0066ff] focus:bg-[rgba(255,255,255,0.08)] focus:outline-none transition-colors placeholder-gray-500"
+                      className="flex-1 bg-[rgba(255,255,255,0.05)] text-white text-sm px-4 py-3 rounded-full border border-[rgba(0,102,255,0.3)] focus:border-nex-primary focus:bg-[rgba(255,255,255,0.08)] focus:outline-none transition-colors placeholder-gray-500"
                       disabled={isTyping}
                     />
                     <motion.button
                       onClick={handleSendMessage}
                       disabled={!inputValue.trim() || isTyping}
-                      className="px-4 py-3 bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity font-semibold"
+                      className="px-4 py-3 bg-linear-to-r from-nex-primary to-nex-secondary text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity font-semibold"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >

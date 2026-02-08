@@ -9,7 +9,6 @@ import {
   StaggerItem,
   PulseGlow,
   GlitchText,
-  ParticleField,
   GridBackground,
   CyberCard,
   FloatingElement,
@@ -26,7 +25,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
       <div className="absolute inset-0 bg-black/30">
         <GridBackground />
         <motion.div
-          className="absolute top-1/4 left-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#0066ff]/15 rounded-full blur-[120px]"
+          className="absolute top-1/4 left-1/4 w-75 sm:w-125 h-75 sm:h-125 bg-nex-primary/15 rounded-full blur-[120px]"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.15, 0.25, 0.15],
@@ -40,7 +39,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-[#00aaff]/15 rounded-full blur-[100px]"
+          className="absolute bottom-1/4 right-1/4 w-62.5 sm:w-100 h-62.5 sm:h-100 bg-nex-secondary/15 rounded-full blur-[100px]"
           animate={{
             scale: [1.1, 1, 1.1],
             opacity: [0.15, 0.25, 0.15],
@@ -55,7 +54,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-[#0066ff]/10 rounded-full blur-[150px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 sm:w-150 h-87.5 sm:h-150 bg-nex-primary/10 rounded-full blur-[150px]"
           animate={{
             scale: [1, 1.15, 1],
             opacity: [0.1, 0.2, 0.1],
@@ -72,11 +71,11 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
       <div className="relative max-w-5xl mx-auto text-center">
         <FadeInUp delay={0}>
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(0,102,255,0.3)] text-sm text-gray-300 mb-8 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-nex-card border border-[rgba(0,102,255,0.3)] text-sm text-gray-300 mb-8 backdrop-blur-sm"
             whileHover={{ borderColor: "rgba(0, 102, 255, 0.6)", scale: 1.02 }}
           >
             <motion.span
-              className="w-2 h-2 bg-[#0066ff] rounded-full"
+              className="w-2 h-2 bg-nex-primary rounded-full"
               animate={{
                 boxShadow: [
                   "0 0 0 0 rgba(0, 102, 255, 0.4)",
@@ -95,7 +94,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
             <span className="block">
               <GlitchText
                 text="Leave the Tech"
-                className="bg-gradient-to-r from-[#0066ff] via-[#00aaff] to-[#0066ff] bg-clip-text text-transparent"
+                className="bg-linear-to-r from-nex-primary via-nex-secondary to-nex-primary bg-clip-text text-transparent"
               />
             </span>
             <motion.span
@@ -123,7 +122,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:-translate-y-1"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:-translate-y-1"
                 >
                   Start Your Project
                   <motion.svg
@@ -154,7 +153,7 @@ export function AnimatedHero({ clients }: { clients: Client[] }) {
             >
               <Link
                 href="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium rounded-full border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff]/10 hover:text-white transition-all duration-300 backdrop-blur-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium rounded-full border border-nex-primary text-nex-primary hover:bg-nex-primary/10 hover:text-white transition-all duration-300 backdrop-blur-sm"
               >
                 Explore Services
               </Link>
@@ -200,16 +199,16 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
         <StaggerItem key={service.id}>
           <CyberCard>
             <motion.div
-              className="h-full p-6 rounded-3xl bg-[rgba(255,255,255,0.03)] border border-[rgba(0,102,255,0.2)] hover:border-[#0066ff] transition-colors relative overflow-hidden group"
+              className="h-full p-6 rounded-3xl bg-nex-card border border-[rgba(0,102,255,0.2)] hover:border-nex-primary transition-colors relative overflow-hidden group"
               whileHover={{
                 y: -8,
                 boxShadow: "0 25px 70px rgba(0, 102, 255, 0.3)",
               }}
               transition={{ duration: 0.3 }}
             >
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/5 via-transparent to-[#00aaff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div className="absolute inset-0 bg-linear-to-br from-nex-primary/5 via-transparent to-next-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <motion.div
-                className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent"
+                className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-nex-primary to-transparent"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "100%" }}
                 transition={{ duration: 0.8 }}
@@ -217,12 +216,12 @@ export function AnimatedServiceCards({ services }: { services: Service[] }) {
               <FloatingElement amplitude={5} duration={3 + index * 0.2}>
                 <span className="text-4xl block mb-4">{service.icon}</span>
               </FloatingElement>
-              <h3 className="mt-2 text-xl font-semibold text-white group-hover:text-[#0066ff] transition-colors">
+              <h3 className="mt-2 text-xl font-semibold text-white group-hover:text-nex-primary transition-colors">
                 {service.title}
               </h3>
               <p className="mt-2 text-[#cccccc] text-sm">{service.description}</p>
               <motion.div
-                className="absolute bottom-0 right-0 w-20 h-20 bg-[#0066ff]/10 rounded-full blur-2xl"
+                className="absolute bottom-0 right-0 w-20 h-20 bg-nex-primary/10 rounded-full blur-2xl"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.3, 0.5, 0.3],
@@ -247,11 +246,11 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
       {workflows.slice(0, 3).map((workflow, index) => (
         <StaggerItem key={workflow.id}>
           <motion.div
-            className="relative p-8 rounded-3xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] h-full overflow-visible group"
+            className="relative p-8 rounded-3xl border border-[rgba(0,102,255,0.2)] bg-nex-card h-full overflow-visible group"
             whileHover={{ y: -8, borderColor: "rgba(0, 102, 255, 0.5)" }}
             transition={{ duration: 0.3 }}
           >
-            <motion.div className="absolute inset-0 bg-gradient-to-b from-[#0066ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <motion.div className="absolute inset-0 bg-linear-to-b from-nex-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <motion.div
               className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20"
               initial={{ scale: 0, rotate: -180 }}
@@ -264,7 +263,7 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
               }}
             >
               <motion.span
-                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white text-base font-bold shadow-lg shadow-[rgba(0,102,255,0.3)] border-4 border-black"
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white text-base font-bold shadow-lg shadow-[rgba(0,102,255,0.3)] border-4 border-black"
                 animate={{
                   boxShadow: [
                     "0 0 20px rgba(0, 102, 255, 0.3)",
@@ -283,7 +282,7 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
             </motion.div>
 
             <div className="mt-8 relative">
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#0066ff] transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-nex-primary transition-colors">
                 {workflow.title}
               </h3>
               <p className="text-[#cccccc] text-sm mb-4">
@@ -300,7 +299,7 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
                     transition={{ delay: 0.3 + stepIndex * 0.1 }}
                   >
                     <motion.span
-                      className="text-[#0066ff] mt-0.5"
+                      className="text-nex-primary mt-0.5"
                       animate={{ x: [0, 3, 0] }}
                       transition={{
                         duration: 1,
@@ -318,7 +317,7 @@ export function AnimatedWorkflowCards({ workflows }: { workflows: Workflow[] }) 
 
             {index < 2 && (
               <motion.div
-                className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-[#0066ff]/30"
+                className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-nex-primary/30"
                 animate={{ x: [0, 5, 0], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -351,17 +350,17 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
         <StaggerItem key={client.id}>
           <CyberCard>
             <motion.div
-              className="group p-6 rounded-3xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[rgba(0,102,255,0.5)] transition-all h-full relative overflow-hidden"
+              className="group p-6 rounded-3xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-glow transition-all h-full relative overflow-hidden"
               whileHover={{
                 y: -8,
                 boxShadow: "0 25px 70px rgba(0, 102, 255, 0.3)",
               }}
               transition={{ duration: 0.3 }}
             >
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/5 via-transparent to-[#00aaff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div className="absolute inset-0 bg-linear-to-br from-nex-primary/5 via-transparent to-nex-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="flex items-center gap-4 mb-4 relative">
                 <motion.div
-                  className="w-14 h-14 rounded-xl bg-gradient-to-br from-[rgba(0,102,255,0.1)] to-[rgba(0,102,255,0.05)] flex items-center justify-center text-xl font-bold text-[#0066ff] border border-[rgba(0,102,255,0.2)] group-hover:border-[rgba(0,102,255,0.5)] transition-colors"
+                  className="w-14 h-14 rounded-xl bg-linear-to-br from-[rgba(0,102,255,0.1)] to-[rgba(0,102,255,0.05)] flex items-center justify-center text-xl font-bold text-nex-primary border border-[rgba(0,102,255,0.2)] group-hover:border-nex-glow transition-colors"
                   whileHover={{
                     rotate: [0, -10, 10, -5, 5, 0],
                     scale: 1.05,
@@ -378,7 +377,7 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
                   {client.name.charAt(0)}
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold text-white group-hover:text-[#0066ff] transition-colors">
+                  <h3 className="font-semibold text-white group-hover:text-nex-primary transition-colors">
                     {client.name}
                   </h3>
                   <p className="text-sm text-gray-500">{client.industry}</p>
@@ -399,7 +398,7 @@ export function AnimatedClientCards({ clients }: { clients: Client[] }) {
                   </cite>
                 </motion.blockquote>
               )}
-              <motion.div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#0066ff]/5 rounded-full blur-2xl group-hover:bg-[#0066ff]/10 transition-colors" />
+              <motion.div className="absolute -bottom-10 -right-10 w-32 h-32 bg-nex-primary/5 rounded-full blur-2xl group-hover:bg-nex-primary/10 transition-colors" />
             </motion.div>
           </CyberCard>
         </StaggerItem>
@@ -412,7 +411,7 @@ export function AnimatedCTA() {
   return (
     <FadeIn>
       <motion.div
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0066ff]/10 via-[#00aaff]/10 to-[#0066ff]/10 border border-[rgba(0,102,255,0.2)] p-6 sm:p-8 md:p-12 text-center"
+        className="relative overflow-hidden rounded-3xl bg-linear-to-r from-nex-primary/10 via-nex-secondary/10 to-nex-primary/10 border border-[rgba(0,102,255,0.2)] p-6 sm:p-8 md:p-12 text-center"
         whileHover={{
           boxShadow: "0 0 80px rgba(0, 102, 255, 0.2)",
           borderColor: "rgba(0, 102, 255, 0.5)",
@@ -421,17 +420,17 @@ export function AnimatedCTA() {
       >
         <GridBackground />
         <motion.div
-          className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent"
+          className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-nex-primary to-transparent"
           animate={{ x: ["-100%", "100%"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#0066ff] to-transparent"
+          className="absolute bottom-0 right-0 w-full h-0.5 bg-linear-to-r from-transparent via-nex-primary to-transparent"
           animate={{ x: ["100%", "-100%"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-[#0066ff]/10 rounded-full blur-[100px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-62.5 sm:w-100 h-62.5 sm:h-100 bg-nex-primary/10 rounded-full blur-[100px]"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.4, 0.2],
@@ -457,7 +456,7 @@ export function AnimatedCTA() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:-translate-y-1"
+                  className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white hover:shadow-[0_15px_40px_rgba(0,102,255,0.6)] transition-all duration-300 hover:-translate-y-1"
                 >
                   Schedule a Call
                   <motion.svg
@@ -487,7 +486,7 @@ export function AnimatedCTA() {
 
 export function AnimatedChatSection() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-nex-surface relative overflow-hidden">
       <motion.div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,102,255,0.05)_0%,transparent_70%)]" />
       <FloatingParticles count={15} />
       <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -512,7 +511,7 @@ export function AnimatedChatSection() {
                 window.dispatchEvent(new Event("open-chatbot"));
               }
             }}
-            className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(0,102,255,0.2)] text-white hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(0,102,255,0.5)] transition-all backdrop-blur-sm"
+            className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-nex-card border border-[rgba(0,102,255,0.2)] text-white hover:bg-[rgba(255,255,255,0.06)] hover:border-nex-glow transition-all backdrop-blur-sm"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 0 40px rgba(0, 102, 255, 0.25)",

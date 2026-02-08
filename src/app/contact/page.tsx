@@ -91,7 +91,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* LEFT: Message Form */}
           <AnimatedSlideLeft>
-            <div className="p-5 sm:p-8 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+            <div className="p-5 sm:p-8 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">
                 Send us a Message
               </h2>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-[#0066ff] transition-colors disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-nex-primary transition-colors disabled:opacity-60"
                     placeholder="Juan dela Cruz"
                   />
                 </div>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-[#0066ff] transition-colors disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-nex-primary transition-colors disabled:opacity-60"
                     placeholder="juan@company.com"
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     value={formData.company}
                     onChange={handleChange}
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-[#0066ff] transition-colors disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-nex-primary transition-colors disabled:opacity-60"
                     placeholder="Your Company"
                   />
                 </div>
@@ -182,7 +182,7 @@ export default function ContactPage() {
                     required
                     rows={5}
                     disabled={loading}
-                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-[#0066ff] transition-colors resize-none disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(0,102,255,0.3)] text-white placeholder-gray-500 focus:outline-none focus:border-nex-primary transition-colors resize-none disabled:opacity-60"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white font-semibold hover:from-[#0055dd] hover:to-[#0099ee] transition-all duration-300 shadow-lg shadow-[#0066ff]/25 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl bg-linear-to-r from-nex-primary to-nex-secondary text-white font-semibold hover:from-[#0055dd] hover:to-[#0099ee] transition-all duration-300 shadow-lg shadow-nex-primary/25 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {loading ? "Sending..." : "Send Message"}
                 </button>
@@ -263,24 +263,24 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto mt-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Office Location */}
-            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
               <h3 className="font-semibold text-white mb-2">Office Location</h3>
               <p className="text-gray-400 text-sm">Makati • Taguig • Cavite</p>
             </div>
 
             {/* Email */}
-            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
               <h3 className="font-semibold text-white mb-2">Email</h3>
               <a
                 href="mailto:team@nexxuslab.com"
-                className="text-[#00aaff] hover:text-[#0066ff] text-sm transition-colors"
+                className="text-nex-secondary hover:text-nex-primary text-sm transition-colors"
               >
                 team@nexxuslab.com
               </a>
             </div>
 
             {/* US / International */}
-            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+            <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
               <h3 className="font-semibold text-white mb-2">
                 US & International Clients
               </h3>

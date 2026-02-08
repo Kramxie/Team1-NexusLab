@@ -28,7 +28,7 @@ export default function WorkflowsPage() {
         className="overflow-visible"
       >
         <div className="relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(0,102,255,0.3)] to-transparent" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-[rgba(0,102,255,0.3)] to-transparent" />
 
           <AnimatedGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {workflows.map((workflow, index) => (
@@ -36,7 +36,7 @@ export default function WorkflowsPage() {
                 <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-black/80 text-center relative overflow-visible">
                   {/* Badge - normal flow, always fully visible */}
                   <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#0066ff] to-[#00aaff] text-white text-sm font-bold shadow-xl ring-4 ring-black">
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-linear-to-r from-nex-primary to-nex-secondary text-white text-sm font-bold shadow-xl ring-4 ring-black">
                       {index + 1}
                     </span>
                   </div>
@@ -58,12 +58,12 @@ export default function WorkflowsPage() {
         <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {automationSamples.map((sample) => (
             <AnimatedGridItem key={sample.id}>
-              <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-[#0066ff]/10 text-[#00aaff] border border-[#0066ff]/20 mb-4">
+              <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300">
+                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-nex-primary/10 text-nex-secondary border border-nex-primary/20 mb-4">
                   {sample.category}
                 </span>
 
-                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-[#00aaff] transition-colors">
+                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-nex-secondary transition-colors">
                   {sample.title}
                 </h3>
 

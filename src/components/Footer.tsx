@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-[#0066ff] to-[#00aaff] bg-clip-text text-transparent"
+              className="text-2xl font-bold bg-linear-to-r from-nex-primary to-nex-secondary bg-clip-text text-transparent"
             >
               NEXXUS LAB
             </Link>
@@ -99,7 +99,7 @@ export default function Footer() {
                     className={`p-2 rounded-lg transition-colors ${
                       disabled
                         ? "text-gray-700 cursor-not-allowed pointer-events-none"
-                        : "text-gray-500 hover:text-[#0066ff] hover:bg-[rgba(0,102,255,0.1)]"
+                        : "text-gray-500 hover:text-nex-primary hover:bg-[rgba(0,102,255,0.1)]"
                     }`}
                   >
                     <SocialIcon type={type} />
@@ -118,7 +118,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#0066ff] text-sm transition-colors"
+                    className="text-gray-400 hover:text-nex-primary text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -138,7 +138,7 @@ export default function Footer() {
                   <button
                     type="button"
                     onClick={() => handleLegalClick(link.label)}
-                    className="text-left text-gray-400 hover:text-[#0066ff] text-sm transition-colors"
+                    className="text-left text-gray-400 hover:text-nex-primary text-sm transition-colors"
                   >
                     {link.label}
                   </button>

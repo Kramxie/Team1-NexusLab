@@ -42,8 +42,8 @@ export default function ClientsPage() {
                 onClick={() => setActiveFilter(industry)}
                 className={`px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 ${
                   activeFilter === industry
-                    ? "bg-[#0066ff] border-[#0066ff] text-white"
-                    : "bg-transparent border-[rgba(0,102,255,0.3)] text-gray-400 hover:border-[#0066ff]/50 hover:text-white"
+                    ? "bg-nex-primary border-nex-primary text-white"
+                    : "bg-transparent border-[rgba(0,102,255,0.3)] text-gray-400 hover:border-nex-primary/50 hover:text-white"
                 }`}
               >
                 {industry}
@@ -60,13 +60,13 @@ export default function ClientsPage() {
         <AnimatedGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredClients.map((client) => (
             <AnimatedGridItem key={client.id}>
-              <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300">
+              <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,170,255,0.2)] flex items-center justify-center text-2xl font-bold text-gray-400 group-hover:from-[#0066ff]/20 group-hover:to-[#00aaff]/20 transition-all">
+                  <div className="w-14 h-14 rounded-xl bg-linear-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,170,255,0.2)] flex items-center justify-center text-2xl font-bold text-gray-400 group-hover:from-nex-primary/20 group-hover:to-nex-secondary/20 transition-all">
                     {client.name.charAt(0)}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white group-hover:text-[#0066ff] transition-colors">
+                    <h3 className="font-semibold text-white group-hover:text-nex-primary transition-colors">
                       {client.name}
                     </h3>
                     <span className="text-xs text-gray-500">{client.industry}</span>
@@ -79,7 +79,7 @@ export default function ClientsPage() {
                 
                 {client.testimonial && (
                   <div className="p-3 rounded-lg bg-[rgba(0,102,255,0.1)] border border-[rgba(0,102,255,0.2)] mb-4">
-                    <p className="text-xs text-[#00aaff] font-medium mb-1">Result Highlight</p>
+                    <p className="text-xs text-nex-secondary font-medium mb-1">Result Highlight</p>
                     <p className="text-sm text-gray-300 italic">
                       &quot;{client.testimonial.quote.slice(0, 60)}...&quot;
                     </p>
@@ -92,7 +92,7 @@ export default function ClientsPage() {
                     href={client.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-[#00aaff] hover:text-[#0066ff] transition-colors"
+                    className="inline-flex items-center gap-2 text-sm text-nex-secondary hover:text-nex-primary transition-colors"
                   >
                     Visit Project
                     <svg
@@ -122,7 +122,7 @@ export default function ClientsPage() {
             <p className="text-gray-500">No clients found in this industry.</p>
             <button
               onClick={() => setActiveFilter("All")}
-              className="mt-4 text-[#00aaff] hover:text-[#0066ff]"
+              className="mt-4 text-nex-secondary hover:text-nex-primary"
             >
               Clear filter
             </button>
@@ -140,9 +140,9 @@ export default function ClientsPage() {
             .slice(0, 4)
             .map((client) => (
               <AnimatedGridItem key={client.id}>
-                <blockquote className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)]">
+                <blockquote className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card">
                   <svg
-                    className="w-8 h-8 text-[#0066ff]/30 mb-4"
+                    className="w-8 h-8 text-nex-primary/30 mb-4"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -150,7 +150,7 @@ export default function ClientsPage() {
                   </svg>
                   <p className="text-gray-300 mb-4">{client.testimonial!.quote}</p>
                   <footer className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,102,255,0.1)] flex items-center justify-center text-sm font-bold text-gray-400">
+                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,102,255,0.1)] flex items-center justify-center text-sm font-bold text-gray-400">
                       {client.testimonial!.author.charAt(0)}
                     </div>
                     <div>
@@ -179,7 +179,7 @@ export default function ClientsPage() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-2xl overflow-hidden border border-[rgba(0,102,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:border-[#0066ff]/50 transition-all duration-300"
+                className="group block rounded-2xl overflow-hidden border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300"
               >
                 {/* Project Image */}
                 <div className="relative aspect-video overflow-hidden">
@@ -190,18 +190,18 @@ export default function ClientsPage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                   
                   {/* Category Badge */}
                   <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 text-xs font-medium bg-[#0066ff]/20 backdrop-blur-sm text-[#00aaff] rounded-full border border-[#0066ff]/30">
+                    <span className="px-3 py-1 text-xs font-medium bg-nex-primary/20 backdrop-blur-sm text-nex-secondary rounded-full border border-nex-primary/30">
                       {project.category}
                     </span>
                   </div>
 
                   {/* View Project Button on Hover */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="px-4 py-2 bg-[#0066ff]/90 backdrop-blur-sm rounded-full text-white text-sm font-medium flex items-center gap-2">
+                    <span className="px-4 py-2 bg-nex-primary/90 backdrop-blur-sm rounded-full text-white text-sm font-medium flex items-center gap-2">
                       View Project
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -212,7 +212,7 @@ export default function ClientsPage() {
 
                 {/* Project Info */}
                 <div className="p-5">
-                  <h3 className="text-lg font-semibold text-white group-hover:text-[#0066ff] transition-colors mb-2">
+                  <h3 className="text-lg font-semibold text-white group-hover:text-nex-primary transition-colors mb-2">
                     {project.name}
                   </h3>
                   <p className="text-sm text-gray-400 line-clamp-2">
