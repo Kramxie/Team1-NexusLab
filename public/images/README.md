@@ -19,14 +19,13 @@ public/images/
 │   └── ojthee-team.png             # DLSUD Interns - OJThee Team
 │
 ├── portfolio/
-│   ├── portfolio-1.png             # MyChapters project
-│   ├── portfolio-2.png             # MC Supplies project
-│   ├── portfolio-3.png             # AI DefendBot project
-│   ├── portfolio-4.png             # TAP Staffing project
-│   ├── portfolio-5.png             # Bonnie Factor project
-│   ├── portfolio-6.png             # Top 100 AI project
-│   ├── portfolio-7.png             # Scale UI project
-│   └── portfolio-8.png             # Fundraising for Jedd project
+│   ├── bambooSpa.png               # Bamboo Spa NZ - Spa Software/CRM (Main Client)
+│   ├── pfip.png                    # PFIP.com.ph - Dynamic Website (Main Client) [PLACEHOLDER - Replace with actual screenshot]
+│   ├── mavers.png                  # Mavers Corp - Inventory System (Main Client)
+│   ├── fundraising.png             # Fundraising for Jedd (Portfolio)
+│   ├── Scale.png                   # Scale UI (Portfolio)
+│   ├── TAP.png                     # TAP Staffing Solutions (Portfolio)
+│   └── MyChapters.png              # MyChapters (Portfolio)
 │
 ├── companies/
 │   ├── company-1.svg               # MC Supplies logo
@@ -42,6 +41,21 @@ public/images/
     ├── hero-background.png         # Main hero section background
     └── hero-background-alt.png     # Alternative hero background
 ```
+
+## 🎯 Client Hierarchy
+
+The portfolio carousel follows this hierarchy (big clients first):
+
+1. **Bamboo Spa NZ** - Spa Software / CRM
+2. **PFIP.com.ph** - Dynamic Website
+3. **[Reserved for Juggling Hats]** - Mobile App (to be added)
+4. **Mavers Corp** - Inventory System for Grocery
+
+Portfolio projects (NexusLab internal):
+- Fundraising for Jedd
+- Scale UI
+- TAP Staffing Solutions
+- MyChapters
 
 ## 🖼️ Usage in Next.js
 

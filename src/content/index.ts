@@ -3,6 +3,6 @@ export * from "./workflows";
 export * from "./clients";
 export * from "./team";
 export * from "./portfolio";
-export { getActiveClients } from "./clients";
+export { getActiveClients, getMainClients, getPortfolioClients } from "./clients";
 export { teamSections, leadershipTeam, internshipTeam } from "./team";
-export { portfolioProjects } from "./portfolio";
+export { portfolioProjects, getClientProjects, getPortfolioOnlyProjects } from "./portfolio";

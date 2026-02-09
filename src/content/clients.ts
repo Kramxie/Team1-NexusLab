@@ -13,23 +13,58 @@ export interface Client {
   website?: string;
   testimonial?: Testimonial;
   isActive: boolean;
+  tier: "main" | "portfolio"; // main = featured clients, portfolio = NexusLab projects
 }
 
 export const clients: Client[] = [
+  // ===== MAIN CLIENTS (Hierarchy order) =====
   {
-    id: "scale-ui",
-    name: "Scale UI",
-    logo: "/logos/scaleui.svg",
-    industry: "Technology",
-    description: "Design system and UI component library for enterprise applications.",
-    website: "https://sites.google.com/view/scaleui/home",
+    id: "bamboo-spa",
+    name: "Bamboo Spa NZ",
+    logo: "/logos/bamboospa.svg",
+    industry: "Wellness & Technology",
+    description: "Comprehensive spa management software with CRM capabilities, appointment scheduling, and customer relationship tracking for wellness businesses in New Zealand.",
+    website: "https://www.bamboospa.co.nz/",
     testimonial: {
-      quote: "Nexxus Lab delivered exactly what we needed - a scalable solution that our team loves using every day.",
-      author: "Project Lead",
-      role: "Scale UI Team",
+      quote: "The spa software and CRM system transformed how we manage our business. Online bookings have doubled and client retention improved significantly.",
+      author: "Spa Director",
+      role: "Bamboo Spa NZ",
     },
     isActive: true,
+    tier: "main",
   },
+  {
+    id: "pfip",
+    name: "PFIP.com.ph",
+    logo: "/logos/pfip.svg",
+    industry: "Finance",
+    description: "Dynamic website solution with modern architecture, responsive design, and seamless user experience for the Philippine financial sector.",
+    website: "https://pfip.com.ph/",
+    testimonial: {
+      quote: "Nexxus Lab delivered a dynamic, professional website that perfectly represents our brand and serves our clients effectively.",
+      author: "Marketing Director",
+      role: "PFIP",
+    },
+    isActive: true,
+    tier: "main",
+  },
+  // Juggling Hats (Mobile App) - To be added with reference
+  {
+    id: "mavers-corp",
+    name: "Mavers Corp",
+    logo: "/logos/mavers.svg",
+    industry: "Retail Technology",
+    description: "Custom inventory management system designed for grocery retail operations, featuring real-time stock tracking, automated reordering, and comprehensive reporting.",
+    website: "https://maverscorp.com/",
+    testimonial: {
+      quote: "The inventory system revolutionized our stock management. We've reduced waste and improved efficiency across all our grocery operations.",
+      author: "Operations Manager",
+      role: "Mavers Corp",
+    },
+    isActive: true,
+    tier: "main",
+  },
+  // ===== PORTFOLIO PROJECTS (NexusLab internal projects) =====
   {
     id: "fundraising-jedd",
     name: "Fundraising for Jedd",
@@ -43,34 +78,22 @@ export const clients: Client[] = [
       role: "Fundraising for Jedd",
     },
     isActive: true,
+    tier: "portfolio",
   },
   {
-    id: "mc-supplies",
-    name: "Man Cave Supplies PH",
-    logo: "/logos/mavers.svg",
-    industry: "E-Commerce",
-    description: "E-commerce platform for quality supplies and products in the Philippines.",
-    website: "https://maverscorp.com/shop/",
+    id: "scale-ui",
+    name: "Scale UI",
+    logo: "/logos/scaleui.svg",
+    industry: "Technology",
+    description: "Design system and UI component library for enterprise applications.",
+    website: "https://sites.google.com/view/scaleui/home",
     testimonial: {
-      quote: "Our online sales increased significantly after launching the new e-commerce platform they built for us.",
-      author: "Store Owner",
-      role: "Man Cave Supplies PH",
+      quote: "Nexxus Lab delivered exactly what we needed - a scalable solution that our team loves using every day.",
+      author: "Project Lead",
+      role: "Scale UI Team",
     },
     isActive: true,
-  },
-  {
-    id: "bamboo-spa",
-    name: "Bamboo Spa",
-    logo: "/logos/bamboospa.svg",
-    industry: "Wellness",
-    description: "Spa website with a clean, relaxing experience and seamless service booking flow.",
-    website: "https://www.bamboospa.co.nz/",
-    testimonial: {
-      quote: "The website perfectly captures our brand's peaceful atmosphere. Our online bookings have doubled since launch.",
-      author: "Spa Manager",
-      role: "Bamboo Spa NZ",
-    },
-    isActive: true,
+    tier: "portfolio",
   },
   {
     id: "tap-staffing",
@@ -85,6 +108,7 @@ export const clients: Client[] = [
       role: "TAP Staffing Solutions",
     },
     isActive: true,
+    tier: "portfolio",
   },
   {
     id: "my-chapters",
@@ -99,8 +123,15 @@ export const clients: Client[] = [
       role: "MyChapters",
     },
     isActive: true,
+    tier: "portfolio",
   },
 ];
 
 // Helper to get only active clients
 export const getActiveClients = () => clients.filter((c) => c.isActive);
+
+// Helper to get main clients (featured)
+export const getMainClients = () => clients.filter((c) => c.isActive && c.tier === "main");
+
+// Helper to get portfolio projects
+export const getPortfolioClients = () => clients.filter((c) => c.isActive && c.tier === "portfolio");

@@ -197,7 +197,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Portfolio / Projects
   if (message.match(/(portfolio|project|work|sample|example|client|gawa|nagawa|projects)/i)) {
-    return `🎯 **Our Portfolio**\n\nWe've worked on various projects including:\n• TAP Staffing Solutions\n• Top 100 AI\n• Scale UI\n• MyChapters\n• AI DefendBot\n• Man Cave Supplies PH\n• Fundraising for Jedd\n• And many more!\n\nCheck out our Portfolio section on the homepage!`;
+    return `🎯 **Our Portfolio**\n\n**Featured Clients:**\n• **Bamboo Spa NZ** - Spa Software / CRM\n• **PFIP.com.ph** - Dynamic Website\n• **Mavers Corp** - Inventory System for Grocery\n\n**Portfolio Projects:**\n• TAP Staffing Solutions\n• Scale UI\n• MyChapters\n• Fundraising for Jedd\n\nCheck out our Portfolio section on the homepage!`;
   }
   
   // Why choose / Benefits
