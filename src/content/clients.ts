@@ -48,7 +48,20 @@ export const clients: Client[] = [
     isActive: true,
     tier: "main",
   },
-  // Juggling Hats (Mobile App) - To be added with reference
+  {
+    id: "juggling-hats",
+    name: "Juggling Hats",
+    logo: "/logos/jugglinghats.svg",
+    industry: "Mobile Technology",
+    description: "A business leader's ideal function focused workforce management tool!",
+    testimonial: {
+      quote: "The app design perfectly captures our vision for helping people balance their busy lives with ease.",
+      author: "Product Owner",
+      role: "Juggling Hats",
+    },
+    isActive: true,
+    tier: "main",
+  },
   {
     id: "mavers-corp",
     name: "Mavers Corp",

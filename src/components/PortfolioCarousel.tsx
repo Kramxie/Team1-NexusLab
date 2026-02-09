@@ -78,49 +78,74 @@ export default function PortfolioCarousel({
         <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
         
         <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.a
-            key={currentIndex}
-            href={currentProject.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 cursor-pointer group"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.3 },
-              scale: { duration: 0.3 },
-            }}
-          >
-            <Image
-              src={currentProject.image}
-              alt={currentProject.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              priority
-            />
-            
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-nex-primary/0 group-hover:bg-nex-primary/10 transition-colors duration-300" />
-            
-            {/* Click indicator */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-              <motion.div
-                className="px-6 py-3 bg-nex-primary/90 backdrop-blur-sm rounded-full text-white font-medium flex items-center gap-2"
-                initial={{ scale: 0.8, y: 20 }}
-                whileHover={{ scale: 1.05 }}
-                animate={{ scale: 1, y: 0 }}
-              >
-                <span>Visit Project</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </motion.div>
-            </div>
-          </motion.a>
+          {currentProject.url ? (
+            <motion.a
+              key={currentIndex}
+              href={currentProject.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 cursor-pointer group"
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 },
+                scale: { duration: 0.3 },
+              }}
+            >
+              <Image
+                src={currentProject.image}
+                alt={currentProject.name}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                priority
+              />
+              
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-nex-primary/0 group-hover:bg-nex-primary/10 transition-colors duration-300" />
+              
+              {/* Click indicator */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                <motion.div
+                  className="px-6 py-3 bg-nex-primary/90 backdrop-blur-sm rounded-full text-white font-medium flex items-center gap-2"
+                  initial={{ scale: 0.8, y: 20 }}
+                  whileHover={{ scale: 1.05 }}
+                  animate={{ scale: 1, y: 0 }}
+                >
+                  <span>Visit Project</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </motion.div>
+              </div>
+            </motion.a>
+          ) : (
+            <motion.div
+              key={currentIndex}
+              className="absolute inset-0 group"
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 },
+                scale: { duration: 0.3 },
+              }}
+            >
+              <Image
+                src={currentProject.image}
+                alt={currentProject.name}
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {/* Project info overlay */}

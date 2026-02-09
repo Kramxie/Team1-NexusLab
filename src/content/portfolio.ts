@@ -28,7 +28,15 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Dynamic Website",
     tier: "client",
   },
-  // Juggling Hats (Mobile App) - To be added with reference
+  {
+    id: "juggling-hats",
+    name: "Juggling Hats",
+    description: "A business leader's ideal function focused workforce management tool!",
+    image: "/images/portfolio/jugglinghat.png",
+    url: "",
+    category: "Mobile App",
+    tier: "client",
+  },
   {
     id: "mavers-corp",
     name: "Mavers Corp",
