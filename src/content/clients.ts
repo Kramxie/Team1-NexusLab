@@ -8,6 +8,7 @@ export interface Client {
   id: string;
   name: string;
   logo: string;
+  image: string; // Portfolio screenshot image
   industry: string;
   description: string;
   website?: string;
@@ -22,6 +23,7 @@ export const clients: Client[] = [
     id: "bamboo-spa",
     name: "Bamboo Spa NZ",
     logo: "/logos/bamboospa.svg",
+    image: "/images/portfolio/bambooSpa.png",
     industry: "Wellness & Technology",
     description: "Comprehensive spa management software with CRM capabilities, appointment scheduling, and customer relationship tracking for wellness businesses in New Zealand.",
     website: "https://www.bamboospa.co.nz/",
@@ -37,6 +39,7 @@ export const clients: Client[] = [
     id: "pfip",
     name: "PFIP.com.ph",
     logo: "/logos/pfip.svg",
+    image: "/images/portfolio/pfip.jpg",
     industry: "Finance",
     description: "Dynamic website solution with modern architecture, responsive design, and seamless user experience for the Philippine financial sector.",
     website: "https://pfip.com.ph/",
@@ -52,6 +55,7 @@ export const clients: Client[] = [
     id: "juggling-hats",
     name: "Juggling Hats",
     logo: "/logos/jugglinghats.svg",
+    image: "/images/portfolio/jugglinghat.png",
     industry: "Mobile Technology",
     description: "A business leader's ideal function focused workforce management tool!",
     testimonial: {
@@ -66,6 +70,7 @@ export const clients: Client[] = [
     id: "mavers-corp",
     name: "Mavers Corp",
     logo: "/logos/mavers.svg",
+    image: "/images/portfolio/maverscorp.png",
     industry: "Retail Technology",
     description: "Custom inventory management system designed for grocery retail operations, featuring real-time stock tracking, automated reordering, and comprehensive reporting.",
     website: "https://maverscorp.com/",
@@ -82,6 +87,7 @@ export const clients: Client[] = [
     id: "fundraising-jedd",
     name: "Fundraising for Jedd",
     logo: "/logos/fundraising.svg",
+    image: "/images/portfolio/fundraising.png",
     industry: "Non-Profit",
     description: "A heartfelt fundraising platform built to support Jedd's journey with compassion and transparency.",
     website: "https://sites.google.com/view/fundraisingforjedd/home",
@@ -97,6 +103,7 @@ export const clients: Client[] = [
     id: "scale-ui",
     name: "Scale UI",
     logo: "/logos/scaleui.svg",
+    image: "/images/portfolio/Scale.png",
     industry: "Technology",
     description: "Design system and UI component library for enterprise applications.",
     website: "https://sites.google.com/view/scaleui/home",
@@ -112,6 +119,7 @@ export const clients: Client[] = [
     id: "tap-staffing",
     name: "TAP Staffing Solutions",
     logo: "/logos/tap.svg",
+    image: "/images/portfolio/TAP.png",
     industry: "Business Services",
     description: "Professional staffing and recruitment solutions website for connecting businesses with top talent.",
     website: "https://tapstaffingsolutions.com/#our-services",
@@ -127,6 +135,7 @@ export const clients: Client[] = [
     id: "my-chapters",
     name: "MyChapters",
     logo: "/logos/mychapters.svg",
+    image: "/images/portfolio/MyChapters.png",
     industry: "Publishing",
     description: "AI-assisted platform to write and publish your personal story as a beautifully crafted book.",
     website: "https://sites.google.com/view/mychapters/home",

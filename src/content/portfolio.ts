@@ -6,6 +6,7 @@ export interface PortfolioProject {
   url: string;
   category: string;
   tier: "client" | "portfolio"; // client = main clients, portfolio = NexusLab projects
+  underDevelopment?: boolean; // Show "Under Development" modal instead of navigating
 }
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -36,6 +37,7 @@ export const portfolioProjects: PortfolioProject[] = [
     url: "",
     category: "Mobile App",
     tier: "client",
+    underDevelopment: true,
   },
   {
     id: "mavers-corp",

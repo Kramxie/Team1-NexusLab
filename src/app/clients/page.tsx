@@ -1,9 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { Section, CTA, AnimatedPageHero, AnimatedSection, AnimatedGrid, AnimatedGridItem } from "@/components";
-import { getActiveClients, portfolioProjects } from "@/content";
+import { getActiveClients, portfolioProjects, PortfolioProject } from "@/content";
+
+// Image loading states tracking
+function useImageLoading() {
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  
+  const handleImageLoad = useCallback((id: string) => {
+    setLoadedImages((prev) => new Set(prev).add(id));
+  }, []);
+  
+  const isLoaded = useCallback((id: string) => loadedImages.has(id), [loadedImages]);
+  
+  return { handleImageLoad, isLoaded };
+}
+
+// Under Development Modal Component
+function UnderDevelopmentModal({ 
+  project, 
+  onClose 
+}: { 
+  project: PortfolioProject | null; 
+  onClose: () => void;
+}) {
+  if (!project) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div 
+        className="relative max-w-md w-full bg-nex-card border border-[rgba(0,102,255,0.3)] rounded-2xl p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        {/* Icon */}
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-nex-primary/20 flex items-center justify-center">
+          <svg className="w-8 h-8 text-nex-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <h3 className="text-xl font-bold text-white text-center mb-2">
+          Under Development
+        </h3>
+        <p className="text-gray-400 text-center mb-4">
+          <span className="text-nex-secondary font-medium">{project.name}</span> is currently being built. 
+          We&apos;re working hard to bring you something amazing!
+        </p>
+
+        {/* Project Preview */}
+        <div className="relative aspect-video rounded-lg overflow-hidden mb-4 border border-[rgba(0,102,255,0.2)]">
+          <Image
+            src={project.image}
+            alt={project.name}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+
+        <p className="text-sm text-gray-500 text-center">
+          Check back soon for updates!
+        </p>
+      </div>
+    </div>
+  );
+}
 
 // Get only active/verified clients
 const activeClients = getActiveClients();
@@ -13,6 +90,8 @@ const industries = ["All", ...Array.from(new Set(activeClients.map((c) => c.indu
 
 export default function ClientsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [underDevProject, setUnderDevProject] = useState<PortfolioProject | null>(null);
+  const { handleImageLoad, isLoaded } = useImageLoading();
 
   const filteredClients =
     activeFilter === "All"
@@ -62,8 +141,19 @@ export default function ClientsPage() {
             <AnimatedGridItem key={client.id}>
               <div className="group p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-linear-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,170,255,0.2)] flex items-center justify-center text-2xl font-bold text-gray-400 group-hover:from-nex-primary/20 group-hover:to-nex-secondary/20 transition-all">
-                    {client.name.charAt(0)}
+                  <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-linear-to-br from-[rgba(0,102,255,0.2)] to-[rgba(0,170,255,0.2)] group-hover:from-nex-primary/20 group-hover:to-nex-secondary/20 transition-all">
+                    {/* Loading skeleton */}
+                    {!isLoaded(client.id) && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-pulse" />
+                    )}
+                    <Image
+                      src={client.image}
+                      alt={client.name}
+                      fill
+                      className={`object-cover transition-opacity duration-300 ${isLoaded(client.id) ? 'opacity-100' : 'opacity-0'}`}
+                      onLoad={() => handleImageLoad(client.id)}
+                      sizes="56px"
+                    />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white group-hover:text-nex-primary transition-colors">
@@ -173,13 +263,25 @@ export default function ClientsPage() {
         dark
       >
         <AnimatedGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {portfolioProjects.map((project) => (
+          {portfolioProjects.map((project) => {
+            const isUnderDev = project.underDevelopment;
+            const ProjectWrapper = isUnderDev ? 'button' : 'a';
+            const wrapperProps = isUnderDev 
+              ? { 
+                  onClick: () => setUnderDevProject(project),
+                  type: 'button' as const
+                }
+              : { 
+                  href: project.url,
+                  target: '_blank',
+                  rel: 'noopener noreferrer'
+                };
+
+            return (
             <AnimatedGridItem key={project.id}>
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block rounded-2xl overflow-hidden border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300"
+              <ProjectWrapper
+                {...wrapperProps}
+                className="group block rounded-2xl overflow-hidden border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 text-left w-full"
               >
                 {/* Project Image */}
                 <div className="relative aspect-video overflow-hidden">
@@ -193,19 +295,30 @@ export default function ClientsPage() {
                   <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                   
                   {/* Category Badge */}
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 left-3 flex gap-2">
                     <span className="px-3 py-1 text-xs font-medium bg-nex-primary/20 backdrop-blur-sm text-nex-secondary rounded-full border border-nex-primary/30">
                       {project.category}
                     </span>
+                    {isUnderDev && (
+                      <span className="px-3 py-1 text-xs font-medium bg-yellow-500/20 backdrop-blur-sm text-yellow-400 rounded-full border border-yellow-500/30">
+                        Under Development
+                      </span>
+                    )}
                   </div>
 
                   {/* View Project Button on Hover */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="px-4 py-2 bg-nex-primary/90 backdrop-blur-sm rounded-full text-white text-sm font-medium flex items-center gap-2">
-                      View Project
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
+                    <span className={`px-4 py-2 ${isUnderDev ? 'bg-yellow-500/90' : 'bg-nex-primary/90'} backdrop-blur-sm rounded-full text-white text-sm font-medium flex items-center gap-2`}>
+                      {isUnderDev ? 'Coming Soon' : 'View Project'}
+                      {isUnderDev ? (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -219,9 +332,9 @@ export default function ClientsPage() {
                     {project.description}
                   </p>
                 </div>
-              </a>
+              </ProjectWrapper>
             </AnimatedGridItem>
-          ))}
+          )})}
         </AnimatedGrid>
       </Section>
 
@@ -236,6 +349,12 @@ export default function ClientsPage() {
           />
         </AnimatedSection>
       </Section>
+
+      {/* Under Development Modal */}
+      <UnderDevelopmentModal 
+        project={underDevProject} 
+        onClose={() => setUnderDevProject(null)} 
+      />
     </>
   );
 }
