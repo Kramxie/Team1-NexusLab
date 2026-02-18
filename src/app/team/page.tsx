@@ -85,7 +85,9 @@ export default function TeamPage() {
                 src="/images/team/intern-team.png"
                 alt="Nexxus Lab Internship Team - DLSUD Interns"
                 fill
-                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 900px"
+                className="object-contain"
+                priority
               />
               <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
             </div>
