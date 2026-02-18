@@ -82,7 +82,7 @@ export default function TeamPage() {
             <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 overflow-hidden">
             <div className="relative w-full aspect-video">
               <Image
-                src="/images/team/intern-team.jfif"
+                src="/images/team/intern-team.png"
                 alt="Nexxus Lab Internship Team - DLSUD Interns"
                 fill
                 className="object-cover"
