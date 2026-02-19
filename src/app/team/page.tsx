@@ -74,32 +74,33 @@ export default function TeamPage() {
       </Section>
 
       {/* Internship Team Section */}
-      <Section
-        title="Internship Team"
-        subtitle="DLSUD Interns - The future of tech"
-      >
+      <Section title="Internship Team" subtitle="DLSUD Interns - The future of tech">
         <AnimatedSection className="max-w-4xl mx-auto">
-            <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 overflow-hidden">
-            <div className="relative w-full aspect-video">
+          <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 overflow-hidden">
+            {/* ✅ FIXED: let the image keep its natural height (no aspect-video + no fill) */}
+            <div className="relative w-full overflow-hidden">
               <Image
-                src="/images/team/intern-team.png"
+                src="/images/team/internships-image.jpg"
                 alt="Nexxus Lab Internship Team - DLSUD Interns"
-                fill
+                width={1400}
+                height={900}
                 sizes="(max-width: 768px) 100vw, 900px"
-                className="object-contain"
+                className="w-full h-auto object-contain"
                 priority
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
+
+              {/* ✅ optional overlay, lighter para di matakpan yung bottom */}
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
             </div>
+
             <div className="p-6 text-center">
               <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-nex-primary transition-colors">
                 DLSUD Interns
               </h3>
               <p className="text-sm text-nex-secondary mb-4">Internship Team</p>
               <p className="text-sm text-gray-400">
-                A talented group of interns from De La Salle University -
-                Dasmariñas, dedicated to learning and contributing to innovative
-                tech solutions.
+                A talented group of interns from De La Salle University - Dasmariñas,
+                dedicated to learning and contributing to innovative tech solutions.
               </p>
             </div>
           </div>
@@ -131,9 +132,7 @@ export default function TeamPage() {
             <AnimatedGridItem key={value.title}>
               <div className="p-6 rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card text-center">
                 <span className="text-4xl mb-4 block">{value.icon}</span>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {value.title}
-                </h3>
+                <h3 className="text-lg font-semibold text-white mb-2">{value.title}</h3>
                 <p className="text-sm text-gray-400">{value.description}</p>
               </div>
             </AnimatedGridItem>
