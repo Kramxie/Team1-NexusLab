@@ -51,7 +51,7 @@ export const leadershipTeam: TeamMember[] = [
 export const internshipTeam: TeamMember[] = [
   {
     id: "internship-team",
-    name: "DLSUD Interns",
+    name: "DLSUD & CAVITE FEU Interns",
     role: "Internship Team",
     bio: "A talented group of interns from De La Salle University - Dasmariñas, dedicated to learning and contributing to innovative tech solutions.",
     avatar: "/images/team/internship-team.png",

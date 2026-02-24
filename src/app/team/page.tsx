@@ -95,7 +95,7 @@ export default function TeamPage() {
 
             <div className="p-6 text-center">
               <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-nex-primary transition-colors">
-                DLSUD Interns
+                DLSUD & FEU CAVITE Interns
               </h3>
               <p className="text-sm text-nex-secondary mb-4">Internship Team</p>
               <p className="text-sm text-gray-400">

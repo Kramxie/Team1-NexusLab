@@ -115,7 +115,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Who made/created this website
   if (message.match(/(sino.*gumawa|who.*made|who.*created|who.*built|who.*develop|gumawa.*website|created.*website|built.*website|sino.*gawa)/i)) {
-    return `🛠️ This website was created by Nexxus Lab!\n\nOur team is led by:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n• Plus our talented Internship Team (DLSUD Interns)\n\nWe built this using Next.js, React, and modern web technologies. Want us to build something for you? Contact us at ${companyInfo.contact.email}! 🚀`;
+    return `🛠️ This website was created by Nexxus Lab!\n\nOur team is led by:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n• Plus our talented Internship Team (DLSUD & FEU CAVITE Interns)\n\nWe built this using Next.js, React, and modern web technologies. Want us to build something for you? Contact us at ${companyInfo.contact.email}! 🚀`;
   }
   
   // Who are you / What's your name (for the bot)
