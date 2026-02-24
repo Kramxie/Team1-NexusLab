@@ -74,14 +74,14 @@ export default function TeamPage() {
       </Section>
 
       {/* Internship Team Section */}
-      <Section title="Internship Team" subtitle="DLSUD Interns - The future of tech">
+      <Section title="Internship Team" subtitle="DLSUD & FEU CAVITE Interns - The future of tech">
         <AnimatedSection className="max-w-4xl mx-auto">
           <div className="group rounded-2xl border border-[rgba(0,102,255,0.2)] bg-nex-card hover:border-nex-primary/50 transition-all duration-300 overflow-hidden">
             {/* ✅ FIXED: let the image keep its natural height (no aspect-video + no fill) */}
             <div className="relative w-full overflow-hidden">
               <Image
                 src="/images/team/internships-image.jpg"
-                alt="Nexxus Lab Internship Team - DLSUD Interns"
+                alt="Nexxus Lab Internship Team - DLSUD & FEU CAVITE Interns"
                 width={1400}
                 height={900}
                 sizes="(max-width: 768px) 100vw, 900px"
