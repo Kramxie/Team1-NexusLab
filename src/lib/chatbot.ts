@@ -181,7 +181,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Team
   if (message.match(/(team|founder|ceo|developer|staff|employees|sino.*team|members)/i)) {
-    return `👥 Our Team\n\nLeadership:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n\nInternship Team:\nTalented interns from De La Salle University - Dasmariñas (DLSUD) who contribute to our innovative projects!\n\nLearn more on our Team page.`;
+    return `👥 Our Team\n\nLeadership:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n\nInternship Team:\nTalented interns from De La Salle University - Dasmariñas (DLSUD) & FEU CAVITE who contribute to our innovative projects!\n\nLearn more on our Team page.`;
   }
   
   // Process / How it works
