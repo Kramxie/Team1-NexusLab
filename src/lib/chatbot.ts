@@ -130,7 +130,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Owner / Founded by
   if (message.match(/(owner|may-ari|nagmamay-ari|founded by|sino.*may-ari|who.*own)/i)) {
-    return `👔 Nexxus Lab Leadership\n\n• Chris Bautista - Founder & Chief Executive Officer\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n\nThey founded Nexxus Lab with a mission to deliver innovative tech solutions to businesses worldwide!`;
+    return `👔 Nexxus Lab Leadership\n\n• Chris Bautista - Founder & Chief Executive Officer\n\n\nThey founded Nexxus Lab with a mission to deliver innovative tech solutions to businesses worldwide!`;
   }
   
   // Services
