@@ -45,11 +45,7 @@ export const companyInfo = {
       role: "Founder & Chief Executive Officer",
       description: "Visionary leader driving Nexxus Lab's mission to deliver innovative tech solutions.",
     },
-    {
-      name: "Loreleen Mae Sablot",
-      role: "Co-Founder & Senior Software Engineer",
-      description: "Technical mastermind behind Nexxus Lab's software solutions.",
-    },
+
   ],
   
   process: [
@@ -115,7 +111,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Who made/created this website
   if (message.match(/(sino.*gumawa|who.*made|who.*created|who.*built|who.*develop|gumawa.*website|created.*website|built.*website|sino.*gawa)/i)) {
-    return `🛠️ This website was created by Nexxus Lab!\n\nOur team is led by:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n• Plus our talented Internship Team (DLSUD & FEU CAVITE Interns)\n\nWe built this using Next.js, React, and modern web technologies. Want us to build something for you? Contact us at ${companyInfo.contact.email}! 🚀`;
+    return `🛠️ This website was created by Nexxus Lab!\n\nOur team is led by:\n• Chris Bautista - Founder & CEO\n• Plus our talented Internship Team (DLSUD & FEU CAVITE Interns)\n\nWe built this using Next.js, React, and modern web technologies. Want us to build something for you? Contact us at ${companyInfo.contact.email}! 🚀`;
   }
   
   // Who are you / What's your name (for the bot)
@@ -181,7 +177,7 @@ export function generateBotResponse(userMessage: string): string {
   
   // Team
   if (message.match(/(team|founder|ceo|developer|staff|employees|sino.*team|members)/i)) {
-    return `👥 Our Team\n\nLeadership:\n• Chris Bautista - Founder & CEO\n• Loreleen Mae Sablot - Co-Founder & Senior Software Engineer\n\nInternship Team:\nTalented interns from De La Salle University - Dasmariñas (DLSUD) & FEU CAVITE who contribute to our innovative projects!\n\nLearn more on our Team page.`;
+    return `👥 Our Team\n\nLeadership:\n• Chris Bautista - Founder & CEO\n\nInternship Team:\nTalented interns from De La Salle University - Dasmariñas (DLSUD) & FEU CAVITE who contribute to our innovative projects!\n\nLearn more on our Team page.`;
   }
   
   // Process / How it works
